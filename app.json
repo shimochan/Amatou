@@ -19,10 +19,12 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "bundleIdentifier": "kbh.amatou.myapp",
+      "supportsTablet": false
     },
     "android": {
       "adaptiveIcon": {
+        "package": "kbh.amatou.myapp",
         "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       }

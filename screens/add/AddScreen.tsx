@@ -1,16 +1,11 @@
-//コピペ段階
-import { StyleSheet, TouchableOpacity } from 'react-native';
-import { Text, View } from '../components/Themed';
+import { StyleSheet } from 'react-native';
+import { View } from '../../components/Themed';
 import React from 'react';
 import {  Button } from 'react-native';
-import * as Haptics from 'expo-haptics';
 import * as NativeStack from '@react-navigation/native-stack';
-import { RootStackParamList } from '../types';
-import { useState } from 'react';
-import { setStatusBarNetworkActivityIndicatorVisible } from 'expo-status-bar';
-import { Image ,ImageBackground} from 'react-native';
+import { RootStackParamList } from '../../types';
 
-export default function Batting({ navigation }: NativeStack.NativeStackScreenProps<RootStackParamList, 'Batting'>) {
+export default function AddStress({ navigation }: NativeStack.NativeStackScreenProps<RootStackParamList, 'AddStress'>) {
   return (
     <View style={styles.container}>
       <Button color = "green" title='ホーム画面へ' onPress={() => navigation.goBack()} />

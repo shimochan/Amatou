@@ -11,19 +11,20 @@ import { Image ,ImageBackground} from 'react-native';
 
 
 export default function PuchiPuchi({ navigation }: NativeStack.NativeStackScreenProps<RootStackParamList, 'PuchiPuchi'>) {
-  const initialpuchipuchi = {uri : "../assets/images/konpou_puchipuchi.png"}
-  const imagepuchipuchi2 = {uri : "../assets/images/ubble-wrap_10623.png"}
-  const [imagepuchipuchi,setimagepuchipuchi] = useState(initialpuchipuchi)
-  function puchipuchiimage(){
+  const initialpuchipuchi = require("../assets/images/puchipuchitubusumae.png")
+  const imagepuchipuchi2 = require("../assets/images/puchipuchitubushitaato.png")
+  
+  const [imagepuchipuchi, setimagepuchipuchi] = useState(initialpuchipuchi)
+  const puchipuchiimage = () => {
     Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success)
     setimagepuchipuchi(imagepuchipuchi2)
   }
   return (
     <View style={styles.container}>
-      <ImageBackground source = {imagepuchipuchi} resizeMode="cover">
-        <Button color = "green" title='プチプチ' onPress={() => puchipuchiimage}/>
+      <TouchableOpacity  activeOpacity={0.5} onPress={puchipuchiimage}>
+        <Image source={imagepuchipuchi}/>
+      </TouchableOpacity>
         <Button color = "green" title='ホーム画面へ' onPress={() => navigation.goBack()} />
-      </ImageBackground>
     </View>
   );
 }

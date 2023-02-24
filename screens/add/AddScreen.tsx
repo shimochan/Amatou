@@ -1,4 +1,4 @@
-import { SafeAreaView,StyleSheet,TextInput,TouchableOpacity } from 'react-native';
+import { Platform, SafeAreaView,StyleSheet,TextInput,TouchableOpacity } from 'react-native';
 import { View } from '../../components/Themed';
 import React, { useEffect, useState } from 'react';
 import { Image, Button,Text } from 'react-native';
@@ -6,8 +6,35 @@ import * as NativeStack from '@react-navigation/native-stack';
 import { RootStackParamList } from '../../types';
 import { ZStack, HStack, VStack,Spacer } from 'react-native-stacks';
 import DefaultStyle from '../../constants/DefaultStyles';
+import DateTimePicker, { DateTimePickerEvent } from '@react-native-community/datetimepicker';
 
 export default function AddStress({ navigation }: NativeStack.NativeStackScreenProps<RootStackParamList, 'AddStress'>) {
+  const [date, setDate] = useState(new Date(1598051730000));
+  const [mode, setMode] = useState('date');
+  const [show, setShow] = useState(false);
+
+  const onChange = (event: DateTimePickerEvent, selectedDate: Date) => {
+    const currentDate = selectedDate;
+    setShow(false);
+    setDate(currentDate);
+  };
+
+  const showMode = (currentMode: React.SetStateAction<string>) => {
+    if (Platform.OS === 'android') {
+      setShow(false);
+      // for iOS, add a button that closes the picker
+    }
+    setMode(currentMode);
+  };
+
+  const showDatepicker = () => {
+    showMode('date');
+  };
+
+  const showTimepicker = () => {
+    showMode('time');
+  };
+
     
   const [text, onChangeText] = useState("");
   const [isPressed_S, onPress_S] = useState(false);
@@ -65,10 +92,22 @@ export default function AddStress({ navigation }: NativeStack.NativeStackScreenP
 
       </HStack>
       
-      <Spacer/>
-      <Button color = "green" title='ホーム画面へ' onPress={() => navigation.goBack()} />
-      <Spacer/>
+      {/* <Button title="Open" onPress={() => setOpen(true)} /> */}
+
+      <Button onPress={showDatepicker} title="Show date picker!" />
+      <Button onPress={showTimepicker} title="Show time picker!" />
+      <Text>selected: {date.toLocaleString()}</Text>
+        <DateTimePicker
+          testID="dateTimePicker"
+          value={date}
+          mode={'datetime'}
+          is24Hour={true}
+        />
+      
     </VStack>
+ 
+
+    
   );
 }
 

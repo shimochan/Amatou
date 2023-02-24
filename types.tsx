@@ -30,6 +30,7 @@ export type RootStackParamList = {
   SolutionSelect: undefined;
   WriteStress: undefined;
   StressSelect: undefined;
+  Home: undefined;
 };
 
 export type RootStackScreenProps<Screen extends keyof RootStackParamList> = NativeStackScreenProps<
@@ -46,8 +47,7 @@ export type StressItem = {
   title: String;
   intensity: number;  // 0: Normal, 1: Moderate, 2: Heavy
   dueDate: Date;
-  doneDate: Date;
-  actionType: number; // 0: Cut, 1: Baseball, 2: PuchiPuchi, 3: Walk and Run
+  isDone: boolean;
 };
 
 export type RootTabScreenProps<Screen extends keyof RootTabParamList> = CompositeScreenProps<

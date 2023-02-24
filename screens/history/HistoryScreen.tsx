@@ -1,15 +1,11 @@
-import { StyleSheet, TouchableOpacity } from 'react-native';
-import { Text, View } from '../components/Themed';
+import { StyleSheet } from 'react-native';
+import { View } from '../../components/Themed';
 import React from 'react';
 import {  Button } from 'react-native';
-import * as Haptics from 'expo-haptics';
 import * as NativeStack from '@react-navigation/native-stack';
-import { RootStackParamList } from '../types';
-import { useState } from 'react';
-import { setStatusBarNetworkActivityIndicatorVisible } from 'expo-status-bar';
-import { Image ,ImageBackground} from 'react-native';
+import { RootStackParamList } from '../../types';
 
-export default function SelectDeadline({ navigation }: NativeStack.NativeStackScreenProps<RootStackParamList, 'SelectDeadline'>) {
+export default function History({ navigation }: NativeStack.NativeStackScreenProps<RootStackParamList, 'History'>) {
   return (
     <View style={styles.container}>
       <Button color = "green" title='ホーム画面へ' onPress={() => navigation.goBack()} />

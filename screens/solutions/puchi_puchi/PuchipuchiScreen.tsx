@@ -1,18 +1,17 @@
 import { StyleSheet, TouchableOpacity } from 'react-native';
-import { Text, View } from '../components/Themed';
+import { View } from '../../../components/Themed';
 import React from 'react';
 import {  Button } from 'react-native';
 import * as Haptics from 'expo-haptics';
 import * as NativeStack from '@react-navigation/native-stack';
-import { RootStackParamList } from '../types';
+import { RootStackParamList } from '../../../types';
 import { useState } from 'react';
-import { setStatusBarNetworkActivityIndicatorVisible } from 'expo-status-bar';
-import { Image ,ImageBackground} from 'react-native';
+import { Image} from 'react-native';
 
 
 export default function PuchiPuchi({ navigation }: NativeStack.NativeStackScreenProps<RootStackParamList, 'PuchiPuchi'>) {
-  const initialpuchipuchi = require("../assets/images/puchipuchitubusumae.png")
-  const imagepuchipuchi2 = require("../assets/images/puchipuchitubushitaato.png")
+  const initialpuchipuchi = require("../../../assets/images/puchipuchitubusumae.png")
+  const imagepuchipuchi2 = require("../../../assets/images/puchipuchitubushitaato.png")
   
   const [imagepuchipuchi, setimagepuchipuchi] = useState(initialpuchipuchi)
   const puchipuchiimage = () => {

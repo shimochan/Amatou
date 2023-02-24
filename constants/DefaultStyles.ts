@@ -9,6 +9,11 @@ const DefaultStyle = StyleSheet.create({
     fontSize: 24,
   },
   fullHeight: {
+    backgroundColor: "#fff",
+    height: '100%',
+  },
+  fill: {
+    width: '100%',
     height: '100%',
   }
 });

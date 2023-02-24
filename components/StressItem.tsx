@@ -1,8 +1,8 @@
 import { HStack, Spacer, VStack } from "react-native-stacks";
 import { StressItem } from "../types";
-import { Text, StyleSheet } from 'react-native';
+import { Text, StyleSheet, TouchableOpacity } from 'react-native';
 
-export default function StressItemView(stress: StressItem) {
+export default function StressItemView(stress: StressItem, navigation: any) {
   const getIntensityLabel = (intensity: number) => {
     switch (intensity) {
       case 0: return "小";
@@ -20,16 +20,18 @@ export default function StressItemView(stress: StressItem) {
   }
 
   return (
-    <HStack style={styles.wrapper}>
-      <Text style={styles.title}>{stress.title}</Text>
-      <Spacer />
-      <VStack spacing={5}>
-        <Text style={[getIntensityStyle(stress.intensity)]}>{getIntensityLabel(stress.intensity)}</Text>
-        <Text style={styles.dueDate}>
-          期限: {stress.dueDate.toLocaleDateString()}
-        </Text>
-      </VStack>
-    </HStack>
+    <TouchableOpacity activeOpacity={0.5} onPress={() => navigation.push("SolutionSelect")}>
+      <HStack style={styles.wrapper}>
+        <Text style={styles.title}>{stress.title}</Text>
+        <Spacer />
+        <VStack spacing={5}>
+          <Text style={[getIntensityStyle(stress.intensity)]}>{getIntensityLabel(stress.intensity)}</Text>
+          <Text style={styles.dueDate}>
+            期限: {stress.dueDate.toLocaleDateString()}
+          </Text>
+        </VStack>
+      </HStack>
+    </TouchableOpacity>
   );
 }
 

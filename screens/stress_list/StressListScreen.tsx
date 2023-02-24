@@ -16,7 +16,7 @@ export default function StressSelect({ navigation }: NativeStack.NativeStackScre
   const list = []
 
   for (const stress of stressList) {
-    list.push(StressItemView(stress));
+    list.push(StressItemView(stress, navigation));
   }
   
   return (

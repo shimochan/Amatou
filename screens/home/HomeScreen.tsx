@@ -1,44 +1,49 @@
 import React from 'react';
-import { Pressable, StyleSheet } from 'react-native';
+import { Pressable, StyleSheet, Image } from 'react-native';
 import { Button, View, Text } from 'react-native';
-import { RootTabScreenProps } from '../../types';
-import { ZStack, HStack, VStack } from 'react-native-stacks';
+import { RootStackParamList, RootTabScreenProps } from '../../types';
+import { ZStack, HStack, VStack, Spacer } from 'react-native-stacks';
 import DefaultStyle from '../../constants/DefaultStyles';
-import { Spacer } from 'react-native-flex-layout';
+import * as NativeStack from '@react-navigation/native-stack';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 
-const HomeScreen = ({ navigation }: RootTabScreenProps<'Home'>) => {
+const HomeScreen = ({ navigation }: NativeStack.NativeStackScreenProps<RootStackParamList, 'Home'>) => {
   return (
-    <VStack spacing={15} style={DefaultStyle.fullHeight}>
-      <Text style={DefaultStyle.title}>抱えているストレス</Text>
-      <Text style={DefaultStyle.title2}>Nこ</Text>
+    <SafeAreaView style={DefaultStyle.safeAreaBackground}>
+      <VStack spacing={15} style={DefaultStyle.fullHeight}>
+        <Text style={DefaultStyle.title}>抱えているストレス</Text>
+        <Text style={DefaultStyle.title2}>0こ</Text>
 
-      <Spacer/>
+        <Spacer />
 
-      <Text>石の画像</Text>
-      
-      <Spacer/>
+        <Image source={require("../../assets/images/home_stones/00.jpeg")} style={DefaultStyle.homeImage} />
 
-      <Pressable>
-        <Text>ストレスを解消する</Text>
-      </Pressable>
-      
-      <HStack>
-        <Spacer/>
+        <Spacer />
 
-        <Pressable onPress={() => navigation.push('History')}>
-          <Text>りれき</Text>
+        <Pressable onPress={() => navigation.push('StressSelect')} style={DefaultStyle.largeButton}>
+          <ZStack style={DefaultStyle.fill}>
+            <Text style={[DefaultStyle.title2, {color: "#fff"}]}>ストレス一覧</Text>
+          </ZStack>
         </Pressable>
 
-        <Spacer/>
+        <HStack>
+          <Spacer />
 
-        <Pressable onPress={() => navigation.push('AddStress')}>
-          <Text>ついか</Text>
-        </Pressable>
+          <Pressable onPress={() => navigation.push('History')} style={[DefaultStyle.smallButton, { backgroundColor: '#9BCDA0' }]}>
+            <Text>りれき</Text>
+          </Pressable>
 
-        <Spacer/>
-      </HStack>
-    </VStack>
+          <Spacer />
+
+          <Pressable onPress={() => navigation.push('AddStress')}  style={[DefaultStyle.smallButton, { backgroundColor: '#C09BCD' }]}>
+            <Text>ついか</Text>
+          </Pressable>
+
+          <Spacer />
+        </HStack>
+      </VStack>
+    </SafeAreaView>
   );
 }
 

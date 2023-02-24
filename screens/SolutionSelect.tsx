@@ -1,3 +1,4 @@
+//コピペ段階
 import { StyleSheet } from 'react-native';
 
 import EditScreenInfo from '../components/EditScreenInfo';

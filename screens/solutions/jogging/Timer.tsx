@@ -1,7 +1,7 @@
 import { StyleSheet } from 'react-native';
 import { View } from '../../../components/Themed';
 import React, { useState, useEffect } from 'react';
-import {  Button } from 'react-native';
+import {  Button, Text } from 'react-native';
 import * as NativeStack from '@react-navigation/native-stack';
 import { RootStackParamList } from '../../../types';
 // export default function Jogging({ navigation }: NativeStack.NativeStackScreenProps<RootStackParamList, 'Jogging'>) {
@@ -13,17 +13,16 @@ import { RootStackParamList } from '../../../types';
 // }
 export const Timer = () => {
   const [now, setNow] = useState(Date.now());
+  const [count, setCount] = useState(Date.now());
 
   useEffect(() => {
+    const count = setTimeout(() => {
+      console.log('10 seconds has passed. TimerID');
+    }, 1 * 100);
+
     const timer = setTimeout(() => {
-      //some action
-      console.log(
-        '10 seconds has passed. TimerID ' +
-          String(timer) +
-          ' has finished.'
-      );
+      console.log('10 seconds has passed. TimerID');
     }, 10 * 1000);
-    console.log('TimerID ' + String(timer) + ' has started.');
 
     //クリーンアップ
     return () => {
@@ -36,40 +35,9 @@ export const Timer = () => {
 
   return (
     <>
-      <div>
-        ・このページを開くと10秒のカウントが開始します。
-      </div>
-      <div>
-        ・カウントが完了すると「10 seconds has passed.」と出力されます。
-      </div>
-      <div>
-        ・Restartボタンをクリックすると、タイマーが0秒から再開始されます。以前のタイマーはキャンセルされます。
-      </div>
-      <div>
-        <button
-          onClick={() => {
-            setNow(Date.now());
-          }}
-        >
-          Restart
-        </button>
-      </div>
+      <Text>
+        {count}
+      </Text>
     </>
   );
 };
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  title: {
-    fontSize: 20,
-    fontWeight: 'bold',
-  },
-  separator: {
-    marginVertical: 30,
-    height: 1,
-    width: '80%',
-  },
-});

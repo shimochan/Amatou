@@ -6,6 +6,7 @@ import { ZStack, HStack, VStack, Spacer } from 'react-native-stacks';
 import DefaultStyle from '../../constants/DefaultStyles';
 import * as NativeStack from '@react-navigation/native-stack';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { Timer } from "../solutions/jogging/Timer"
 
 
 const HomeScreen = ({ navigation }: NativeStack.NativeStackScreenProps<RootStackParamList, 'Home'>) => {
@@ -14,7 +15,7 @@ const HomeScreen = ({ navigation }: NativeStack.NativeStackScreenProps<RootStack
       <VStack spacing={15} style={DefaultStyle.fullHeight}>
         <Text style={DefaultStyle.title}>抱えているストレス</Text>
         <Text style={DefaultStyle.title2}>0こ</Text>
-
+        <Timer></Timer>
         <Spacer />
 
         <Image source={require("../../assets/images/home_stones/00.jpeg")} style={DefaultStyle.homeImage} />

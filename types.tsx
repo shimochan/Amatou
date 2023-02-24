@@ -6,6 +6,7 @@
 import { BottomTabScreenProps } from '@react-navigation/bottom-tabs';
 import { CompositeScreenProps, NavigatorScreenParams } from '@react-navigation/native';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
+import { v4 as uuidv4 } from 'uuid';
 
 declare global {
   namespace ReactNavigation {
@@ -40,6 +41,14 @@ export type RootStackScreenProps<Screen extends keyof RootStackParamList> = Nati
 export type RootTabParamList = {
   Home: undefined;
   Settings: undefined;
+};
+
+export type StressItem = {
+  title: String;
+  intensity: number;  // 0: Normal, 1: Moderate, 2: Heavy
+  dueDate: Date;
+  doneDate: Date;
+  actionType: number; // 0: Cut, 1: Baseball, 2: PuchiPuchi, 3: Walk and Run
 };
 
 export type RootTabScreenProps<Screen extends keyof RootTabParamList> = CompositeScreenProps<

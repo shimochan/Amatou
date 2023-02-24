@@ -1,14 +1,15 @@
 import { StyleSheet, TouchableOpacity } from 'react-native';
-import { View } from '../../components/Themed';
 import React from 'react';
-import { Button, Image, Text } from 'react-native';
-import { HStack, Spacer } from 'react-native-flex-layout';
+import { Image, Text } from 'react-native';
 import * as NativeStack from '@react-navigation/native-stack';
 import { RootStackParamList } from '../../types';
+import { VStack, HStack, Spacer } from 'react-native-stacks';
+import BackButton from '../../components/BackButton';
+import DefaultStyle from '../../constants/DefaultStyles';
 
 export default function SolutionSelect({ navigation }: NativeStack.NativeStackScreenProps<RootStackParamList, 'SolutionSelect'>) {
   return (
-    <View style={styles.container}>
+    <VStack style={DefaultStyle.fullHeight}>
       <TouchableOpacity activeOpacity={0.5} onPress={() => navigation.push("CutAction")} style={styles.imageOuter}>
         <HStack>
           <Spacer />
@@ -18,6 +19,7 @@ export default function SolutionSelect({ navigation }: NativeStack.NativeStackSc
           <Spacer />
         </HStack>
       </TouchableOpacity>
+
       <TouchableOpacity activeOpacity={0.5} onPress={() => navigation.push("Jogging")} style={styles.imageOuter}>
         <HStack>
           <Spacer />
@@ -27,6 +29,7 @@ export default function SolutionSelect({ navigation }: NativeStack.NativeStackSc
           <Spacer />
         </HStack>
       </TouchableOpacity>
+
       <TouchableOpacity activeOpacity={0.5} onPress={() => navigation.push("PuchiPuchi")} style={styles.imageOuter}>
         <HStack>
           <Spacer />
@@ -36,8 +39,14 @@ export default function SolutionSelect({ navigation }: NativeStack.NativeStackSc
           <Spacer />
         </HStack>
       </TouchableOpacity>
-      <Button color="green" title='ホーム画面へ' onPress={() => navigation.goBack()} />
-    </View>
+
+      <Spacer />
+
+      <HStack style={styles.footer}>
+        {BackButton(navigation)}
+        <Spacer />
+      </HStack>
+    </VStack>
   );
 }
 
@@ -67,7 +76,10 @@ const styles = StyleSheet.create({
     height: 100,
     width: 100,
     resizeMode: 'contain',
-    // overflow: "hidden",
+  },
+  footer: {
+    padding: 40,
+    marginBottom: 10,
   },
   text: {
     fontSize: 40,

@@ -10,11 +10,11 @@ const HomeScreen = ({ navigation }: RootTabScreenProps<'Home'>) => {
       <Text>抱えているストレス</Text>
       <Text>Nこ</Text>
       <Text>石の画像</Text>
-      <Pressable>ストレスを解消する</Pressable>
+      <Pressable><Text>ストレスを解消する</Text></Pressable>
 
       <View style={{ flex: 2, flexDirection: "row", justifyContent: 'space-between', padding: 10 }}>
         <Pressable onPress={() => navigation.push('History')}>
-          <Text>りれき</Text>
+          
         </Pressable>
         <Pressable onPress={() => navigation.push('AddStress')}>
           <Text>ついか</Text>

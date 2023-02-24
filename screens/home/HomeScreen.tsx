@@ -2,35 +2,47 @@ import React from 'react';
 import { Pressable, StyleSheet } from 'react-native';
 import { Button, View, Text } from 'react-native';
 import { RootTabScreenProps } from '../../types';
-import { Stack, HStack, VStack } from 'react-native-flex-layout';
+import { ZStack, HStack, VStack } from 'react-native-stacks';
+import DefaultStyle from '../../constants/DefaultStyles';
+import { Spacer } from 'react-native-flex-layout';
+
 
 const HomeScreen = ({ navigation }: RootTabScreenProps<'Home'>) => {
   return (
-    <View style={styles.container}>
-      <Text>抱えているストレス</Text>
-      <Text>Nこ</Text>
-      <Text>石の画像</Text>
-      <Pressable><Text>ストレスを解消する</Text></Pressable>
+    <VStack spacing={15} style={DefaultStyle.fullHeight}>
+      <Text style={DefaultStyle.title}>抱えているストレス</Text>
+      <Text style={DefaultStyle.title2}>Nこ</Text>
 
-      <View style={{ flex: 2, flexDirection: "row", justifyContent: 'space-between', padding: 10 }}>
+      <Spacer/>
+
+      <Text>石の画像</Text>
+      
+      <Spacer/>
+
+      <Pressable>
+        <Text>ストレスを解消する</Text>
+      </Pressable>
+      
+      <HStack>
+        <Spacer/>
+
         <Pressable onPress={() => navigation.push('History')}>
-          
+          <Text>りれき</Text>
         </Pressable>
+
+        <Spacer/>
+
         <Pressable onPress={() => navigation.push('AddStress')}>
           <Text>ついか</Text>
         </Pressable>
-      </View>
-    </View>
+
+        <Spacer/>
+      </HStack>
+    </VStack>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    flexDirection: "column",
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
   text: {
     fontSize: 14,
   },

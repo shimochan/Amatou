@@ -1,15 +1,29 @@
-//コピペ段階
-import { StyleSheet } from 'react-native';
-
-import EditScreenInfo from '../components/EditScreenInfo';
+import { StyleSheet, TouchableOpacity } from 'react-native';
 import { Text, View } from '../components/Themed';
+import React from 'react';
+import {  Button } from 'react-native';
+import * as Haptics from 'expo-haptics';
+import * as NativeStack from '@react-navigation/native-stack';
+import { RootStackParamList } from '../types';
+import { useState } from 'react';
+import { setStatusBarNetworkActivityIndicatorVisible } from 'expo-status-bar';
+import { Image ,ImageBackground} from 'react-native';
 
-export default function TabTwoScreen() {
+
+export default function PuchiPuchi({ navigation }: NativeStack.NativeStackScreenProps<RootStackParamList, 'PuchiPuchi'>) {
+  const initialpuchipuchi = {uri : "../assets/images/konpou_puchipuchi.png"}
+  const imagepuchipuchi2 = {uri : "../assets/images/ubble-wrap_10623.png"}
+  const [imagepuchipuchi,setimagepuchipuchi] = useState(initialpuchipuchi)
+  function puchipuchiimage(){
+    Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success)
+    setimagepuchipuchi(imagepuchipuchi2)
+  }
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Tab Two</Text>
-      <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
-      <EditScreenInfo path="/screens/TabTwoScreen.tsx" />
+      <ImageBackground source = {imagepuchipuchi} resizeMode="cover">
+        <Button color = "green" title='プチプチ' onPress={() => puchipuchiimage}/>
+        <Button color = "green" title='ホーム画面へ' onPress={() => navigation.goBack()} />
+      </ImageBackground>
     </View>
   );
 }
@@ -20,9 +34,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-  title: {
-    fontSize: 20,
-    fontWeight: 'bold',
+  text: {
+    fontSize: 14,
   },
   separator: {
     marginVertical: 30,

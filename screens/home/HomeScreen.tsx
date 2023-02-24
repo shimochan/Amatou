@@ -16,7 +16,7 @@ const HomeScreen = ({ navigation }: RootTabScreenProps<'Home'>) => {
         <Pressable onPress={() => navigation.push('History')}>
           
         </Pressable>
-        <Pressable onPress={() => navigation.push('AddStress')}>
+        <Pressable onPress={() => navigation.push('SolutionSelect')}>
           <Text>ついか</Text>
         </Pressable>
       </View>

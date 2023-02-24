@@ -1,30 +1,32 @@
 import { SafeAreaView,StyleSheet,TextInput } from 'react-native';
 import { View } from '../../components/Themed';
 import React from 'react';
-import {  Button } from 'react-native';
+import { Image, Button } from 'react-native';
 import * as NativeStack from '@react-navigation/native-stack';
 import { RootStackParamList } from '../../types';
+import { ZStack, HStack, VStack } from 'react-native-stacks';
+import { Spacer } from 'react-native-flex-layout';
+import DefaultStyle from '../../constants/DefaultStyles';
 
 export default function AddStress({ navigation }: NativeStack.NativeStackScreenProps<RootStackParamList, 'AddStress'>) {
-  
-    const [text, onChangeText] = React.useState('Useless Text');
-    const [number, onChangeNumber] = React.useState('');
+    
+    const [text, onChangeText] = React.useState("");
   return (
-    <View style={styles.container}>
-       <TextInput
-        style={styles.input}
+    <VStack spacing={15} style={DefaultStyle.fullHeight}>
+      <ZStack>
+        <Image source ={require ("../../assets/images/cloud.png")}/>
+        <TextInput
+        style={styles.addtext}
         onChangeText={onChangeText}
         value={text}
-      />
-      <TextInput
-        style={styles.input}
-        onChangeText={onChangeNumber}
-        value={number}
-        placeholder="useless placeholder"
-        keyboardType="numeric"
-      />
+        placeholder="- タップ -"
+        />
+      </ZStack>
+      <Image source ={require ("../../assets/images/worry.png")}/>
+      <Spacer/>
       <Button color = "green" title='ホーム画面へ' onPress={() => navigation.goBack()} />
-    </View>
+      <Spacer/>
+    </VStack>
   );
 }
 
@@ -43,10 +45,9 @@ const styles = StyleSheet.create({
     height: 1,
     width: '80%',
   },
-  input: {
+  addtext: {
     height: 40,
     margin: 12,
-    borderWidth: 1,
     padding: 10,
   },
 });

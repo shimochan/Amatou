@@ -19,6 +19,17 @@ export type RootStackParamList = {
   NotFound: undefined;
   PuchiPuchi: undefined;
   Gyro: undefined;
+  AddStress: undefined;
+  Batting: undefined;
+  CutAction: undefined;
+  FinallyAddStress: undefined;
+  History: undefined;
+  Jogging: undefined;
+  SelectDeadline: undefined;
+  SelectSize: undefined;
+  SolutionSelect: undefined;
+  WriteStress: undefined;
+  StressSelect: undefined;
 };
 
 export type RootStackScreenProps<Screen extends keyof RootStackParamList> = NativeStackScreenProps<

@@ -18,6 +18,16 @@ import HomeScreen from '../screens/HomeScreen';
 import PuchiPuchi from '../screens/Puchipuchi';
 import Gyro from '../screens/Gyro';
 
+import AddStress from '../screens/AddStress';
+import Batting from '../screens/Batting';
+import CutAction from '../screens/CutAction';
+import History from '../screens/History';
+import Jogging from '../screens/Jogging';
+import SelectDeadline from '../screens/SelectDeadline';
+import SelectSize from '../screens/SelectSize';
+import SolutionSelect from '../screens/SolutionSelect';
+import StressSelect from '../screens/StressSelect';
+import WriteStress from '../screens/WriteStress';
 
 import { RootStackParamList, RootTabParamList, RootTabScreenProps } from '../types';
 import LinkingConfiguration from './LinkingConfiguration';
@@ -47,7 +57,18 @@ function RootNavigator() {
       <Stack.Group screenOptions={{ presentation: 'modal' }}>
         <Stack.Screen name="Modal" component={ModalScreen} />
         <Stack.Screen name="PuchiPuchi" component={PuchiPuchi} />
-      <Stack.Screen name="Gyro" component={Gyro} />
+        <Stack.Screen name="Gyro" component={Gyro} />
+
+        <Stack.Screen name="AddStress" component={AddStress} />
+        <Stack.Screen name="Batting" component={Batting} />
+        <Stack.Screen name="CutAction" component={CutAction} />
+        <Stack.Screen name="History" component={History} />
+        <Stack.Screen name="Jogging" component={Jogging} />
+        <Stack.Screen name="SelectDeadline" component={SelectDeadline} />
+        <Stack.Screen name="SelectSize" component={SelectSize} />
+        <Stack.Screen name="StressSelect" component={StressSelect} />
+        <Stack.Screen name="SolutionSelect" component={SolutionSelect} />
+        <Stack.Screen name="WriteStress" component={WriteStress} />
       </Stack.Group>
     </Stack.Navigator>
   );

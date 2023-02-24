@@ -11,6 +11,15 @@ const HomeScreen = ({ navigation }: RootTabScreenProps<'Home'>) => {
     <View style={styles.container}>
       <Button color = "green" title='プチプチへ' onPress={() => navigation.push('PuchiPuchi')} />
       <Button color = "green" title='Gyroへ' onPress={() => navigation.push('Gyro')} />
+      <Button color = "green" title='ストレス追加画面へ' onPress={() => navigation.push('AddStress')} />
+      <Button color = "green" title='野球へ' onPress={() => navigation.push('Batting')} />
+      <Button color = "green" title='キルアクションへ' onPress={() => navigation.push('CutAction')} />
+      <Button color = "green" title='ストレス履歴画面へ' onPress={() => navigation.push('History')} />
+      <Button color = "green" title='ジョギングへ' onPress={() => navigation.push('Jogging')} />
+      <Button color = "green" title='締切り画面へ' onPress={() => navigation.push('SelectDeadline')} />
+      <Button color = "green" title='ストレスサイズ選択画面へ' onPress={() => navigation.push('SelectSize')} />
+      <Button color = "green" title='ゲーム選択画面へ' onPress={() => navigation.push('SolutionSelect')} />
+      <Button color = "green" title='ストレス書く画面へ' onPress={() => navigation.push('WriteStress')} />
     </View>
   );
 }

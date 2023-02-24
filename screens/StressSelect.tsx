@@ -1,14 +1,18 @@
-import { StyleSheet } from 'react-native';
-
-import EditScreenInfo from '../components/EditScreenInfo';
+import { StyleSheet, TouchableOpacity } from 'react-native';
 import { Text, View } from '../components/Themed';
+import React from 'react';
+import {  Button } from 'react-native';
+import * as Haptics from 'expo-haptics';
+import * as NativeStack from '@react-navigation/native-stack';
+import { RootStackParamList } from '../types';
+import { useState } from 'react';
+import { setStatusBarNetworkActivityIndicatorVisible } from 'expo-status-bar';
+import { Image ,ImageBackground} from 'react-native';
 
-export default function TabTwoScreen() {
+export default function StressSelect({ navigation }: NativeStack.NativeStackScreenProps<RootStackParamList, 'StressSelect'>) {
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Tab Two</Text>
-      <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
-      <EditScreenInfo path="/screens/TabTwoScreen.tsx" />
+      <Button color = "green" title='ホーム画面へ' onPress={() => navigation.goBack()} />
     </View>
   );
 }

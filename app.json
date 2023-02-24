@@ -18,6 +18,9 @@
     "assetBundlePatterns": [
       "**/*"
     ],
+    "expo": {
+      "userInterfaceStyle": "automatic"
+    },
     "ios": {
       "bundleIdentifier": "kbh.amatou.tidy",
       "supportsTablet": false

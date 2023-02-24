@@ -1,35 +1,54 @@
-import { StyleSheet, TouchableOpacity } from 'react-native';
+import { ScrollView, StyleSheet, TouchableOpacity } from 'react-native';
 import { Text, View } from '../../components/Themed';
 import React from 'react';
-import {  Button } from 'react-native';
-import * as Haptics from 'expo-haptics';
 import * as NativeStack from '@react-navigation/native-stack';
 import { RootStackParamList } from '../../types';
-import { useState } from 'react';
-import { setStatusBarNetworkActivityIndicatorVisible } from 'expo-status-bar';
-import { Image ,ImageBackground} from 'react-native';
+import stressListController from '../../hooks/stressList';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import StressItemView from '../../components/StressItem';
+import DefaultStyle from '../../constants/DefaultStyles';
+import { Spacer, VStack, HStack, ZStack } from 'react-native-stacks';
+import BackButton from '../../components/BackButton';
 
 export default function StressSelect({ navigation }: NativeStack.NativeStackScreenProps<RootStackParamList, 'StressSelect'>) {
+  const { stressList, setStressList } = stressListController();
+
+  const list = []
+
+  for (const stress of stressList) {
+    list.push(StressItemView(stress));
+  }
+  
   return (
-    <View style={styles.container}>
-      <Button color = "green" title='ホーム画面へ' onPress={() => navigation.goBack()} />
-    </View>
+    <VStack style={[DefaultStyle.fullHeight, { width: '100%' }]}>
+      <ScrollView style={{ width: '100%' }}>
+          {list}
+        <Spacer/>
+      </ScrollView>
+      <HStack style={styles.footer}>
+        {BackButton(navigation)}
+        <Spacer/>
+        <TouchableOpacity activeOpacity={0.5} style={styles.addButton}  onPress={() => navigation.push('AddStress')}>
+          <ZStack style={DefaultStyle.fill}>
+            <Text>ストレスを追加</Text>
+          </ZStack>
+        </TouchableOpacity>
+        <Spacer/>
+        <View style={{width: 40, height: 0}}></View>
+      </HStack>
+    </VStack>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
+  addButton: {
+    width: 150,
+    height: 80,
+    borderRadius: 20,
+    backgroundColor: "#C09BCD"
   },
-  title: {
-    fontSize: 20,
-    fontWeight: 'bold',
-  },
-  separator: {
-    marginVertical: 30,
-    height: 1,
-    width: '80%',
-  },
+  footer: {
+    padding: 40,
+    marginBottom: 10,
+  }
 });

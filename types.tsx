@@ -17,7 +17,7 @@ export type RootStackParamList = {
   Root: NavigatorScreenParams<RootTabParamList> | undefined;
   Modal: undefined;
   NotFound: undefined;
-  PuchiPuchi: undefined;
+  PuchiPuchi: { stress: StressItem };
   Gyro: undefined;
   AddStress: undefined;
   Batting: undefined;

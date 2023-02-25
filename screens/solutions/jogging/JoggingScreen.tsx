@@ -12,6 +12,8 @@ export default function Jogging({ route, navigation }: NativeStack.NativeStackSc
 
   let time: number = 20;
 
+  const [limit, setLimit] = useState<number>();
+
   let end: Date;
   const [stepCount, setStepCount] = useState(0);
   const [pastCount, setPastCount] = useState(0);
@@ -21,7 +23,6 @@ export default function Jogging({ route, navigation }: NativeStack.NativeStackSc
   const [mode, setMode] = useState(0);  //0:初期、1:動作中、2:停止中 3:終了後
 
   const [start, setStart] = useState(new Date());
-
 
   const switchMode = () => {
     switch (mode) {
@@ -90,14 +91,14 @@ export default function Jogging({ route, navigation }: NativeStack.NativeStackSc
 
   return (
     <View style={styles.container}>
-      
+
       <RNPickerSelect
-            onValueChange={(value) => console.log(value)}
-            items={[
-                { label: 'Football', value: 'football' },
-                { label: 'Baseball', value: 'baseball' },
-                { label: 'Hockey', value: 'hockey' },
-            ]}
+        onValueChange={(value) => setLimit(Number(value))}
+        items={[
+          { label: '1', value: '1' },
+          { label: '2', value: '2' },
+          { label: '3', value: '3' },
+        ]}
       />
 
       <VStack spacing={10} style={styles.stack}>

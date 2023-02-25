@@ -6,6 +6,7 @@ import * as NativeStack from '@react-navigation/native-stack';
 import { RootStackParamList } from '../../../types';
 import { ZStack, HStack, VStack, Spacer } from 'react-native-stacks';
 import { Pedometer } from 'expo-sensors';
+import RNPickerSelect from 'react-native-picker-select';
 
 export default function Jogging({ navigation }: NativeStack.NativeStackScreenProps<RootStackParamList, 'Jogging'>) {
 
@@ -118,6 +119,16 @@ export default function Jogging({ navigation }: NativeStack.NativeStackScreenPro
 
   return (
     <View style={styles.container}>
+      
+      <RNPickerSelect
+            onValueChange={(value) => console.log(value)}
+            items={[
+                { label: 'Football', value: 'football' },
+                { label: 'Baseball', value: 'baseball' },
+                { label: 'Hockey', value: 'hockey' },
+            ]}
+      />
+
       <VStack spacing={10} style={styles.stack}>
         <Text style={styles.time}>{count}</Text>
         <Text style={styles.count}>{pastCount+stepCount}</Text>

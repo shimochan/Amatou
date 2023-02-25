@@ -26,7 +26,7 @@ export default function SolutionSelect({ route, navigation }: RootStackScreenPro
           <Spacer />
           <Text style={styles.text}>斬る</Text>
           <Spacer />
-          <Image source={require("../../assets/images/kiruyatu.png")} style={styles.imagesize} />
+          <Image source={require("../../assets/images/kiruyatu.webp")} style={styles.imagesize} />
           <Spacer />
         </HStack>
       </TouchableOpacity>
@@ -36,7 +36,7 @@ export default function SolutionSelect({ route, navigation }: RootStackScreenPro
           <Spacer />
           <Text style={styles.text}>走る</Text>
           <Spacer />
-          <Image source={require("../../assets/images/sport_jogging_woman.png")} style={styles.imagesize} />
+          <Image source={require("../../assets/images/sport_jogging_woman.webp")} style={styles.imagesize} />
           <Spacer />
         </HStack>
       </TouchableOpacity>
@@ -46,7 +46,7 @@ export default function SolutionSelect({ route, navigation }: RootStackScreenPro
           <Spacer />
           <Text style={styles.text}>潰す</Text>
           <Spacer />
-          <Image source={require("../../assets/images/bakuhatsu.png")} style={styles.imagesize} />
+          <Image source={require("../../assets/images/bakuhatsu.webp")} style={styles.imagesize} />
           <Spacer />
         </HStack>
       </TouchableOpacity>

@@ -15,7 +15,7 @@ export default function CutAction({ navigation }: NativeStack.NativeStackScreenP
   <View style={styles.container}>
     <Button title='Start' onPress={startListening} />
     <Button title='Stop' onPress={stopListening} />
-    <Image style={[styles.effect, { opacity: opacity }]} source={require('../../../assets/images/cut-effect.png')} />
+    <Image style={[styles.effect, { opacity: opacity }]} source={require('../../../assets/images/cut-effect.webp')} />
   </View>
   );
 }

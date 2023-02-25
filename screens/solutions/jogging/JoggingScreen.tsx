@@ -4,10 +4,11 @@ import React from 'react';
 import {  Button } from 'react-native';
 import * as NativeStack from '@react-navigation/native-stack';
 import { RootStackParamList } from '../../../types';
+import {Timer} from './Timer';
 export default function Jogging({ navigation }: NativeStack.NativeStackScreenProps<RootStackParamList, 'Jogging'>) {
   return (
     <View style={styles.container}>
-      <Button color = "green" title='ホーム画面へ' onPress={() => navigation.goBack()} />
+      <Timer></Timer>
     </View>
   );
 }

@@ -1,10 +1,8 @@
 import { StyleSheet, TouchableOpacity } from 'react-native';
-import { View } from '../components/Themed';
 import React from 'react';
-import { Button } from 'react-native';
 import * as Haptics from 'expo-haptics';
 import * as NativeStack from '@react-navigation/native-stack';
-import { ActionType, RootStackParamList, RootStackScreenProps, StressItem } from '../types';
+import { RootStackParamList, StressItem } from '../types';
 import { useState } from 'react';
 import { Image } from 'react-native';
 
@@ -12,7 +10,7 @@ export default function PuchiPuchione(key: number, tapAction: () => void, naviga
   const imagepuchipuchi2 = require("../assets/images/puchipuchitubushitaato.webp")
   const [imagepuchipuchi, setimagepuchipuchi] = useState(require("../assets/images/puchipuchitubusumae.webp"))
   const puchipuchiimage = () => {
-    if(imagepuchipuchi === require("../assets/images/puchipuchitubusumae.webp")){
+    if (imagepuchipuchi === require("../assets/images/puchipuchitubusumae.webp")) {
       Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success)
       setimagepuchipuchi(imagepuchipuchi2)
       tapAction();

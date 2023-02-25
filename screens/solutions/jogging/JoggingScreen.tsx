@@ -1,10 +1,10 @@
 import { StyleSheet, TouchableOpacity } from 'react-native';
 import { View } from '../../../components/Themed';
-import React, { useState, useEffect } from 'react';
-import { Button, Text } from 'react-native';
+import React, { useState } from 'react';
+import { Text } from 'react-native';
 import * as NativeStack from '@react-navigation/native-stack';
 import { RootStackParamList } from '../../../types';
-import { ZStack, HStack, VStack, Spacer } from 'react-native-stacks';
+import { VStack } from 'react-native-stacks';
 import { Pedometer } from 'expo-sensors';
 
 export default function Jogging({ navigation }: NativeStack.NativeStackScreenProps<RootStackParamList, 'Jogging'>) {
@@ -68,7 +68,7 @@ export default function Jogging({ navigation }: NativeStack.NativeStackScreenPro
         setText("再開");
         break;
       case 2://再開ボタン押されたとき
-        setPastCount(pastCount+stepCount);
+        setPastCount(pastCount + stepCount);
         setStepCount(0);
         setMode(1);
         setStart(new Date());
@@ -120,7 +120,7 @@ export default function Jogging({ navigation }: NativeStack.NativeStackScreenPro
     <View style={styles.container}>
       <VStack spacing={10} style={styles.stack}>
         <Text style={styles.time}>{count}</Text>
-        <Text style={styles.count}>{pastCount+stepCount}</Text>
+        <Text style={styles.count}>{pastCount + stepCount}</Text>
         <TouchableOpacity activeOpacity={0.5} onPress={switchMode} style={styles.button}>
           <Text style={styles.text}>{text}</Text>
         </TouchableOpacity>

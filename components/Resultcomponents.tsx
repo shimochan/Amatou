@@ -1,5 +1,5 @@
 import { StyleSheet, Text, Image, TouchableOpacity } from 'react-native';
-import { VStack, Spacer } from 'react-native-stacks';
+import { VStack } from 'react-native-stacks';
 import { ActionType, StressItem } from "../types";
 import DefaultStyle from '../constants/DefaultStyles';
 import { useEffect } from 'react';
@@ -10,13 +10,13 @@ const Resultcomponents = (stress: StressItem, type: ActionType, navigation: any)
   const [imageurl, setimageurl] = useState(initialimageUrl)
   const setUrl = () => {
     switch (type) {
-      case ActionType.Cutting: setimageurl(require( '../assets/images/monster.webp')); break;
+      case ActionType.Cutting: setimageurl(require('../assets/images/monster.webp')); break;
       case ActionType.Batting: setimageurl(require('../assets/images/bg_baseball_ground.webp')); break;
       case ActionType.Joggnig: setimageurl(require('../assets/images/sport_jogging_woman.webp')); break;
       case ActionType.PuchiPuchi: setimageurl(require('../assets/images/bakuhatsu.webp')); break;
     }
   }
-  
+
   useEffect(() => {
     setUrl();
   }, []);
@@ -49,7 +49,7 @@ const styles = StyleSheet.create({
   imagestyle: {
     resizeMode: 'contain',
     width: '90%',
-    flex:1
+    flex: 1
   }
 });
 

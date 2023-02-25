@@ -1,16 +1,9 @@
-//コピペ段階
 import { StyleSheet, TouchableOpacity } from 'react-native';
-import { Text, View } from '../../../components/Themed';
 import React from 'react';
-import {  Button } from 'react-native';
-import * as Haptics from 'expo-haptics';
 import * as NativeStack from '@react-navigation/native-stack';
 import { RootStackParamList } from '../../../types';
-import { useState,useEffect } from 'react';
-import { setStatusBarNetworkActivityIndicatorVisible } from 'expo-status-bar';
-import { Image ,ImageBackground} from 'react-native';
-import DefaultStyle from '../../../constants/DefaultStyles';
-import battingAction from '../../../hooks/actions/battingAction';
+import { useEffect } from 'react';
+import { Image } from 'react-native';
 import { Audio } from 'expo-av';
 
 
@@ -18,7 +11,7 @@ export default function Batting({ navigation }: NativeStack.NativeStackScreenPro
   const [sound, setSound] = React.useState<Audio.Sound>();
   async function playSound() {
     console.log('Loading Sound');
-    const { sound } = await Audio.Sound.createAsync( require('../../../assets/Audio/ouenka.mp3')
+    const { sound } = await Audio.Sound.createAsync(require('../../../assets/Audio/ouenka.mp3')
     );
     setSound(sound);
     await sound.playAsync();
@@ -26,9 +19,9 @@ export default function Batting({ navigation }: NativeStack.NativeStackScreenPro
   React.useEffect(() => {
     return sound
       ? () => {
-          console.log('Unloading Sound');
-          sound.unloadAsync();
-        }
+        console.log('Unloading Sound');
+        sound.unloadAsync();
+      }
       : undefined;
   }, [sound]);
 
@@ -36,25 +29,25 @@ export default function Batting({ navigation }: NativeStack.NativeStackScreenPro
     playSound();
   }, [])
 
- 
+
 
   return (
-    <TouchableOpacity activeOpacity={0.5} onPress={()=>navigation.push('Pitching', {sound: sound})} style={styles.container}>
-    <Image source ={require("../../../assets/images/batting.png")} style = {styles.image}/>
+    <TouchableOpacity activeOpacity={0.5} onPress={() => navigation.push('Pitching', { sound: sound })} style={styles.container}>
+      <Image source={require("../../../assets/images/batting.png")} style={styles.image} />
     </TouchableOpacity>
   );
-    
 
-  
-  
 
-  
+
+
+
+
 }
 
 const styles = StyleSheet.create({
-  image:{
-     width:"100%",
-     resizeMode: 'contain',
+  image: {
+    width: "100%",
+    resizeMode: 'contain',
   },
   container: {
     flex: 1,

@@ -42,7 +42,7 @@ const HomeScreen = ({ navigation }: NativeStack.NativeStackScreenProps<RootStack
 
         <TouchableOpacity activeOpacity={0.5} onPress={() => navigation.push('StressSelect')} style={DefaultStyle.largeButton}>
           <ZStack style={DefaultStyle.fill}>
-            <Text style={[DefaultStyle.title2, {color: "#fff"}]}>ストレス一覧</Text>
+            <Text style={[DefaultStyle.title2, { color: "#fff" }]}>ストレス一覧</Text>
           </ZStack>
         </TouchableOpacity>
 
@@ -55,7 +55,7 @@ const HomeScreen = ({ navigation }: NativeStack.NativeStackScreenProps<RootStack
 
           <Spacer />
 
-          <TouchableOpacity activeOpacity={0.5} onPress={() => navigation.push('AddStress')}  style={[DefaultStyle.smallButton, { backgroundColor: '#C09BCD' }]}>
+          <TouchableOpacity activeOpacity={0.5} onPress={() => navigation.push('AddStress')} style={[DefaultStyle.smallButton, { backgroundColor: '#C09BCD' }]}>
             <Text>ついか</Text>
           </TouchableOpacity>
 

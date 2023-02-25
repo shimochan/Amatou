@@ -1,7 +1,7 @@
 import { StyleSheet, TouchableOpacity } from 'react-native';
 import React, { useEffect } from 'react';
 import { Image, Text } from 'react-native';
-import { RootStackScreenProps, StressItem } from '../../types';
+import { RootStackScreenProps } from '../../types';
 import { VStack, HStack, Spacer } from 'react-native-stacks';
 import BackButton from '../../components/BackButton';
 import DefaultStyle from '../../constants/DefaultStyles';
@@ -9,9 +9,9 @@ import { getIntensityStyle, getIntensityLabel } from '../../hooks/intensityConve
 import cutAction from '../../hooks/actions/cutAction';
 
 export default function SolutionSelect({ route, navigation }: RootStackScreenProps<'SolutionSelect'>) {
-  const { stopListening } = cutAction(() => {});
+  const { stopListening } = cutAction(() => { });
 
-  useEffect(()=> {
+  useEffect(() => {
     stopListening();
 
     const willFocusSubscription = navigation.addListener('focus', () => {

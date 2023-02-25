@@ -6,6 +6,7 @@
 import { BottomTabScreenProps } from '@react-navigation/bottom-tabs';
 import { CompositeScreenProps, NavigatorScreenParams } from '@react-navigation/native';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
+import { Audio } from 'expo-av';
 
 declare global {
   namespace ReactNavigation {
@@ -21,8 +22,8 @@ export type RootStackParamList = {
   Gyro: undefined;
   AddStress: undefined;
   Batting: undefined;
-  Pitching: undefined;
-  Homerun: undefined;
+  Pitching: {sound: Audio.Sound | undefined};
+  Homerun: {sound: Audio.Sound | undefined};
   CutAction: undefined;
   FinallyAddStress: undefined;
   History: undefined;

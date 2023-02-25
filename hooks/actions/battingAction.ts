@@ -3,7 +3,7 @@ import { useRef, useState } from "react";
 import * as Haptics from 'expo-haptics';
 import { Animated } from "react-native";
 
-const battingAction = (navigation: any) => {
+const battingAction = (pushToHomeRUn: () => void) => {
   const interval = 100;
   let sumCount = 0;
 
@@ -49,7 +49,7 @@ const battingAction = (navigation: any) => {
     // Right to Left || Left to Right
     if (xAccAvg < -4.0 || 4.0 < xAccAvg) {
       Haptics.notificationAsync(Haptics.NotificationFeedbackType.Error);
-      navigation.push('Homerun');
+      pushToHomeRUn();
       stopListening();
       return;
     }

@@ -11,8 +11,11 @@ import { setStatusBarNetworkActivityIndicatorVisible } from 'expo-status-bar';
 import { Image ,ImageBackground} from 'react-native';
 import battingAction from '../../../hooks/actions/battingAction';
 
-export default function Pitching({ navigation }: NativeStack.NativeStackScreenProps<RootStackParamList, 'Pitching'>) {
-  const { startListening, stopListening } = battingAction(navigation);
+export default function Pitching({ route, navigation }: NativeStack.NativeStackScreenProps<RootStackParamList, 'Pitching'>) {
+  const pushToHomeRun = () => {
+    navigation.push('Homerun', {sound: route.params.sound})
+  }
+  const { startListening, stopListening } = battingAction(pushToHomeRun);
   startListening();
   return (
     <View style={styles.container}>

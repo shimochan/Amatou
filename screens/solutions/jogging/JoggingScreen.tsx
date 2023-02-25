@@ -7,12 +7,34 @@ import { ActionType, RootStackParamList } from '../../../types';
 import { VStack } from 'react-native-stacks';
 import { Pedometer } from 'expo-sensors';
 import RNPickerSelect from 'react-native-picker-select';
+import { numberLiteralTypeAnnotation } from '@babel/types';
 
 export default function Jogging({ route, navigation }: NativeStack.NativeStackScreenProps<RootStackParamList, 'Jogging'>) {
 
   let time: number = 20;
 
-  const [limit, setLimit] = useState<number>();
+  const list = [
+    { label: '5分', value:5 },
+    { label: '10分', value:10 },
+    { label: '15分', value:15 },
+    { label: '20分', value:20 },
+    { label: '25分', value:25 },
+    { label: '30分', value:30 },
+    { label: '35分', value:35 },
+    { label: '40分', value:40 },
+    { label: '45分', value:45 },
+    { label: '50分', value:50 },
+    { label: '55分', value:55 },
+    { label: '60分', value:60 },
+    { label: '65分', value:65 },
+    { label: '70分', value:70 },
+    { label: '75分', value:75 },
+    { label: '80分', value:80 },
+    { label: '85分', value:85 },
+    { label: '90分', value:90 }
+  ];
+  
+  const [limit, setLimit] = useState(0);
 
   let end: Date;
   const [stepCount, setStepCount] = useState(0);
@@ -93,12 +115,8 @@ export default function Jogging({ route, navigation }: NativeStack.NativeStackSc
     <View style={styles.container}>
 
       <RNPickerSelect
-        onValueChange={(value) => setLimit(Number(value))}
-        items={[
-          { label: '1', value: '1' },
-          { label: '2', value: '2' },
-          { label: '3', value: '3' },
-        ]}
+        onValueChange={(value) => setLimit(value.value)}
+        items = {list}
       />
 
       <VStack spacing={10} style={styles.stack}>

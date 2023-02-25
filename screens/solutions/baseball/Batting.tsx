@@ -11,6 +11,8 @@ import { setStatusBarNetworkActivityIndicatorVisible } from 'expo-status-bar';
 import { Image ,ImageBackground} from 'react-native';
 
 export default function Batting({ navigation }: NativeStack.NativeStackScreenProps<RootStackParamList, 'Batting'>) {
+
+
   return (
     <View style={styles.container}>
       <Button color = "green" title='ホーム画面へ' onPress={() => navigation.goBack()} />
@@ -34,3 +36,5 @@ const styles = StyleSheet.create({
     width: '80%',
   },
 });
+
+

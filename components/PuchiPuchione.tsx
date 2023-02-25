@@ -9,14 +9,15 @@ import { useState } from 'react';
 import { Image } from 'react-native';
 import FastImage from 'react-native-fast-image';
 
-export default function PuchiPuchione(key: number, navigation: NativeStack.NativeStackNavigationProp<RootStackParamList, "PuchiPuchi", undefined>, stress: StressItem) {
+export default function PuchiPuchione(key: number, tapAction: () => void, navigation: NativeStack.NativeStackNavigationProp<RootStackParamList, "PuchiPuchi", undefined>, stress: StressItem) {
   const imagepuchipuchi2 = require("../assets/images/puchipuchitubushitaato.webp")
   const [imagepuchipuchi, setimagepuchipuchi] = useState(require("../assets/images/puchipuchitubusumae.webp"))
-
   const puchipuchiimage = () => {
-    Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success)
-    setimagepuchipuchi(imagepuchipuchi2)
-    navigation.push("Result", { stress: stress, type: ActionType.PuchiPuchi});
+    if(imagepuchipuchi === require("../assets/images/puchipuchitubusumae.webp")){
+      Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success)
+      setimagepuchipuchi(imagepuchipuchi2)
+      tapAction();
+    }
   }
 
   return (

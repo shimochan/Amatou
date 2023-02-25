@@ -7,7 +7,6 @@ import * as NativeStack from '@react-navigation/native-stack';
 import { ActionType, RootStackParamList, RootStackScreenProps, StressItem } from '../types';
 import { useState } from 'react';
 import { Image } from 'react-native';
-import FastImage from 'react-native-fast-image';
 
 export default function PuchiPuchione(key: number, tapAction: () => void, navigation: NativeStack.NativeStackNavigationProp<RootStackParamList, "PuchiPuchi", undefined>, stress: StressItem) {
   const imagepuchipuchi2 = require("../assets/images/puchipuchitubushitaato.webp")

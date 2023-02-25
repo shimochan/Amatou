@@ -6,11 +6,11 @@ import { useEffect } from 'react';
 import { useState } from 'react';
 
 const Resultcomponents = (stress: StressItem, type: ActionType, navigation: any) => {
-  const initialimageUrl = require('../assets/images/image_9.webp');
+  const initialimageUrl = require('../assets/images/monster.webp');
   const [imageurl, setimageurl] = useState(initialimageUrl)
   const setUrl = () => {
     switch (type) {
-      case ActionType.Cutting: setimageurl(require( '../assets/images/image_9.webp')); break;
+      case ActionType.Cutting: setimageurl(require( '../assets/images/monster.webp')); break;
       case ActionType.Batting: setimageurl(require('../assets/images/bg_baseball_ground.webp')); break;
       case ActionType.Joggnig: setimageurl(require('../assets/images/sport_jogging_woman.webp')); break;
       case ActionType.PuchiPuchi: setimageurl(require('../assets/images/bakuhatsu.webp')); break;

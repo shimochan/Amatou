@@ -5,17 +5,21 @@ import useCachedResources from './hooks/useCachedResources';
 import useColorScheme from './hooks/useColorScheme';
 import Navigation from './navigation';
 
-import {
-  RecoilRoot,
-  atom,
-  selector,
-  useRecoilState,
-  useRecoilValue,
-} from 'recoil';
+import { RecoilRoot } from 'recoil';
+import { setCustomText } from 'react-native-global-props';
+import { TextProps } from 'react-native';
 
 export default function App() {
   const isLoadingComplete = useCachedResources();
   const colorScheme = useColorScheme();
+
+  const textProps: TextProps = {
+    style: {
+      fontFamily: "Yomogi",
+    }
+  };
+
+  setCustomText(textProps);
 
   if (!isLoadingComplete) {
     return null;

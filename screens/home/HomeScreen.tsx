@@ -1,16 +1,17 @@
 import React from 'react';
 import { StyleSheet, Image, TouchableOpacity } from 'react-native';
 import { Text } from 'react-native';
-import { RootStackParamList } from '../../types';
+import { RootStackParamList, StressItem } from '../../types';
 import { ZStack, HStack, VStack, Spacer } from 'react-native-stacks';
 import DefaultStyle from '../../constants/DefaultStyles';
 import * as NativeStack from '@react-navigation/native-stack';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import stressListController from '../../hooks/stressList';
+import { useRecoilValue } from 'recoil';
+import { unDoneStressSelector } from '../../atoms/stressList';
 
 
 const HomeScreen = ({ navigation }: NativeStack.NativeStackScreenProps<RootStackParamList, 'Home'>) => {
-  const { stressList, setStressList } = stressListController();
+  const stressList: StressItem[] = useRecoilValue(unDoneStressSelector);
 
   const getStoneImagePath = (count: number) => {
     const basePath = "../../assets/images/home_stones/";
@@ -39,7 +40,7 @@ const HomeScreen = ({ navigation }: NativeStack.NativeStackScreenProps<RootStack
 
         <Spacer />
 
-        <TouchableOpacity activeOpacity={0.5} onPress={() => navigation.push('PuchiPuchi')} style={DefaultStyle.largeButton}>
+        <TouchableOpacity activeOpacity={0.5} onPress={() => navigation.push('StressSelect')} style={DefaultStyle.largeButton}>
           <ZStack style={DefaultStyle.fill}>
             <Text style={[DefaultStyle.title2, {color: "#fff"}]}>ストレス一覧</Text>
           </ZStack>

@@ -1,4 +1,3 @@
-//コピペ段階
 import { StyleSheet } from 'react-native';
 import { View } from '../../../components/Themed';
 import React from 'react';

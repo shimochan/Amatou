@@ -16,6 +16,7 @@ export default function App() {
   const textProps: TextProps = {
     style: {
       fontFamily: "Yomogi",
+      fontSize: 18,
     }
   };
 

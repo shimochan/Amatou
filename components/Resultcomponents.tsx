@@ -7,7 +7,7 @@ import { useState } from 'react';
 
 const Resultcomponents = (stress: StressItem, type: ActionType, navigation: any) => {
   const initialimageUrl = require('../assets/images/monster.webp');
-  const [imageurl, setimageurl] = useState(initialimageUrl)
+  const [imageurl, setimageurl] = useState(initialimageUrl);
   const setUrl = () => {
     switch (type) {
       case ActionType.Cutting: setimageurl(require('../assets/images/monster.webp')); break;
@@ -22,7 +22,10 @@ const Resultcomponents = (stress: StressItem, type: ActionType, navigation: any)
   }, []);
 
   return (
-    <TouchableOpacity activeOpacity={0.5} onPress={() => navigation.push("Home", { stress: stress })}>
+    <TouchableOpacity activeOpacity={0.5} onPress={() => {
+      stress.isDone = true;
+      navigation.popToTop();
+    }}>
       <VStack style={DefaultStyle.fullHeight} spacing={5}>
         <Text style={styles.title}>{stress.title}</Text>
         <Text style={styles.solve}>

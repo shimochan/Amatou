@@ -1,16 +1,19 @@
-import { Platform, SafeAreaView,StyleSheet,TextInput,TouchableOpacity } from 'react-native';
+import { Platform, SafeAreaView, StyleSheet, TextInput, TouchableOpacity } from 'react-native';
 import { View } from '../../components/Themed';
 import React, { useEffect, useState } from 'react';
-import { Image, Button,Text } from 'react-native';
+import { Image, Button, Text } from 'react-native';
 import * as NativeStack from '@react-navigation/native-stack';
-import { RootStackParamList } from '../../types';
-import { ZStack, HStack, VStack,Spacer } from 'react-native-stacks';
+import { RootStackParamList, StressItem } from '../../types';
+import { ZStack, HStack, VStack, Spacer } from 'react-native-stacks';
 import DefaultStyle from '../../constants/DefaultStyles';
 import DateTimePickerModal from "react-native-modal-datetime-picker";
+import { stressListState } from '../../atoms/stressList';
+import { useRecoilState } from 'recoil';
 
 
 export default function AddStress({ navigation }: NativeStack.NativeStackScreenProps<RootStackParamList, 'AddStress'>) {
-    
+  const [stressList, setStressList] = useRecoilState(stressListState);
+
   const [text, onChangeText] = useState("");
   const [isPressed_S, onPress_S] = useState(false);
   const [isPressed_M, onPress_M] = useState(true);
@@ -46,63 +49,73 @@ export default function AddStress({ navigation }: NativeStack.NativeStackScreenP
     onPress_L(true);
   }
 
+  const addAndNavigate = () => {
+    if (text == "" ) return;
+    const stressCount = stressList.length;
+    const newStress: StressItem = { key: stressCount, title: text, intensity: 0, dueDate: new Date(), isDone: false };
+    setStressList([...stressList, newStress]);
+    console.log([...stressList, newStress]);
+    navigation.pop();
+    navigation.push('StressSelect');
+  }
+
   return (
     <VStack spacing={2} style={DefaultStyle.fullHeight}>
       <ZStack>
-        <Image source ={require("../../assets/images/worry.png")} style={styles.inputbutton}/>
+        <Image source={require("../../assets/images/worry.png")} style={styles.inputbutton} />
         <TextInput
-        style={styles.addtext}
-        onChangeText={onChangeText}
-        value={text}
-        placeholder="- タップ -"
+          style={styles.addtext}
+          onChangeText={onChangeText}
+          value={text}
+          placeholder="- タップ -"
         />
       </ZStack>
       <HStack spacing={8}>
-      <TouchableOpacity activeOpacity={0.5} onPress={updateState_S} style={isPressed_S ? styles.pressedColor_S : styles.defaultColor_S}>
-        <ZStack style={DefaultStyle.fill}>
-          <Text style={styles.text}>小</Text>
-        </ZStack>
-      </TouchableOpacity>
-      
-      
-      <TouchableOpacity activeOpacity={0.5} onPress={updateState_M} style={isPressed_M ? styles.pressedColor_M : styles.defaultColor_M}>
-      <ZStack style={DefaultStyle.fill}>
-          <Text style={styles.text}>中</Text>
-        </ZStack>
-      </TouchableOpacity>
-      <TouchableOpacity activeOpacity={0.5} onPress={updateState_L} style={isPressed_L ? styles.pressedColor_L : styles.defaultColor_L}>
-      <ZStack style={DefaultStyle.fill}>
-          <Text style={styles.text}>大</Text>
-        </ZStack>
-      </TouchableOpacity>
-      </HStack>
-      <HStack spacing={0}>
-      <Image source ={require("../../assets/images/character_shimekiri.png")} style={styles.character_shimekiri} />
-      <Button title="期限：＿曜日＿月＿日  ＿時＿分" onPress={showDatePicker}/>
-      <DateTimePickerModal
-        isVisible={isDatePickerVisible}
-        mode="datetime"
-        onConfirm={handleConfirm}
-        onCancel={hideDatePicker}
-      />
-      </HStack>
-
-      <TouchableOpacity activeOpacity={0.5} onPress={() => navigation.push('StressSelect')} style={DefaultStyle.largeButton}>
+        <TouchableOpacity activeOpacity={0.5} onPress={updateState_S} style={isPressed_S ? styles.pressedColor_S : styles.defaultColor_S}>
           <ZStack style={DefaultStyle.fill}>
-            <Text style={[DefaultStyle.title2, {color: "#fff"}]}>ストレスを追加</Text>
+            <Text style={styles.text}>小</Text>
           </ZStack>
         </TouchableOpacity>
 
-          
-    </VStack>
- 
 
-    
+        <TouchableOpacity activeOpacity={0.5} onPress={updateState_M} style={isPressed_M ? styles.pressedColor_M : styles.defaultColor_M}>
+          <ZStack style={DefaultStyle.fill}>
+            <Text style={styles.text}>中</Text>
+          </ZStack>
+        </TouchableOpacity>
+        <TouchableOpacity activeOpacity={0.5} onPress={updateState_L} style={isPressed_L ? styles.pressedColor_L : styles.defaultColor_L}>
+          <ZStack style={DefaultStyle.fill}>
+            <Text style={styles.text}>大</Text>
+          </ZStack>
+        </TouchableOpacity>
+      </HStack>
+      <HStack spacing={0}>
+        <Image source={require("../../assets/images/character_shimekiri.png")} style={styles.character_shimekiri} />
+        <Button title="期限：＿曜日＿月＿日  ＿時＿分" onPress={showDatePicker} />
+        <DateTimePickerModal
+          isVisible={isDatePickerVisible}
+          mode="datetime"
+          onConfirm={handleConfirm}
+          onCancel={hideDatePicker}
+        />
+      </HStack>
+
+      <TouchableOpacity activeOpacity={0.5} onPress={() => addAndNavigate()} style={DefaultStyle.largeButton}>
+        <ZStack style={DefaultStyle.fill}>
+          <Text style={[DefaultStyle.title2, { color: "#fff" }]}>ストレスを追加</Text>
+        </ZStack>
+      </TouchableOpacity>
+
+
+    </VStack>
+
+
+
   );
 }
 
 const styles = StyleSheet.create({
-  inputbutton:{
+  inputbutton: {
     maxwidth: '100%',
     resizeMode: 'contain',
   },
@@ -122,7 +135,7 @@ const styles = StyleSheet.create({
   },
   pressedColor_S: {
     backgroundColor: '#4587c1',
-    borderColor:"#000000",
+    borderColor: "#000000",
     borderWidth: 2,
     height: 60,
     width: 60,
@@ -130,7 +143,7 @@ const styles = StyleSheet.create({
   },
   defaultColor_S: {
     backgroundColor: '#ffffff',
-    borderColor:"#000000",
+    borderColor: "#000000",
     borderWidth: 2,
     height: 60,
     width: 60,
@@ -138,7 +151,7 @@ const styles = StyleSheet.create({
   },
   pressedColor_M: {
     backgroundColor: '#4587c1',
-    borderColor:"#000000",
+    borderColor: "#000000",
     borderWidth: 2,
     height: 80,
     width: 80,
@@ -146,7 +159,7 @@ const styles = StyleSheet.create({
   },
   defaultColor_M: {
     backgroundColor: '#ffffff',
-    borderColor:"#000000",
+    borderColor: "#000000",
     borderWidth: 2,
     height: 80,
     width: 80,
@@ -154,7 +167,7 @@ const styles = StyleSheet.create({
   },
   pressedColor_L: {
     backgroundColor: '#4587c1',
-    borderColor:"#000000",
+    borderColor: "#000000",
     borderWidth: 2,
     height: 100,
     width: 100,
@@ -162,7 +175,7 @@ const styles = StyleSheet.create({
   },
   defaultColor_L: {
     backgroundColor: '#ffffff',
-    borderColor:"#000000",
+    borderColor: "#000000",
     borderWidth: 2,
     height: 100,
     width: 100,
@@ -174,17 +187,17 @@ const styles = StyleSheet.create({
     margin: 10,
     padding: 5,
   },
-  text:{
+  text: {
     fontSize: 25,
     fontWeight: 'bold',
   },
-  character_shimekiri:{
+  character_shimekiri: {
     height: 100,
-    width:100,
+    width: 100,
     resizeMode: 'contain',
   },
-  timelimit:{
-    
+  timelimit: {
+
   }
 
 

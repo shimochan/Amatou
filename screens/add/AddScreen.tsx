@@ -3,11 +3,12 @@ import React, { useState } from 'react';
 import { Image, Button, Text } from 'react-native';
 import * as NativeStack from '@react-navigation/native-stack';
 import { RootStackParamList, StressItem } from '../../types';
-import { ZStack, HStack, VStack } from 'react-native-stacks';
+import { ZStack, HStack, VStack, Spacer } from 'react-native-stacks';
 import DefaultStyle from '../../constants/DefaultStyles';
 import DateTimePickerModal from "react-native-modal-datetime-picker";
 import { stressListState } from '../../atoms/stressList';
 import { useRecoilState } from 'recoil';
+import CloseButton from '../../components/CloseButton';
 
 
 export default function AddStress({ navigation }: NativeStack.NativeStackScreenProps<RootStackParamList, 'AddStress'>) {
@@ -53,7 +54,7 @@ export default function AddStress({ navigation }: NativeStack.NativeStackScreenP
   const getIntensity = () => {
     if (isPressed_S) {
       return 0;
-    } else if(isPressed_M) {
+    } else if (isPressed_M) {
       return 1;
     } else {
       return 2;
@@ -117,6 +118,12 @@ export default function AddStress({ navigation }: NativeStack.NativeStackScreenP
         </ZStack>
       </TouchableOpacity>
 
+      <Spacer />
+
+      <HStack style={DefaultStyle.footer}>
+        {CloseButton(navigation)}
+        <Spacer />
+      </HStack>
 
     </VStack>
 

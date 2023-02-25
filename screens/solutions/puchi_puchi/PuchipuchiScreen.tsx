@@ -1,14 +1,13 @@
-import { StyleSheet, TouchableOpacity } from 'react-native';
+import { StyleSheet } from 'react-native';
 import { View } from '../../../components/Themed';
 import React from 'react';
-import { Button } from 'react-native';
-import * as Haptics from 'expo-haptics';
 import * as NativeStack from '@react-navigation/native-stack';
 import { ActionType, RootStackParamList, RootStackScreenProps, StressItem } from '../../../types';
 import { useState } from 'react';
 import PuchiPuchione from '../../../components/PuchiPuchione'
-import { HStack } from 'react-native-stacks';
-import FastImage from 'react-native-fast-image'
+import { HStack, Spacer } from 'react-native-stacks';
+import DefaultStyle from '../../../constants/DefaultStyles';
+import BackButton from '../../../components/BackButton';
 
 export default function PuchiPuchi({ route, navigation }: RootStackScreenProps<'PuchiPuchi'>) {
 
@@ -30,6 +29,10 @@ export default function PuchiPuchi({ route, navigation }: RootStackScreenProps<'
   return (
     <View style={styles.container}>
       {items}
+      <HStack style={DefaultStyle.footer}>
+        {BackButton(navigation)}
+        <Spacer />
+      </HStack>
     </View>
   );
 }

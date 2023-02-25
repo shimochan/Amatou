@@ -1,0 +1,22 @@
+import { StyleSheet, Image, TouchableOpacity } from 'react-native';
+
+export default function BackButton(navigation: any) {
+  return (
+    <TouchableOpacity activeOpacity={0.5} style={styles.wrapper} onPress={() => navigation.pop()}>
+      <Image source={require("../assets/images/icons/close.png")} style={styles.backIcon}/>
+    </TouchableOpacity>
+  );
+}
+
+const styles = StyleSheet.create({
+  wrapper: {
+    width: 40,
+    height: 40,
+    padding: 5,
+  },
+  backIcon: {
+    width: 30,
+    height: 30,
+    resizeMode: "contain",
+  }
+});

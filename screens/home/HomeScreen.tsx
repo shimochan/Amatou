@@ -6,7 +6,6 @@ import { ZStack, HStack, VStack, Spacer } from 'react-native-stacks';
 import DefaultStyle from '../../constants/DefaultStyles';
 import * as NativeStack from '@react-navigation/native-stack';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { Timer } from "../solutions/jogging/Timer"
 import stressListController from '../../hooks/stressList';
 
 

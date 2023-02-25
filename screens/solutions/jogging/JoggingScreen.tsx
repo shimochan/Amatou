@@ -62,7 +62,6 @@ export default function Jogging({ navigation }: NativeStack.NativeStackScreenPro
         setMode(1);
         setStart(new Date());
         setText("停止");
-        console.log(new Date());
         break;
       case 1://中断ボタン押されたとき
         setMode(2);
@@ -78,11 +77,7 @@ export default function Jogging({ navigation }: NativeStack.NativeStackScreenPro
   }
 
   const getcount = async () => {
-    console.log("CALLED");
     const pastStepCountResult = await Pedometer.getStepCountAsync(start, end);
-    console.log("LOG" + start);
-    console.log("LOG" + end);
-    console.log("LOG" + pastStepCountResult.steps);
     setStepCount(pastStepCountResult.steps);
   }
 
@@ -99,8 +94,6 @@ export default function Jogging({ navigation }: NativeStack.NativeStackScreenPro
         setCount(0);
         setMode(2);
         // getcount();
-        console.log(currentStepCount);
-        console.log(new Date());
       }
       else {//タイマー絶賛動作中は
         setCount(next);

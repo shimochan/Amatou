@@ -49,7 +49,7 @@ export default function AddStress({ navigation }: NativeStack.NativeStackScreenP
   return (
     <VStack spacing={2} style={DefaultStyle.fullHeight}>
       <ZStack>
-        <Image source ={require("../../assets/images/worry.png")} style={styles.inputbutton}/>
+        <Image source ={require("../../assets/images/worry.webp")} style={styles.inputbutton}/>
         <TextInput
         style={styles.addtext}
         onChangeText={onChangeText}
@@ -77,7 +77,7 @@ export default function AddStress({ navigation }: NativeStack.NativeStackScreenP
       </TouchableOpacity>
       </HStack>
       <HStack spacing={0}>
-      <Image source ={require("../../assets/images/character_shimekiri.png")} style={styles.character_shimekiri} />
+      <Image source ={require("../../assets/images/character_shimekiri.webp")} style={styles.character_shimekiri} />
       <Button title="期限：＿曜日＿月＿日  ＿時＿分" onPress={showDatePicker}/>
       <DateTimePickerModal
         isVisible={isDatePickerVisible}

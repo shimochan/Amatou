@@ -15,15 +15,15 @@ const HomeScreen = ({ navigation }: NativeStack.NativeStackScreenProps<RootStack
   const getStoneImagePath = (count: number) => {
     const basePath = "../../assets/images/home_stones/";
     switch (count) {
-      case 0: return require(basePath + "00.jpeg");
-      case 1: return require(basePath + "01.jpg");
-      case 2: return require(basePath + "02.jpg");
-      case 3: return require(basePath + "03.jpg");
-      case 4: return require(basePath + "04.jpg");
-      case 5: return require(basePath + "05.jpg");
-      case 6: return require(basePath + "06.png");
-      case 7: return require(basePath + "07.jpg");
-      default: return require(basePath + "many.png");
+      case 0: return require(basePath + "00.webp");
+      case 1: return require(basePath + "01.webp");
+      case 2: return require(basePath + "02.webp");
+      case 3: return require(basePath + "03.webp");
+      case 4: return require(basePath + "04.webp");
+      case 5: return require(basePath + "05.webp");
+      case 6: return require(basePath + "06.webp");
+      case 7: return require(basePath + "07.webp");
+      default: return require(basePath + "many.webp");
     }
   }
 

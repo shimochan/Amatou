@@ -21,13 +21,13 @@ export type RootStackParamList = {
   PuchiPuchi: { stress: StressItem };
   Gyro: undefined;
   AddStress: undefined;
-  Batting: undefined;
-  Pitching: {sound: Audio.Sound | undefined};
-  Homerun: {sound: Audio.Sound | undefined};
+  Batting: { stress: StressItem };
+  Pitching: {sound: Audio.Sound | undefined,  stress: StressItem};
+  Homerun: {sound: Audio.Sound | undefined, stress: StressItem};
   CutAction: { stress: StressItem };
   FinallyAddStress: undefined;
   History: undefined;
-  Jogging: undefined;
+  Jogging: { stress: StressItem };
   SelectDeadline: undefined;
   SelectSize: undefined;
   SolutionSelect: { stress: StressItem };

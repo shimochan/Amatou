@@ -3,71 +3,40 @@ import { View } from '../../../components/Themed';
 import React, { useState } from 'react';
 import { Text } from 'react-native';
 import * as NativeStack from '@react-navigation/native-stack';
-import { RootStackParamList } from '../../../types';
+import { ActionType, RootStackParamList } from '../../../types';
 import { VStack } from 'react-native-stacks';
 import { Pedometer } from 'expo-sensors';
 
-export default function Jogging({ navigation }: NativeStack.NativeStackScreenProps<RootStackParamList, 'Jogging'>) {
+export default function Jogging({ route, navigation }: NativeStack.NativeStackScreenProps<RootStackParamList, 'Jogging'>) {
 
   let time: number = 20;
-  // const [currentStepCount, setCurrentStepCount] = useState(0);
-  // const [end, setEnd] = useState();
 
   let end: Date;
   const [stepCount, setStepCount] = useState(0);
   const [pastCount, setPastCount] = useState(0);
 
-  const [now, setNow] = useState(Date.now());
   const [count, setCount] = useState(time);
   const [text, setText] = useState("開始");
-  const [mode, setMode] = useState(0);//0:初期、1:動作中、2:停止中 3:終了後
-  // const [start, setStart] = useState(new Date());
-  // const [now, setNow] = useState(Date.now());
-  // let mode = 0;
-  let use: () => void;
+  const [mode, setMode] = useState(0);  //0:初期、1:動作中、2:停止中 3:終了後
+
   const [start, setStart] = useState(new Date());
-
-  // useEffect(() => {
-  //   setStart(new Date());
-  //   return () => {
-  //   };
-  // }, []);
-
-  // if (mode == 1) {
-  //   const subscribe = async () => {
-  //     const isAvailable = await Pedometer.isAvailableAsync();
-
-  //     if (isAvailable) {
-  //       // start = new Date();
-  //       // const start = new Date();
-  //       // console.log(end.getDate() - 1);
-  //       //console.log(end.getDate() - 1);
-  //       // start.setDate(end.getDate() - 1);
-  //       // //console.log(end.getDate() - 1);
-  //       // const pastStepCountResult = await Pedometer.getStepCountAsync(start, end);
-
-
-  //       return Pedometer.watchStepCount(result => {
-  //         setCurrentStepCount(result.steps);
-  //       });
-  //     }
-  //   };
-  //   subscribe();
-  // };
 
 
   const switchMode = () => {
     switch (mode) {
-      case 0://スタートボタン押されたとき
+      case 0:
+        //スタートボタン押されたとき
         setMode(1);
         setStart(new Date());
         setText("停止");
         break;
-      case 1://中断ボタン押されたとき
+      case 1:
+        //中断ボタン押されたとき
         setMode(2);
         setText("再開");
         break;
-      case 2://再開ボタン押されたとき
+      case 2:
+        //再開ボタン押されたとき
         setPastCount(pastCount + stepCount);
         setStepCount(0);
         setMode(1);
@@ -75,8 +44,10 @@ export default function Jogging({ navigation }: NativeStack.NativeStackScreenPro
         setCount(count);
         setText("停止");
         break;
-      case 3://結果画面ボタン押されたとき
-        break;//ここで遷移
+      case 3:
+        //結果画面ボタン押されたとき
+        navigation.push('Result', { stress: route.params.stress, type: ActionType.Joggnig })
+        break;
     }
   }
 
@@ -94,27 +65,27 @@ export default function Jogging({ navigation }: NativeStack.NativeStackScreenPro
   }
 
   const countdown = setTimeout(() => {
-    if (mode == 1) {//タイマー動作中は
+    if (mode == 1) {
+      //タイマー動作中は
       const next = Number((count - 0.1).toFixed(1));
-      if (next < 0) {//タイマー切れた瞬間
+
+      if (next < 0) {
+        //タイマー切れた瞬間
         setCount(0);
         end = new Date();
         getcount();
         setMode(3);
         setText("結果画面へ");
-        // getcount();
       }
-      else {//タイマー絶賛動作中は
+      else {
+        //タイマー絶賛動作中は
         setCount(next);
       }
+
       end = new Date();
       getcount();
     }
   }, 1 * 100);
-
-  // if (mode == 0) {
-  //   countdown;
-  // }
 
   return (
     <View style={styles.container}>
@@ -170,7 +141,6 @@ const styles = StyleSheet.create({
     paddingRight: 40,
     paddingBottom: 20,
     paddingLeft: 40,
-
   },
   text: {
     fontSize: 30

@@ -1,7 +1,7 @@
 import { StyleSheet, TouchableOpacity } from 'react-native';
 import React from 'react';
 import * as NativeStack from '@react-navigation/native-stack';
-import { RootStackParamList } from '../../../types';
+import { ActionType, RootStackParamList } from '../../../types';
 import { useEffect } from 'react';
 import { Image } from 'react-native';
 import { Audio } from 'expo-av';
@@ -24,11 +24,6 @@ export default function Homerun({ route, navigation }: NativeStack.NativeStackSc
       : undefined;
   }, [sound]);
 
-
-
-
-
-
   useEffect(() => {
     if (route.params.sound != undefined) {
       route.params.sound.unloadAsync();
@@ -37,7 +32,7 @@ export default function Homerun({ route, navigation }: NativeStack.NativeStackSc
   }, [])
 
   return (
-    <TouchableOpacity activeOpacity={0.5} onPress={() => navigation.push("Home")} style={styles.container}>
+    <TouchableOpacity activeOpacity={0.5} onPress={() => navigation.push('Result', { stress: route.params.stress, type: ActionType.Batting })} style={styles.container}>
 
       <Image source={require("../../../assets/images/homerun.png")} style={styles.image} />
 

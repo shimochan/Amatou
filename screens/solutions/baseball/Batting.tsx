@@ -7,7 +7,7 @@ import { Image } from 'react-native';
 import { Audio } from 'expo-av';
 
 
-export default function Batting({ navigation }: NativeStack.NativeStackScreenProps<RootStackParamList, 'Batting'>) {
+export default function Batting({ route, navigation }: NativeStack.NativeStackScreenProps<RootStackParamList, 'Batting'>) {
   const [sound, setSound] = React.useState<Audio.Sound>();
   async function playSound() {
     console.log('Loading Sound');
@@ -32,7 +32,7 @@ export default function Batting({ navigation }: NativeStack.NativeStackScreenPro
 
 
   return (
-    <TouchableOpacity activeOpacity={0.5} onPress={() => navigation.push('Pitching', { sound: sound })} style={styles.container}>
+    <TouchableOpacity activeOpacity={0.5} onPress={() => navigation.push('Pitching', { sound: sound, stress: route.params.stress })} style={styles.container}>
       <Image source={require("../../../assets/images/batting.png")} style={styles.image} />
     </TouchableOpacity>
   );

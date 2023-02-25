@@ -44,7 +44,7 @@ export default function SolutionSelect({ route, navigation }: RootStackScreenPro
         </HStack>
       </TouchableOpacity>
 
-      <TouchableOpacity key={1} activeOpacity={0.5} onPress={() => navigation.push("Jogging")} style={styles.imageOuter}>
+      <TouchableOpacity key={1} activeOpacity={0.5} onPress={() => navigation.push("Jogging", { stress: route.params.stress })} style={styles.imageOuter}>
         <HStack>
           <Spacer />
           <Text style={styles.text}>走る</Text>
@@ -64,7 +64,7 @@ export default function SolutionSelect({ route, navigation }: RootStackScreenPro
         </HStack>
       </TouchableOpacity>
 
-      <TouchableOpacity key={3} activeOpacity={0.5} onPress={() => navigation.push("Batting")} style={styles.imageOuter}>
+      <TouchableOpacity key={3} activeOpacity={0.5} onPress={() => navigation.push("Batting", { stress: route.params.stress })} style={styles.imageOuter}>
         <HStack>
           <Spacer />
           <Text style={styles.text}>打つ</Text>
@@ -73,7 +73,7 @@ export default function SolutionSelect({ route, navigation }: RootStackScreenPro
           <Spacer />
         </HStack>
       </TouchableOpacity>
-      
+
       <Spacer />
 
       <HStack style={styles.footer}>

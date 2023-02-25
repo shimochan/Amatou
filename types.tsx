@@ -27,10 +27,11 @@ export type RootStackParamList = {
   Jogging: undefined;
   SelectDeadline: undefined;
   SelectSize: undefined;
-  SolutionSelect: undefined;
+  SolutionSelect: { stress: StressItem };
   WriteStress: undefined;
-  StressSelect: { stress: StressItem };
+  StressSelect: undefined;
   Home: undefined;
+  Result: { stress: StressItem, url: string };
 };
 
 export type RootStackScreenProps<Screen extends keyof RootStackParamList> = NativeStackScreenProps<
@@ -43,7 +44,8 @@ export type RootTabParamList = {
   Settings: undefined;
 };
 
-export type StressItem = {
+export interface StressItem {
+  key: number;
   title: String;
   intensity: number;  // 0: Normal, 1: Moderate, 2: Heavy
   dueDate: Date;

@@ -1,29 +1,30 @@
 import React from 'react';
 import { StyleSheet, Image, TouchableOpacity } from 'react-native';
 import { Text } from 'react-native';
-import { RootStackParamList } from '../../types';
+import { RootStackParamList, StressItem } from '../../types';
 import { ZStack, HStack, VStack, Spacer } from 'react-native-stacks';
 import DefaultStyle from '../../constants/DefaultStyles';
 import * as NativeStack from '@react-navigation/native-stack';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import stressListController from '../../hooks/stressList';
+import { useRecoilValue } from 'recoil';
+import { unDoneStressSelector } from '../../atoms/stressList';
 
 
 const HomeScreen = ({ navigation }: NativeStack.NativeStackScreenProps<RootStackParamList, 'Home'>) => {
-  const { stressList, setStressList } = stressListController();
+  const stressList: StressItem[] = useRecoilValue(unDoneStressSelector);
 
   const getStoneImagePath = (count: number) => {
     const basePath = "../../assets/images/home_stones/";
     switch (count) {
-      case 0: return require(basePath + "00.jpeg");
-      case 1: return require(basePath + "01.jpg");
-      case 2: return require(basePath + "02.jpg");
-      case 3: return require(basePath + "03.jpg");
-      case 4: return require(basePath + "04.jpg");
-      case 5: return require(basePath + "05.jpg");
-      case 6: return require(basePath + "06.png");
-      case 7: return require(basePath + "07.jpg");
-      default: return require(basePath + "many.png");
+      case 0: return require(basePath + "00.webp");
+      case 1: return require(basePath + "01.webp");
+      case 2: return require(basePath + "02.webp");
+      case 3: return require(basePath + "03.webp");
+      case 4: return require(basePath + "04.webp");
+      case 5: return require(basePath + "05.webp");
+      case 6: return require(basePath + "06.webp");
+      case 7: return require(basePath + "07.webp");
+      default: return require(basePath + "many.webp");
     }
   }
 
@@ -39,7 +40,7 @@ const HomeScreen = ({ navigation }: NativeStack.NativeStackScreenProps<RootStack
 
         <Spacer />
 
-        <TouchableOpacity activeOpacity={0.5} onPress={() => navigation.push('PuchiPuchi')} style={DefaultStyle.largeButton}>
+        <TouchableOpacity activeOpacity={0.5} onPress={() => navigation.push('StressSelect')} style={DefaultStyle.largeButton}>
           <ZStack style={DefaultStyle.fill}>
             <Text style={[DefaultStyle.title2, {color: "#fff"}]}>ストレス一覧</Text>
           </ZStack>

@@ -8,6 +8,7 @@ import { RootStackParamList } from '../../../types';
 import { useState } from 'react';
 import PuchiPuchione from '../../../components/PuchiPuchione'
 import { HStack } from 'react-native-stacks';
+import FastImage from 'react-native-fast-image'
 
 export default function PuchiPuchi({ navigation }: NativeStack.NativeStackScreenProps<RootStackParamList, 'PuchiPuchi'>) {
   

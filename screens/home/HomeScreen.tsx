@@ -1,7 +1,7 @@
 import React from 'react';
-import { Pressable, StyleSheet, Image, TouchableOpacity } from 'react-native';
-import { Button, View, Text } from 'react-native';
-import { RootStackParamList, RootTabScreenProps } from '../../types';
+import { StyleSheet, Image, TouchableOpacity } from 'react-native';
+import { Text } from 'react-native';
+import { RootStackParamList } from '../../types';
 import { ZStack, HStack, VStack, Spacer } from 'react-native-stacks';
 import DefaultStyle from '../../constants/DefaultStyles';
 import * as NativeStack from '@react-navigation/native-stack';

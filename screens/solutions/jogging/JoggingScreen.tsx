@@ -10,17 +10,17 @@ import { Pedometer } from 'expo-sensors';
 export default function Jogging({ navigation }: NativeStack.NativeStackScreenProps<RootStackParamList, 'Jogging'>) {
 
   let time: number = 20;
-  const [currentStepCount, setCurrentStepCount] = useState(0);
+  // const [currentStepCount, setCurrentStepCount] = useState(0);
   // const [end, setEnd] = useState();
 
   let end: Date;
   const [stepCount, setStepCount] = useState(0);
-  const [stepNotCount, setNotCount] = useState(0);
+  const [pastCount, setPastCount] = useState(0);
 
   const [now, setNow] = useState(Date.now());
   const [count, setCount] = useState(time);
   const [text, setText] = useState("開始");
-  const [mode, setMode] = useState(0);//0:初期、1:動作中、2:停止中
+  const [mode, setMode] = useState(0);//0:初期、1:動作中、2:停止中 3:終了後
   // const [start, setStart] = useState(new Date());
   // const [now, setNow] = useState(Date.now());
   // let mode = 0;
@@ -65,14 +65,18 @@ export default function Jogging({ navigation }: NativeStack.NativeStackScreenPro
         break;
       case 1://中断ボタン押されたとき
         setMode(2);
-        setCurrentStepCount(0);
         setText("再開");
         break;
       case 2://再開ボタン押されたとき
+        setPastCount(pastCount+stepCount);
+        setStepCount(0);
         setMode(1);
+        setStart(new Date());
         setCount(count);
         setText("停止");
         break;
+      case 3://結果画面ボタン押されたとき
+        break;//ここで遷移
     }
   }
 
@@ -83,6 +87,8 @@ export default function Jogging({ navigation }: NativeStack.NativeStackScreenPro
 
   const reset = () => {
     setMode(0);
+    setStepCount(0);
+    setPastCount(0);
     setCount(time);
     setText("開始");
   }
@@ -92,7 +98,10 @@ export default function Jogging({ navigation }: NativeStack.NativeStackScreenPro
       const next = Number((count - 0.1).toFixed(1));
       if (next < 0) {//タイマー切れた瞬間
         setCount(0);
-        setMode(2);
+        end = new Date();
+        getcount();
+        setMode(3);
+        setText("結果画面へ");
         // getcount();
       }
       else {//タイマー絶賛動作中は
@@ -111,7 +120,7 @@ export default function Jogging({ navigation }: NativeStack.NativeStackScreenPro
     <View style={styles.container}>
       <VStack spacing={10} style={styles.stack}>
         <Text style={styles.time}>{count}</Text>
-        <Text style={styles.count}>{stepCount}</Text>
+        <Text style={styles.count}>{pastCount+stepCount}</Text>
         <TouchableOpacity activeOpacity={0.5} onPress={switchMode} style={styles.button}>
           <Text style={styles.text}>{text}</Text>
         </TouchableOpacity>

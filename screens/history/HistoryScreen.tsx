@@ -14,7 +14,7 @@ export default function StressHistory({ navigation }: NativeStack.NativeStackScr
   const listView = []
 
   for (const stress of stressList) {
-    listView.push(StressItemView(stress, navigation));
+    listView.push(StressItemView(stress, navigation, true));
   }
 
   return (

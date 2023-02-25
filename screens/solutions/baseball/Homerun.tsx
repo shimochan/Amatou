@@ -9,28 +9,22 @@ import { RootStackParamList } from '../../../types';
 import { useState } from 'react';
 import { setStatusBarNetworkActivityIndicatorVisible } from 'expo-status-bar';
 import { Image ,ImageBackground} from 'react-native';
-import DefaultStyle from '../../../constants/DefaultStyles';
 
 export default function Batting({ navigation }: NativeStack.NativeStackScreenProps<RootStackParamList, 'Batting'>) {
-  setTimeout(() => {
-    navigation.push('Pitching');
-  }, 10 * 1000);
+  if (window.location.pathname === "../Batting") {
+    setTimeout(() => {
+      window.location.href = "../Piching";
+    }, 3 * 1000);
+  }
+
   return (
     <View style={styles.container}>
-    <Image source ={require("../../../assets/images/batting.png")} style = {styles.image}/>
+      <Button color = "green" title='ホーム画面へ' onPress={() => navigation.goBack()} />
     </View>
   );
-    
-  
-
-  
 }
 
 const styles = StyleSheet.create({
-  image:{
-     height:"100%",
-     resizeMode: 'contain',
-  },
   container: {
     flex: 1,
     alignItems: 'center',

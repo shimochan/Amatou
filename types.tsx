@@ -31,7 +31,7 @@ export type RootStackParamList = {
   WriteStress: undefined;
   StressSelect: { stress: StressItem };
   Home: undefined;
-  Result: undefined;
+  Result: { stress: StressItem, url: string };
 };
 
 export type RootStackScreenProps<Screen extends keyof RootStackParamList> = NativeStackScreenProps<

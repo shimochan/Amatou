@@ -8,18 +8,14 @@ import * as NativeStack from '@react-navigation/native-stack';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import stressListController from '../../hooks/stressList';
 import { View } from '../../components/Themed';
+import Resultcomponents from '../../components/Resultcomponents';
 
 
-const ResultScreen = ({ navigation }: NativeStack.NativeStackScreenProps<RootStackParamList, 'Result'>) => {
-  
-    
+
+const ResultScreen = ({ route, navigation }: NativeStack.NativeStackScreenProps<RootStackParamList, 'Result'>) => {
   return (
     <View>
-        <Text>テスト</Text>
-        <Text>解消</Text>
-        <Image ></Image>
-        <Text>130m飛ばした。</Text>
-        <Text>100人のファンを得た。</Text>
+        {Resultcomponents(route.params?.stress, route.params?.url, navigation)}
     </View>
   );
 }

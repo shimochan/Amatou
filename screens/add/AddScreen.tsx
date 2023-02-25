@@ -23,7 +23,7 @@ export default function AddStress({ navigation }: NativeStack.NativeStackScreenP
   const hideDatePicker = () => {
     setDatePickerVisibility(false);
   };
-  const handleConfirm = (date) => {
+  const handleConfirm = (date: Date) => {
     console.warn("A date has been picked: ", date);
     hideDatePicker();
   };
@@ -78,7 +78,7 @@ export default function AddStress({ navigation }: NativeStack.NativeStackScreenP
       </HStack>
       <HStack spacing={0}>
       <Image source ={require("../../assets/images/character_shimekiri.png")} style={styles.character_shimekiri} />
-      <Button title="期限：＿曜日＿月＿日　＿時＿分" onPress={showDatePicker}/>
+      <Button title="期限：＿曜日＿月＿日  ＿時＿分" onPress={showDatePicker}/>
       <DateTimePickerModal
         isVisible={isDatePickerVisible}
         mode="datetime"

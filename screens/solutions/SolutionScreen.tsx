@@ -1,43 +1,62 @@
 import { StyleSheet, TouchableOpacity } from 'react-native';
-import { View } from '../../components/Themed';
 import React from 'react';
-import {  Button, Image, Text } from 'react-native';
-import { HStack, Spacer } from 'react-native-flex-layout';
-import * as NativeStack from '@react-navigation/native-stack';
-import { RootStackParamList } from '../../types';
+import { Image, Text } from 'react-native';
+import { RootStackScreenProps, StressItem } from '../../types';
+import { VStack, HStack, Spacer } from 'react-native-stacks';
+import BackButton from '../../components/BackButton';
+import DefaultStyle from '../../constants/DefaultStyles';
+import { getIntensityStyle, getIntensityLabel } from '../../hooks/intensityConverter';
 
-export default function SolutionSelect({ navigation }: NativeStack.NativeStackScreenProps<RootStackParamList, 'SolutionSelect'>) {
+export default function SolutionSelect({ route, navigation }: RootStackScreenProps<'SolutionSelect'>) {
   return (
-    <View style={styles.container}>
+    <VStack style={DefaultStyle.fullHeight}>
+
+      <HStack spacing={15} style={styles.header}>
+        <Spacer/>
+        <Text style={DefaultStyle.title}>{route.params?.stress.title}</Text>
+        <Spacer/>
+          <Text style={[getIntensityStyle(route.params?.stress.intensity)]}>{getIntensityLabel(route.params?.stress.intensity)}</Text>
+          <Text style={styles.dueDate}>
+            期限: {route.params?.stress.dueDate.toLocaleDateString()}
+          </Text>
+      </HStack>
+
       <TouchableOpacity activeOpacity={0.5} onPress={() => navigation.push("CutAction")} style={styles.imageOuter}>
         <HStack>
-          <Spacer/>
+          <Spacer />
           <Text style={styles.text}>斬る</Text>
-          <Spacer/>
-          <Image source = {require("../../assets/images/kiruyatu.png")} style={styles.imagesize}/>
-          <Spacer/>
+          <Spacer />
+          <Image source={require("../../assets/images/kiruyatu.png")} style={styles.imagesize} />
+          <Spacer />
         </HStack>
       </TouchableOpacity>
+
       <TouchableOpacity activeOpacity={0.5} onPress={() => navigation.push("Jogging")} style={styles.imageOuter}>
-      <HStack>
-          <Spacer/>
+        <HStack>
+          <Spacer />
           <Text style={styles.text}>走る</Text>
-          <Spacer/>
-          <Image source = {require("../../assets/images/sport_jogging_woman.png")} style={styles.imagesize}/>
-          <Spacer/>
+          <Spacer />
+          <Image source={require("../../assets/images/sport_jogging_woman.png")} style={styles.imagesize} />
+          <Spacer />
         </HStack>
       </TouchableOpacity>
+
       <TouchableOpacity activeOpacity={0.5} onPress={() => navigation.push("PuchiPuchi")} style={styles.imageOuter}>
         <HStack>
-          <Spacer/>
+          <Spacer />
           <Text style={styles.text}>潰す</Text>
-          <Spacer/>
-          <Image source = {require("../../assets/images/bakuhatsu.png")} style={styles.imagesize}/>
-          <Spacer/>
+          <Spacer />
+          <Image source={require("../../assets/images/bakuhatsu.png")} style={styles.imagesize} />
+          <Spacer />
         </HStack>
       </TouchableOpacity>
-      <Button color = "green" title='ホーム画面へ' onPress={() => navigation.goBack()}/>
-    </View>
+      <Spacer />
+
+      <HStack style={styles.footer}>
+        {BackButton(navigation)}
+        <Spacer />
+      </HStack>
+    </VStack>
   );
 }
 
@@ -47,9 +66,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-  title: {
-    fontSize: 20,
-    fontWeight: 'bold',
+  header: {
+    paddingVertical: 20,
   },
   separator: {
     marginVertical: 30,
@@ -67,11 +85,18 @@ const styles = StyleSheet.create({
     height: 100,
     width: 100,
     resizeMode: 'contain',
-    // overflow: "hidden",
+  },
+  footer: {
+    padding: 40,
+    marginBottom: 10,
   },
   text: {
     fontSize: 40,
     alignItems: "center",
     padding: 30
-  }
+  },
+  dueDate: {
+    fontSize: 14,
+    color: "#777777",
+  },
 });

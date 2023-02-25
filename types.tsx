@@ -21,7 +21,7 @@ export type RootStackParamList = {
   Gyro: undefined;
   AddStress: undefined;
   Batting: undefined;
-  CutAction: undefined;
+  CutAction: { stress: StressItem };
   FinallyAddStress: undefined;
   History: undefined;
   Jogging: undefined;

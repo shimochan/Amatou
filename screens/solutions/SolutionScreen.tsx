@@ -1,27 +1,40 @@
 import { StyleSheet, TouchableOpacity } from 'react-native';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Image, Text } from 'react-native';
 import { RootStackScreenProps, StressItem } from '../../types';
 import { VStack, HStack, Spacer } from 'react-native-stacks';
 import BackButton from '../../components/BackButton';
 import DefaultStyle from '../../constants/DefaultStyles';
 import { getIntensityStyle, getIntensityLabel } from '../../hooks/intensityConverter';
+import cutAction from '../../hooks/actions/cutAction';
 
 export default function SolutionSelect({ route, navigation }: RootStackScreenProps<'SolutionSelect'>) {
+  const { stopListening } = cutAction();
+
+  useEffect(()=> {
+    stopListening();
+
+    const willFocusSubscription = navigation.addListener('focus', () => {
+      stopListening();
+    })
+
+    return willFocusSubscription
+  }, []);
+
   return (
     <VStack style={DefaultStyle.fullHeight}>
 
       <HStack spacing={15} style={styles.header}>
-        <Spacer/>
+        <Spacer />
         <Text style={DefaultStyle.title}>{route.params?.stress.title}</Text>
-        <Spacer/>
-          <Text style={[getIntensityStyle(route.params?.stress.intensity)]}>{getIntensityLabel(route.params?.stress.intensity)}</Text>
-          <Text style={styles.dueDate}>
-            期限: {route.params?.stress.dueDate.toLocaleDateString()}
-          </Text>
+        <Spacer />
+        <Text style={[getIntensityStyle(route.params?.stress.intensity)]}>{getIntensityLabel(route.params?.stress.intensity)}</Text>
+        <Text style={styles.dueDate}>
+          期限: {route.params?.stress.dueDate.toLocaleDateString()}
+        </Text>
       </HStack>
 
-      <TouchableOpacity activeOpacity={0.5} onPress={() => navigation.push("CutAction")} style={styles.imageOuter}>
+      <TouchableOpacity activeOpacity={0.5} onPress={() => navigation.push("CutAction", { stress: route.params?.stress })} style={styles.imageOuter}>
         <HStack>
           <Spacer />
           <Text style={styles.text}>斬る</Text>

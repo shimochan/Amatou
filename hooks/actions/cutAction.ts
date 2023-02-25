@@ -3,7 +3,7 @@ import { useRef, useState } from "react";
 import * as Haptics from 'expo-haptics';
 import { Animated } from "react-native";
 
-const cutAction = () => {
+const cutAction = (completion: () => void) => {
   // Animation
   const [opacity, setOpacity] = useState(0);
   const opacityAnimation = useRef(new Animated.Value(0)).current;
@@ -15,6 +15,7 @@ const cutAction = () => {
       useNativeDriver: true,
   });
 
+  const [isFinal, setFinalState] = useState(false);
 
   const interval = 100;
   let sumCount = 0;
@@ -77,6 +78,11 @@ const cutAction = () => {
           isAnimationStarted = false;
         });
       });
+      if (isFinal) {
+        stopListening();
+        completion();
+        return;
+      }
       initializeValues();
     }
   }
@@ -103,7 +109,7 @@ const cutAction = () => {
     gammaSum = 0;
   }
 
-  return { opacity, startListening, stopListening }
+  return { opacity, setFinalState, startListening, stopListening }
 }
 
 export default cutAction;

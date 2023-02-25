@@ -17,6 +17,7 @@ export default function AddStress({ navigation }: NativeStack.NativeStackScreenP
   const [isPressed_S, onPress_S] = useState(false);
   const [isPressed_M, onPress_M] = useState(true);
   const [isPressed_L, onPress_L] = useState(false);
+  const [selectedDate, selectDate] = useState(new Date());
 
   const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
   const showDatePicker = () => {
@@ -27,6 +28,7 @@ export default function AddStress({ navigation }: NativeStack.NativeStackScreenP
   };
   const handleConfirm = (date: Date) => {
     console.warn("A date has been picked: ", date);
+    selectDate(date);
     hideDatePicker();
   };
 
@@ -48,10 +50,20 @@ export default function AddStress({ navigation }: NativeStack.NativeStackScreenP
     onPress_L(true);
   }
 
+  const getIntensity = () => {
+    if (isPressed_S) {
+      return 0;
+    } else if(isPressed_M) {
+      return 1;
+    } else {
+      return 2;
+    }
+  }
+
   const addAndNavigate = () => {
     if (text == "") return;
     const stressCount = stressList.length;
-    const newStress: StressItem = { key: stressCount, title: text, intensity: 0, dueDate: new Date(), isDone: false };
+    const newStress: StressItem = { key: stressCount, title: text, intensity: getIntensity(), dueDate: selectedDate, isDone: false };
     setStressList([...stressList, newStress]);
     console.log([...stressList, newStress]);
     navigation.pop();

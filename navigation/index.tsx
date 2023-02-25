@@ -15,6 +15,8 @@ import PuchiPuchi from '../screens/solutions/puchi_puchi/PuchipuchiScreen';
 
 import AddStress from '../screens/add/AddScreen';
 import Batting from '../screens/solutions/baseball/Batting';
+import Pitching from "../screens/solutions/baseball/Pitching";
+import Homerun from "../screens/solutions/baseball/Homerun";
 import CutAction from '../screens/solutions/cut/CutScreen';
 import History from '../screens/history/HistoryScreen';
 import Jogging from '../screens/solutions/jogging/JoggingScreen';
@@ -48,6 +50,8 @@ function RootNavigator() {
       <Stack.Screen name="Home" component={HomeScreen} options={{ headerShown: false }} />
       <Stack.Screen name="PuchiPuchi" component={PuchiPuchi} />
       <Stack.Screen name="Batting" component={Batting} />
+      <Stack.Screen name="Pitching" component={Pitching} />
+      <Stack.Screen name="Homerun" component={Homerun} />
       <Stack.Screen name="CutAction" component={CutAction} />
       <Stack.Screen name="Jogging" component={Jogging} />
       <Stack.Screen name="StressSelect" component={StressSelect} />

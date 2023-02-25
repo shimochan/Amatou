@@ -21,6 +21,7 @@ const DefaultStyle = StyleSheet.create({
   },
   homeImage: {
     width: '80%',
+    height: 300,
     resizeMode: 'contain',
   },
   smallButton: {

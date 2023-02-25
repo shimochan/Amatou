@@ -6,40 +6,27 @@ import * as NativeStack from '@react-navigation/native-stack';
 import { RootStackParamList } from '../../types';
 import { ZStack, HStack, VStack,Spacer } from 'react-native-stacks';
 import DefaultStyle from '../../constants/DefaultStyles';
-import DateTimePicker, { DateTimePickerEvent } from '@react-native-community/datetimepicker';
+import DateTimePickerModal from "react-native-modal-datetime-picker";
+
 
 export default function AddStress({ navigation }: NativeStack.NativeStackScreenProps<RootStackParamList, 'AddStress'>) {
-  const [date, setDate] = useState(new Date(1598051730000));
-  const [mode, setMode] = useState('date');
-  const [show, setShow] = useState(false);
-
-  const onChange = (event: DateTimePickerEvent, selectedDate: Date) => {
-    const currentDate = selectedDate;
-    setShow(false);
-    setDate(currentDate);
-  };
-
-  const showMode = (currentMode: React.SetStateAction<string>) => {
-    if (Platform.OS === 'android') {
-      setShow(false);
-      // for iOS, add a button that closes the picker
-    }
-    setMode(currentMode);
-  };
-
-  const showDatepicker = () => {
-    showMode('date');
-  };
-
-  const showTimepicker = () => {
-    showMode('time');
-  };
-
     
   const [text, onChangeText] = useState("");
   const [isPressed_S, onPress_S] = useState(false);
   const [isPressed_M, onPress_M] = useState(true);
   const [isPressed_L, onPress_L] = useState(false);
+
+  const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
+  const showDatePicker = () => {
+    setDatePickerVisibility(true);
+  };
+  const hideDatePicker = () => {
+    setDatePickerVisibility(false);
+  };
+  const handleConfirm = (date) => {
+    console.warn("A date has been picked: ", date);
+    hideDatePicker();
+  };
 
   const updateState_S = () => {
     onPress_S(true);
@@ -91,19 +78,14 @@ export default function AddStress({ navigation }: NativeStack.NativeStackScreenP
       </TouchableOpacity>
 
       </HStack>
-      
-      {/* <Button title="Open" onPress={() => setOpen(true)} /> */}
-
-      <Button onPress={showDatepicker} title="Show date picker!" />
-      <Button onPress={showTimepicker} title="Show time picker!" />
-      <Text>selected: {date.toLocaleString()}</Text>
-        <DateTimePicker
-          testID="dateTimePicker"
-          value={date}
-          mode={'datetime'}
-          is24Hour={true}
-        />
-      
+      <Button title="Show Date Picker" onPress={showDatePicker} />
+      <DateTimePickerModal
+        isVisible={isDatePickerVisible}
+        mode="datetime"
+        onConfirm={handleConfirm}
+        onCancel={hideDatePicker}
+      />
+          
     </VStack>
  
 
@@ -195,7 +177,3 @@ const styles = StyleSheet.create({
 
 
 });
-
-
-
- 

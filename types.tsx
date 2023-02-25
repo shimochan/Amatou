@@ -30,7 +30,6 @@ export type RootStackParamList = {
   SolutionSelect: { stress: StressItem };
   WriteStress: undefined;
   StressSelect: undefined;
-  Result: { stress: StressItem } | undefined;
   Home: undefined;
   Result: { stress: StressItem, url: string };
 };

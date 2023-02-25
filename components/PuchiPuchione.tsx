@@ -4,7 +4,7 @@ import React from 'react';
 import { Button } from 'react-native';
 import * as Haptics from 'expo-haptics';
 import * as NativeStack from '@react-navigation/native-stack';
-import { RootStackParamList, RootStackScreenProps, StressItem } from '../types';
+import { ActionType, RootStackParamList, RootStackScreenProps, StressItem } from '../types';
 import { useState } from 'react';
 import { Image } from 'react-native';
 import FastImage from 'react-native-fast-image';
@@ -16,7 +16,7 @@ export default function PuchiPuchione(key: number, navigation: NativeStack.Nativ
   const puchipuchiimage = () => {
     Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success)
     setimagepuchipuchi(imagepuchipuchi2)
-    navigation.push("Result", { stress: stress, url: '../assets/bakuhatsu.webp' });
+    navigation.push("Result", { stress: stress, type: ActionType.PuchiPuchi});
   }
 
   return (

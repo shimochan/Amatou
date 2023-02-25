@@ -1,7 +1,7 @@
 import { StyleSheet, TouchableOpacity } from 'react-native';
 import React, { useEffect } from 'react';
 import { Image, Text } from 'react-native';
-import { RootStackScreenProps, StressItem } from '../../types';
+import { RootStackScreenProps } from '../../types';
 import { VStack, HStack, Spacer } from 'react-native-stacks';
 import BackButton from '../../components/BackButton';
 import DefaultStyle from '../../constants/DefaultStyles';
@@ -9,9 +9,9 @@ import { getIntensityStyle, getIntensityLabel } from '../../hooks/intensityConve
 import cutAction from '../../hooks/actions/cutAction';
 
 export default function SolutionSelect({ route, navigation }: RootStackScreenProps<'SolutionSelect'>) {
-  const { stopListening } = cutAction(() => {});
+  const { stopListening } = cutAction(() => { });
 
-  useEffect(()=> {
+  useEffect(() => {
     stopListening();
 
     const willFocusSubscription = navigation.addListener('focus', () => {
@@ -34,7 +34,7 @@ export default function SolutionSelect({ route, navigation }: RootStackScreenPro
         </Text>
       </HStack>
 
-      <TouchableOpacity activeOpacity={0.5} onPress={() => navigation.push("CutAction", { stress: route.params?.stress })} style={styles.imageOuter}>
+      <TouchableOpacity key={0} activeOpacity={0.5} onPress={() => navigation.push("CutAction", { stress: route.params?.stress })} style={styles.imageOuter}>
         <HStack>
           <Spacer />
           <Text style={styles.text}>斬る</Text>
@@ -44,7 +44,7 @@ export default function SolutionSelect({ route, navigation }: RootStackScreenPro
         </HStack>
       </TouchableOpacity>
 
-      <TouchableOpacity key={1} activeOpacity={0.5} onPress={() => navigation.push("Jogging")} style={styles.imageOuter}>
+      <TouchableOpacity key={1} activeOpacity={0.5} onPress={() => navigation.push("Jogging", { stress: route.params.stress })} style={styles.imageOuter}>
         <HStack>
           <Spacer />
           <Text style={styles.text}>走る</Text>
@@ -54,7 +54,7 @@ export default function SolutionSelect({ route, navigation }: RootStackScreenPro
         </HStack>
       </TouchableOpacity>
 
-      <TouchableOpacity activeOpacity={0.5} onPress={() => navigation.push("PuchiPuchi", { stress: route.params?.stress })} style={styles.imageOuter}>
+      <TouchableOpacity key={2} activeOpacity={0.5} onPress={() => navigation.push("PuchiPuchi", { stress: route.params?.stress })} style={styles.imageOuter}>
         <HStack>
           <Spacer />
           <Text style={styles.text}>潰す</Text>
@@ -64,25 +64,16 @@ export default function SolutionSelect({ route, navigation }: RootStackScreenPro
         </HStack>
       </TouchableOpacity>
 
-      <TouchableOpacity key={3} activeOpacity={0.5} onPress={() => navigation.push("Batting")} style={styles.imageOuter}>
+      <TouchableOpacity key={3} activeOpacity={0.5} onPress={() => navigation.push("Batting", { stress: route.params.stress })} style={styles.imageOuter}>
         <HStack>
           <Spacer />
           <Text style={styles.text}>打つ</Text>
           <Spacer />
-          <Image source={require("../../assets/images/kiruyatu.png")} style={styles.imagesize} />
+          <Image source={require("../../assets/images/baseball.png")} style={styles.imagesize} />
           <Spacer />
         </HStack>
       </TouchableOpacity>
 
-      <TouchableOpacity key={3} activeOpacity={0.5} onPress={() => navigation.push("Batting")} style={styles.imageOuter}>
-        <HStack>
-          <Spacer />
-          <Text style={styles.text}>打つ</Text>
-          <Spacer />
-          <Image source={require("../../assets/images/kiruyatu.png")} style={styles.imagesize} />
-          <Spacer />
-        </HStack>
-      </TouchableOpacity>
       <Spacer />
 
       <HStack style={styles.footer}>

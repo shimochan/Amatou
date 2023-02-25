@@ -2,18 +2,21 @@ import { StyleSheet } from 'react-native';
 
 const DefaultStyle = StyleSheet.create({
   safeAreaBackground: {
-    backgroundColor: "#fff"
+    backgroundColor: "#fff",
   },
   title: {
     fontWeight: 'bold',
+    fontFamily: 'PottaOne',
     fontSize: 32,
   },
   title2: {
     fontSize: 24,
+    fontFamily: 'PottaOne',
   },
   body: {
     fontSize: 18,
     fontWeight: 'bold',
+    fontFamily: 'Yomogi',
   },
   fullHeight: {
     height: '100%',

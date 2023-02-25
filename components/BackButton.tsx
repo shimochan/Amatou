@@ -1,6 +1,4 @@
-import { HStack, Spacer, VStack } from "react-native-stacks";
-import { StressItem } from "../types";
-import { View, StyleSheet, Image, TouchableOpacity } from 'react-native';
+import { StyleSheet, Image, TouchableOpacity } from 'react-native';
 
 export default function BackButton(navigation: any) {
   return (

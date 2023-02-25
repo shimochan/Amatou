@@ -1,10 +1,9 @@
-import { Platform, SafeAreaView, StyleSheet, TextInput, TouchableOpacity } from 'react-native';
-import { View } from '../../components/Themed';
-import React, { useEffect, useState } from 'react';
+import { StyleSheet, TextInput, TouchableOpacity } from 'react-native';
+import React, { useState } from 'react';
 import { Image, Button, Text } from 'react-native';
 import * as NativeStack from '@react-navigation/native-stack';
 import { RootStackParamList, StressItem } from '../../types';
-import { ZStack, HStack, VStack, Spacer } from 'react-native-stacks';
+import { ZStack, HStack, VStack } from 'react-native-stacks';
 import DefaultStyle from '../../constants/DefaultStyles';
 import DateTimePickerModal from "react-native-modal-datetime-picker";
 import { stressListState } from '../../atoms/stressList';
@@ -50,7 +49,7 @@ export default function AddStress({ navigation }: NativeStack.NativeStackScreenP
   }
 
   const addAndNavigate = () => {
-    if (text == "" ) return;
+    if (text == "") return;
     const stressCount = stressList.length;
     const newStress: StressItem = { key: stressCount, title: text, intensity: 0, dueDate: new Date(), isDone: false };
     setStressList([...stressList, newStress]);
@@ -62,7 +61,7 @@ export default function AddStress({ navigation }: NativeStack.NativeStackScreenP
   return (
     <VStack spacing={2} style={DefaultStyle.fullHeight}>
       <ZStack>
-        <Image source ={require("../../assets/images/worry.webp")} style={styles.inputbutton}/>
+        <Image source={require("../../assets/images/worry.webp")} style={styles.inputbutton} />
         <TextInput
           style={styles.addtext}
           onChangeText={onChangeText}
@@ -90,14 +89,14 @@ export default function AddStress({ navigation }: NativeStack.NativeStackScreenP
         </TouchableOpacity>
       </HStack>
       <HStack spacing={0}>
-      <Image source ={require("../../assets/images/character_shimekiri.webp")} style={styles.character_shimekiri} />
-      <Button title="期限：＿曜日＿月＿日  ＿時＿分" onPress={showDatePicker}/>
-      <DateTimePickerModal
-        isVisible={isDatePickerVisible}
-        mode="datetime"
-        onConfirm={handleConfirm}
-        onCancel={hideDatePicker}
-      />
+        <Image source={require("../../assets/images/character_shimekiri.webp")} style={styles.character_shimekiri} />
+        <Button title="期限：＿曜日＿月＿日  ＿時＿分" onPress={showDatePicker} />
+        <DateTimePickerModal
+          isVisible={isDatePickerVisible}
+          mode="datetime"
+          onConfirm={handleConfirm}
+          onCancel={hideDatePicker}
+        />
       </HStack>
 
       <TouchableOpacity activeOpacity={0.5} onPress={() => addAndNavigate()} style={DefaultStyle.largeButton}>

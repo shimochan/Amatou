@@ -8,7 +8,7 @@ import Resultcomponents from '../../components/Resultcomponents';
 const ResultScreen = ({ route, navigation }: NativeStack.NativeStackScreenProps<RootStackParamList, 'Result'>) => {
   return (
     <View>
-        {Resultcomponents(route.params?.stress, route.params?.type, navigation)}
+      {Resultcomponents(route.params?.stress, route.params?.type, navigation)}
     </View>
   );
 }

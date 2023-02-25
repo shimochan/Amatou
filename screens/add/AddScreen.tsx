@@ -47,9 +47,9 @@ export default function AddStress({ navigation }: NativeStack.NativeStackScreenP
   }
 
   return (
-    <VStack spacing={0} style={DefaultStyle.fullHeight}>
+    <VStack spacing={2} style={DefaultStyle.fullHeight}>
       <ZStack>
-        <Image source ={require("../../assets/images/cloud.png")} style={styles.inputbutton}/>
+        <Image source ={require("../../assets/images/worry.png")} style={styles.inputbutton}/>
         <TextInput
         style={styles.addtext}
         onChangeText={onChangeText}
@@ -57,7 +57,6 @@ export default function AddStress({ navigation }: NativeStack.NativeStackScreenP
         placeholder="- タップ -"
         />
       </ZStack>
-      <Image source ={require ("../../assets/images/worry.png")} style={styles.worry}/>
       <HStack spacing={8}>
       <TouchableOpacity activeOpacity={0.5} onPress={updateState_S} style={isPressed_S ? styles.pressedColor_S : styles.defaultColor_S}>
         <ZStack style={DefaultStyle.fill}>
@@ -76,15 +75,24 @@ export default function AddStress({ navigation }: NativeStack.NativeStackScreenP
           <Text style={styles.text}>大</Text>
         </ZStack>
       </TouchableOpacity>
-
       </HStack>
-      <Button title="Show Date Picker" onPress={showDatePicker} />
+      <HStack spacing={0}>
+      <Image source ={require("../../assets/images/character_shimekiri.png")} style={styles.character_shimekiri} />
+      <Button title="期限：＿曜日＿月＿日　＿時＿分" onPress={showDatePicker}/>
       <DateTimePickerModal
         isVisible={isDatePickerVisible}
         mode="datetime"
         onConfirm={handleConfirm}
         onCancel={hideDatePicker}
       />
+      </HStack>
+
+      <TouchableOpacity activeOpacity={0.5} onPress={() => navigation.push('StressSelect')} style={DefaultStyle.largeButton}>
+          <ZStack style={DefaultStyle.fill}>
+            <Text style={[DefaultStyle.title2, {color: "#fff"}]}>ストレスを追加</Text>
+          </ZStack>
+        </TouchableOpacity>
+
           
     </VStack>
  
@@ -96,10 +104,6 @@ export default function AddStress({ navigation }: NativeStack.NativeStackScreenP
 const styles = StyleSheet.create({
   inputbutton:{
     maxwidth: '100%',
-    resizeMode: 'contain',
-  },
-  worry:{
-    width:150,
     resizeMode: 'contain',
   },
   container: {
@@ -173,6 +177,14 @@ const styles = StyleSheet.create({
   text:{
     fontSize: 25,
     fontWeight: 'bold',
+  },
+  character_shimekiri:{
+    height: 100,
+    width:100,
+    resizeMode: 'contain',
+  },
+  timelimit:{
+    
   }
 
 

@@ -32,7 +32,6 @@ const HomeScreen = ({ navigation }: NativeStack.NativeStackScreenProps<RootStack
     <SafeAreaView style={DefaultStyle.safeAreaBackground}>
       <VStack spacing={15} style={DefaultStyle.fullHeight}>
         <Text style={DefaultStyle.title}>抱えているストレス</Text>
-        <Timer></Timer>
         <Text style={DefaultStyle.title2}>{stressList.length}こ</Text>
 
         <Spacer />

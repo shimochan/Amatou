@@ -29,7 +29,7 @@ export type RootStackParamList = {
   SelectSize: undefined;
   SolutionSelect: undefined;
   WriteStress: undefined;
-  StressSelect: undefined;
+  StressSelect: { stress: StressItem };
   Home: undefined;
 };
 

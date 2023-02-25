@@ -1,15 +1,26 @@
 import { StyleSheet, TouchableOpacity } from 'react-native';
 import React from 'react';
 import { Image, Text } from 'react-native';
-import * as NativeStack from '@react-navigation/native-stack';
-import { RootStackParamList } from '../../types';
+import { RootStackScreenProps, StressItem } from '../../types';
 import { VStack, HStack, Spacer } from 'react-native-stacks';
 import BackButton from '../../components/BackButton';
 import DefaultStyle from '../../constants/DefaultStyles';
+import { getIntensityStyle, getIntensityLabel } from '../../hooks/intensityConverter';
 
-export default function SolutionSelect({ navigation }: NativeStack.NativeStackScreenProps<RootStackParamList, 'SolutionSelect'>) {
+export default function SolutionSelect({ route, navigation }: RootStackScreenProps<'SolutionSelect'>) {
   return (
     <VStack style={DefaultStyle.fullHeight}>
+
+      <HStack spacing={15} style={styles.header}>
+        <Spacer/>
+        <Text style={DefaultStyle.title}>{route.params?.stress.title}</Text>
+        <Spacer/>
+          <Text style={[getIntensityStyle(route.params?.stress.intensity)]}>{getIntensityLabel(route.params?.stress.intensity)}</Text>
+          <Text style={styles.dueDate}>
+            期限: {route.params?.stress.dueDate.toLocaleDateString()}
+          </Text>
+      </HStack>
+
       <TouchableOpacity activeOpacity={0.5} onPress={() => navigation.push("CutAction")} style={styles.imageOuter}>
         <HStack>
           <Spacer />
@@ -39,7 +50,6 @@ export default function SolutionSelect({ navigation }: NativeStack.NativeStackSc
           <Spacer />
         </HStack>
       </TouchableOpacity>
-
       <Spacer />
 
       <HStack style={styles.footer}>
@@ -56,9 +66,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-  title: {
-    fontSize: 20,
-    fontWeight: 'bold',
+  header: {
+    paddingVertical: 20,
   },
   separator: {
     marginVertical: 30,
@@ -85,5 +94,9 @@ const styles = StyleSheet.create({
     fontSize: 40,
     alignItems: "center",
     padding: 30
-  }
+  },
+  dueDate: {
+    fontSize: 14,
+    color: "#777777",
+  },
 });

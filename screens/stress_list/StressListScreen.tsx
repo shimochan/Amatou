@@ -2,7 +2,7 @@ import { ScrollView, StyleSheet, TouchableOpacity } from 'react-native';
 import { Text, View } from '../../components/Themed';
 import React from 'react';
 import * as NativeStack from '@react-navigation/native-stack';
-import { RootStackParamList } from '../../types';
+import { RootStackParamList, StressItem } from '../../types';
 import stressListController from '../../hooks/stressList';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import StressItemView from '../../components/StressItem';
@@ -18,23 +18,23 @@ export default function StressSelect({ navigation }: NativeStack.NativeStackScre
   for (const stress of stressList) {
     list.push(StressItemView(stress, navigation));
   }
-  
+
   return (
     <VStack style={[DefaultStyle.fullHeight, { width: '100%' }]}>
       <ScrollView style={{ width: '100%' }}>
-          {list}
-        <Spacer/>
+        {list}
+        <Spacer />
       </ScrollView>
       <HStack style={styles.footer}>
         {BackButton(navigation)}
-        <Spacer/>
-        <TouchableOpacity activeOpacity={0.5} style={styles.addButton}  onPress={() => navigation.push('AddStress')}>
+        <Spacer />
+        <TouchableOpacity activeOpacity={0.5} style={styles.addButton} onPress={() => navigation.push('AddStress')}>
           <ZStack style={DefaultStyle.fill}>
             <Text>ストレスを追加</Text>
           </ZStack>
         </TouchableOpacity>
-        <Spacer/>
-        <View style={{width: 40, height: 0}}></View>
+        <Spacer />
+        <View style={{ width: 40, height: 0 }}></View>
       </HStack>
     </VStack>
   );

@@ -10,21 +10,22 @@ import { useState } from 'react';
 import { setStatusBarNetworkActivityIndicatorVisible } from 'expo-status-bar';
 import { Image ,ImageBackground} from 'react-native';
 
-export default function Batting({ navigation }: NativeStack.NativeStackScreenProps<RootStackParamList, 'Batting'>) {
-  if (window.location.pathname === "../Batting") {
-    setTimeout(() => {
-      window.location.href = "../Piching";
-    }, 3 * 1000);
-  }
+export default function Homerun({ navigation }: NativeStack.NativeStackScreenProps<RootStackParamList, 'Homerun'>) {
 
   return (
-    <View style={styles.container}>
-      <Button color = "green" title='ホーム画面へ' onPress={() => navigation.goBack()} />
-    </View>
+    <TouchableOpacity activeOpacity={0.5} onPress={()=>navigation.push("Home")} style={styles.container}>
+    
+      <Image source ={require("../../../assets/images/homerun.png")} style = {styles.image}/>
+  
+    </TouchableOpacity>
   );
 }
 
 const styles = StyleSheet.create({
+  image:{
+    width:"100%",
+    resizeMode: 'contain',
+ },
   container: {
     flex: 1,
     alignItems: 'center',

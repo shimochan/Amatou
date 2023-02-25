@@ -9,10 +9,11 @@ import { RootStackParamList } from '../../../types';
 import { useState } from 'react';
 import { setStatusBarNetworkActivityIndicatorVisible } from 'expo-status-bar';
 import { Image ,ImageBackground} from 'react-native';
+import battingAction from '../../../hooks/actions/battingAction';
 
 export default function Pitching({ navigation }: NativeStack.NativeStackScreenProps<RootStackParamList, 'Pitching'>) {
-  
-
+  const { startListening, stopListening } = battingAction(navigation);
+  startListening();
   return (
     <View style={styles.container}>
       <Image source ={require("../../../assets/images/Pitching.png")} style = {styles.image}/>
@@ -22,7 +23,7 @@ export default function Pitching({ navigation }: NativeStack.NativeStackScreenPr
 
 const styles = StyleSheet.create({
     image:{
-        height:"100%",
+        width:"100%",
         resizeMode: 'contain',
      },
   container: {

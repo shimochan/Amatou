@@ -21,6 +21,8 @@ export type RootStackParamList = {
   Gyro: undefined;
   AddStress: undefined;
   Batting: undefined;
+  Pitching: undefined;
+  Homerun: undefined;
   CutAction: undefined;
   FinallyAddStress: undefined;
   History: undefined;
@@ -31,7 +33,7 @@ export type RootStackParamList = {
   WriteStress: undefined;
   StressSelect: { stress: StressItem };
   Home: undefined;
-  Pitching: undefined;
+  
 };
 
 export type RootStackScreenProps<Screen extends keyof RootStackParamList> = NativeStackScreenProps<

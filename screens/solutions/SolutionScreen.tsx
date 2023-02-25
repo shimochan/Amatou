@@ -54,7 +54,7 @@ export default function SolutionSelect({ route, navigation }: RootStackScreenPro
       <TouchableOpacity key={3} activeOpacity={0.5} onPress={() => navigation.push("Batting")} style={styles.imageOuter}>
         <HStack>
           <Spacer />
-          <Text style={styles.text}>バッティング</Text>
+          <Text style={styles.text}>打つ</Text>
           <Spacer />
           <Image source={require("../../assets/images/kiruyatu.png")} style={styles.imagesize} />
           <Spacer />

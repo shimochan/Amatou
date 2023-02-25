@@ -12,7 +12,7 @@ import { View } from '../../components/Themed';
 
 const ResultScreen = ({ navigation }: NativeStack.NativeStackScreenProps<RootStackParamList, 'Result'>) => {
   
-
+    
   return (
     <View>
         <Text>テスト</Text>

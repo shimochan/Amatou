@@ -26,6 +26,7 @@ import WriteStress from '../screens/WriteStress';
 
 import { RootStackParamList } from '../types';
 import LinkingConfiguration from './LinkingConfiguration';
+import ResultScreen from '../screens/result/ResultScreen';
 
 export default function Navigation({ colorScheme }: { colorScheme: ColorSchemeName }) {
   return (
@@ -56,6 +57,7 @@ function RootNavigator() {
       <Stack.Screen name="StressSelect" component={StressSelect} />
       <Stack.Screen name="SolutionSelect" component={SolutionSelect} />
       <Stack.Screen name="WriteStress" component={WriteStress} />
+      <Stack.Screen name="Result" component={ResultScreen} />
       <Stack.Screen name="NotFound" component={NotFoundScreen} options={{ title: 'Oops!' }} />
 
       <Stack.Group screenOptions={{ presentation: 'modal' }}>

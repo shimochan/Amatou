@@ -5,7 +5,7 @@ import { View, StyleSheet, Image, TouchableOpacity } from 'react-native';
 export default function BackButton(navigation: any) {
   return (
     <TouchableOpacity activeOpacity={0.5} style={styles.wrapper} onPress={() => navigation.goBack()}>
-      <Image source={require("../assets/images/icons/back.png")} style={styles.backIcon}/>
+      <Image source={require("../assets/images/icons/back.webp")} style={styles.backIcon}/>
     </TouchableOpacity>
   );
 }

@@ -3,26 +3,27 @@ import { Text, View } from '../../components/Themed';
 import React from 'react';
 import * as NativeStack from '@react-navigation/native-stack';
 import { RootStackParamList, StressItem } from '../../types';
-import stressListController from '../../hooks/stressList';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import StressItemView from '../../components/StressItem';
 import DefaultStyle from '../../constants/DefaultStyles';
 import { Spacer, VStack, HStack, ZStack } from 'react-native-stacks';
 import BackButton from '../../components/BackButton';
+import { useRecoilValue } from 'recoil';
+import { unDoneStressSelector } from '../../atoms/stressList';
 
 export default function StressSelect({ navigation }: NativeStack.NativeStackScreenProps<RootStackParamList, 'StressSelect'>) {
-  const { stressList, setStressList } = stressListController();
+  const stressList: StressItem[] = useRecoilValue(unDoneStressSelector);
 
-  const list = []
+  const listView = []
 
   for (const stress of stressList) {
-    list.push(StressItemView(stress, navigation));
+    listView.push(StressItemView(stress, navigation));
   }
 
   return (
     <VStack style={[DefaultStyle.fullHeight, { width: '100%' }]}>
       <ScrollView style={{ width: '100%' }}>
-        {list}
+        {listView}
         <Spacer />
       </ScrollView>
       <HStack style={styles.footer}>

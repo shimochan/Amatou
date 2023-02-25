@@ -17,7 +17,7 @@ export type RootStackParamList = {
   Root: NavigatorScreenParams<RootTabParamList> | undefined;
   Modal: undefined;
   NotFound: undefined;
-  PuchiPuchi: undefined;
+  PuchiPuchi: { stress: StressItem };
   Gyro: undefined;
   AddStress: undefined;
   Batting: undefined;
@@ -31,7 +31,7 @@ export type RootStackParamList = {
   WriteStress: undefined;
   StressSelect: undefined;
   Home: undefined;
-  Result: { stress: StressItem, url: string };
+  Result: { stress: StressItem, type: ActionType };
 };
 
 export type RootStackScreenProps<Screen extends keyof RootStackParamList> = NativeStackScreenProps<
@@ -42,6 +42,10 @@ export type RootStackScreenProps<Screen extends keyof RootStackParamList> = Nati
 export type RootTabParamList = {
   Home: undefined;
   Settings: undefined;
+};
+
+export enum ActionType {
+  Cutting, Batting, Joggnig, PuchiPuchi
 };
 
 export interface StressItem {

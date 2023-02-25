@@ -6,19 +6,17 @@ import {  Button } from 'react-native';
 import * as Haptics from 'expo-haptics';
 import * as NativeStack from '@react-navigation/native-stack';
 import { RootStackParamList } from '../../../types';
-import { useState,useEffect } from 'react';
+import { useState ,useEffect } from 'react';
 import { setStatusBarNetworkActivityIndicatorVisible } from 'expo-status-bar';
 import { Image ,ImageBackground} from 'react-native';
-import DefaultStyle from '../../../constants/DefaultStyles';
-import battingAction from '../../../hooks/actions/battingAction';
 import { Audio } from 'expo-av';
+import Batting from './Batting';
 
-
-export default function Batting({ navigation }: NativeStack.NativeStackScreenProps<RootStackParamList, 'Batting'>) {
+export default function Homerun({ route, navigation }: NativeStack.NativeStackScreenProps<RootStackParamList, 'Homerun'>) {
   const [sound, setSound] = React.useState<Audio.Sound>();
   async function playSound() {
     console.log('Loading Sound');
-    const { sound } = await Audio.Sound.createAsync( require('../../../assets/Audio/ouenka.mp3')
+    const { sound } = await Audio.Sound.createAsync( require('../../../assets/Audio/金属バットと歓声.mp3')
     );
     setSound(sound);
     await sound.playAsync();
@@ -32,30 +30,32 @@ export default function Batting({ navigation }: NativeStack.NativeStackScreenPro
       : undefined;
   }, [sound]);
 
-  useEffect(() => {
-    playSound();
-  }, [])
-
  
 
+
+
+  
+  useEffect(() => {
+    if (route.params.sound != undefined) {
+      route.params.sound.unloadAsync();
+      playSound();
+    }
+  }, [])
+
   return (
-    <TouchableOpacity activeOpacity={0.5} onPress={()=>navigation.push('Pitching', {sound: sound})} style={styles.container}>
-    <Image source ={require("../../../assets/images/batting.png")} style = {styles.image}/>
+    <TouchableOpacity activeOpacity={0.5} onPress={()=>navigation.push("Home")} style={styles.container}>
+    
+      <Image source ={require("../../../assets/images/homerun.png")} style = {styles.image}/>
+  
     </TouchableOpacity>
   );
-    
-
-  
-  
-
-  
 }
 
 const styles = StyleSheet.create({
   image:{
-     width:"100%",
-     resizeMode: 'contain',
-  },
+    width:"100%",
+    resizeMode: 'contain',
+ },
   container: {
     flex: 1,
     alignItems: 'center',

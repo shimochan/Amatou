@@ -3,24 +3,9 @@ import { useRef, useState } from "react";
 import * as Haptics from 'expo-haptics';
 import { Animated } from "react-native";
 
-const cutAction = (completion: () => void) => {
-  // Animation
-  const [opacity, setOpacity] = useState(0);
-  const opacityAnimation = useRef(new Animated.Value(0)).current;
-  opacityAnimation.addListener((value) => { setOpacity(value.value); });
-  let isAnimationStarted = false;
-  const animation = Animated.timing(opacityAnimation, {
-      toValue: 1.0,
-      duration: 200,
-      useNativeDriver: true,
-  });
-
-  const [isFinal, setFinalState] = useState(false);
-
+const battingAction = (pushToHomeRUn: () => void) => {
   const interval = 100;
   let sumCount = 0;
-
-  const [{ x, y, z }, setData] = useState({ x: 0, y: 0, z: 0 });
 
   // Accelerometer Values
   let { xAccSum, yAccSum, zAccSum } = { xAccSum: 0, yAccSum: 0, zAccSum: 0 };
@@ -34,19 +19,15 @@ const cutAction = (completion: () => void) => {
   // On Start
   const startListening = () => {
     DeviceMotion.addListener((motionData) => {
-      if (!isAnimationStarted) {
-        setData(motionData.acceleration ?? { x: 0, y: 0, z: 0 });
-
-        if (sumCount >= 5) {
-          motionReset();
-        }
-
-        if (sumCount >= 10) {
-          sumCount = 0;
-        }
-
-        motionSumUp(motionData);
+      if (sumCount >= 5) {
+        motionReset();
       }
+
+      if (sumCount >= 10) {
+        sumCount = 0;
+      }
+
+      motionSumUp(motionData);
     });
   }
 
@@ -68,22 +49,9 @@ const cutAction = (completion: () => void) => {
     // Right to Left || Left to Right
     if (xAccAvg < -4.0 || 4.0 < xAccAvg) {
       Haptics.notificationAsync(Haptics.NotificationFeedbackType.Error);
-      isAnimationStarted = true;
-      animation.start((_) => {
-        Animated.timing(opacityAnimation, {
-          toValue: 0,
-          duration: 200,
-          useNativeDriver: true,
-        }).start((_) => {
-          isAnimationStarted = false;
-        });
-      });
-      if (isFinal) {
-        stopListening();
-        completion();
-        return;
-      }
-      initializeValues();
+      pushToHomeRUn();
+      stopListening();
+      return;
     }
   }
 
@@ -109,7 +77,7 @@ const cutAction = (completion: () => void) => {
     gammaSum = 0;
   }
 
-  return { opacity, setFinalState, startListening, stopListening }
+  return { startListening, stopListening }
 }
 
-export default cutAction;
+export default battingAction;

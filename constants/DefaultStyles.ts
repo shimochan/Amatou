@@ -40,6 +40,10 @@ const DefaultStyle = StyleSheet.create({
   fill: {
     width: '100%',
     height: '100%',
+  },
+  footer: {
+    padding: 40,
+    marginBottom: 10,
   }
 });
 

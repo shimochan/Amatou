@@ -26,7 +26,7 @@ export default function StressSelect({ navigation }: NativeStack.NativeStackScre
         {listView}
         <Spacer />
       </ScrollView>
-      <HStack style={styles.footer}>
+      <HStack style={DefaultStyle.footer}>
         {BackButton(navigation)}
         <Spacer />
         <TouchableOpacity activeOpacity={0.5} style={styles.addButton} onPress={() => navigation.push('AddStress')}>

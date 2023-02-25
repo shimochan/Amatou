@@ -1,31 +1,28 @@
-import { StyleSheet } from 'react-native';
-import { View } from '../../components/Themed';
+import { ScrollView } from 'react-native';
 import React from 'react';
-import {  Button } from 'react-native';
 import * as NativeStack from '@react-navigation/native-stack';
-import { RootStackParamList } from '../../types';
+import { RootStackParamList, StressItem } from '../../types';
+import StressItemView from '../../components/StressItem';
+import DefaultStyle from '../../constants/DefaultStyles';
+import { Spacer, VStack } from 'react-native-stacks';
+import { useRecoilValue } from 'recoil';
+import { finishedStressSelector } from '../../atoms/stressList';
 
-export default function History({ navigation }: NativeStack.NativeStackScreenProps<RootStackParamList, 'History'>) {
+export default function StressHistory({ navigation }: NativeStack.NativeStackScreenProps<RootStackParamList, 'History'>) {
+  const stressList: StressItem[] = useRecoilValue(finishedStressSelector);
+
+  const listView = []
+
+  for (const stress of stressList) {
+    listView.push(StressItemView(stress, navigation));
+  }
+
   return (
-    <View style={styles.container}>
-      <Button color = "green" title='ホーム画面へ' onPress={() => navigation.goBack()} />
-    </View>
+    <VStack style={[DefaultStyle.fullHeight, { width: '100%' }]}>
+      <ScrollView style={{ width: '100%' }}>
+        {listView}
+        <Spacer />
+      </ScrollView>
+    </VStack>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  title: {
-    fontSize: 20,
-    fontWeight: 'bold',
-  },
-  separator: {
-    marginVertical: 30,
-    height: 1,
-    width: '80%',
-  },
-});

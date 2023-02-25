@@ -24,7 +24,7 @@ export type RootStackParamList = {
   Batting: undefined;
   Pitching: {sound: Audio.Sound | undefined};
   Homerun: {sound: Audio.Sound | undefined};
-  CutAction: undefined;
+  CutAction: { stress: StressItem };
   FinallyAddStress: undefined;
   History: undefined;
   Jogging: undefined;

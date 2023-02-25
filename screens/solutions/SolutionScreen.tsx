@@ -9,7 +9,7 @@ import { getIntensityStyle, getIntensityLabel } from '../../hooks/intensityConve
 import cutAction from '../../hooks/actions/cutAction';
 
 export default function SolutionSelect({ route, navigation }: RootStackScreenProps<'SolutionSelect'>) {
-  const { stopListening } = cutAction();
+  const { stopListening } = cutAction(() => {});
 
   useEffect(()=> {
     stopListening();

@@ -1,7 +1,6 @@
 import DeviceMotion, { DeviceMotionMeasurement } from "expo-sensors/build/DeviceMotion";
 import { useRef, useState } from "react";
 import * as Haptics from 'expo-haptics';
-import { Animated } from "react-native";
 
 const battingAction = (pushToHomeRUn: () => void) => {
   const interval = 100;

@@ -10,9 +10,9 @@ const cutAction = (completion: () => void) => {
   opacityAnimation.addListener((value) => { setOpacity(value.value); });
   let isAnimationStarted = false;
   const animation = Animated.timing(opacityAnimation, {
-      toValue: 1.0,
-      duration: 200,
-      useNativeDriver: true,
+    toValue: 1.0,
+    duration: 200,
+    useNativeDriver: true,
   });
 
   const [isFinal, setFinalState] = useState(false);

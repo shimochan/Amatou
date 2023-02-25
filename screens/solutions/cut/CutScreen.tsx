@@ -3,7 +3,7 @@ import { View } from '../../../components/Themed';
 import React, { useEffect } from 'react';
 import { Text, Image, Button } from 'react-native';
 import * as NativeStack from '@react-navigation/native-stack';
-import { RootStackParamList } from '../../../types';
+import { ActionType, RootStackParamList } from '../../../types';
 import cutAction from '../../../hooks/actions/cutAction';
 import DefaultStyle from '../../../constants/DefaultStyles';
 import { Spacer, VStack, HStack, ZStack } from 'react-native-stacks';
@@ -12,7 +12,7 @@ import BackButton from '../../../components/BackButton';
 export default function CutAction({ route, navigation }: NativeStack.NativeStackScreenProps<RootStackParamList, 'CutAction'>) {
 
   const onFinal = () => {
-    navigation.push('Result', {stress: route.params.stress, url: ""});
+    navigation.push('Result', { stress: route.params.stress, type: ActionType.Cutting });
   }
 
   const { opacity, setFinalState, startListening } = cutAction(onFinal);

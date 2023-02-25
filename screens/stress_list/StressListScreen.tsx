@@ -3,7 +3,6 @@ import { Text, View } from '../../components/Themed';
 import React from 'react';
 import * as NativeStack from '@react-navigation/native-stack';
 import { RootStackParamList, StressItem } from '../../types';
-import { SafeAreaView } from 'react-native-safe-area-context';
 import StressItemView from '../../components/StressItem';
 import DefaultStyle from '../../constants/DefaultStyles';
 import { Spacer, VStack, HStack, ZStack } from 'react-native-stacks';

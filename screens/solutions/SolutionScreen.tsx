@@ -44,7 +44,7 @@ export default function SolutionSelect({ route, navigation }: RootStackScreenPro
         </HStack>
       </TouchableOpacity>
 
-      <TouchableOpacity activeOpacity={0.5} onPress={() => navigation.push("Jogging")} style={styles.imageOuter}>
+      <TouchableOpacity key={1} activeOpacity={0.5} onPress={() => navigation.push("Jogging")} style={styles.imageOuter}>
         <HStack>
           <Spacer />
           <Text style={styles.text}>走る</Text>
@@ -54,12 +54,32 @@ export default function SolutionSelect({ route, navigation }: RootStackScreenPro
         </HStack>
       </TouchableOpacity>
 
-      <TouchableOpacity activeOpacity={0.5} onPress={() => navigation.push("PuchiPuchi")} style={styles.imageOuter}>
+      <TouchableOpacity activeOpacity={0.5} onPress={() => navigation.push("PuchiPuchi", { stress: route.params?.stress })} style={styles.imageOuter}>
         <HStack>
           <Spacer />
           <Text style={styles.text}>潰す</Text>
           <Spacer />
           <Image source={require("../../assets/images/bakuhatsu.webp")} style={styles.imagesize} />
+          <Spacer />
+        </HStack>
+      </TouchableOpacity>
+
+      <TouchableOpacity key={3} activeOpacity={0.5} onPress={() => navigation.push("Batting")} style={styles.imageOuter}>
+        <HStack>
+          <Spacer />
+          <Text style={styles.text}>打つ</Text>
+          <Spacer />
+          <Image source={require("../../assets/images/kiruyatu.png")} style={styles.imagesize} />
+          <Spacer />
+        </HStack>
+      </TouchableOpacity>
+
+      <TouchableOpacity key={3} activeOpacity={0.5} onPress={() => navigation.push("Batting")} style={styles.imageOuter}>
+        <HStack>
+          <Spacer />
+          <Text style={styles.text}>打つ</Text>
+          <Spacer />
+          <Image source={require("../../assets/images/kiruyatu.png")} style={styles.imagesize} />
           <Spacer />
         </HStack>
       </TouchableOpacity>

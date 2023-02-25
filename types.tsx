@@ -6,6 +6,7 @@
 import { BottomTabScreenProps } from '@react-navigation/bottom-tabs';
 import { CompositeScreenProps, NavigatorScreenParams } from '@react-navigation/native';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
+import { Audio } from 'expo-av';
 
 declare global {
   namespace ReactNavigation {
@@ -17,11 +18,13 @@ export type RootStackParamList = {
   Root: NavigatorScreenParams<RootTabParamList> | undefined;
   Modal: undefined;
   NotFound: undefined;
-  PuchiPuchi: undefined;
+  PuchiPuchi: { stress: StressItem };
   Gyro: undefined;
   AddStress: undefined;
   Batting: undefined;
-  CutAction: { stress: StressItem };
+  Pitching: {sound: Audio.Sound | undefined};
+  Homerun: {sound: Audio.Sound | undefined};
+  CutAction: undefined;
   FinallyAddStress: undefined;
   History: undefined;
   Jogging: undefined;
@@ -31,7 +34,7 @@ export type RootStackParamList = {
   WriteStress: undefined;
   StressSelect: undefined;
   Home: undefined;
-  Result: { stress: StressItem, url: string };
+  Result: { stress: StressItem, type: ActionType };
 };
 
 export type RootStackScreenProps<Screen extends keyof RootStackParamList> = NativeStackScreenProps<
@@ -42,6 +45,10 @@ export type RootStackScreenProps<Screen extends keyof RootStackParamList> = Nati
 export type RootTabParamList = {
   Home: undefined;
   Settings: undefined;
+};
+
+export enum ActionType {
+  Cutting, Batting, Joggnig, PuchiPuchi
 };
 
 export interface StressItem {

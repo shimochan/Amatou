@@ -30,7 +30,8 @@
         "package": "kbh.amatou.tidy",
         "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "kbh.amatou.tidy"
     },
     "web": {
       "favicon": "./assets/images/favicon.png"

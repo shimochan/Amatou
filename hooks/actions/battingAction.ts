@@ -24,7 +24,9 @@ const battingAction = (pushToHomeRUn: () => void) => {
 
       if (sumCount >= 10) {
         sumCount = 0;
+        initializeValues();
       }
+
 
       motionSumUp(motionData);
     });

@@ -1,11 +1,12 @@
 import { StyleSheet, TouchableOpacity } from 'react-native';
+import { View } from '../../../components/Themed';
 import React from 'react';
 import * as NativeStack from '@react-navigation/native-stack';
 import { RootStackParamList } from '../../../types';
 import { useEffect } from 'react';
 import { Image } from 'react-native';
 import { Audio } from 'expo-av';
-
+import battingAction from '../../../hooks/actions/battingAction';
 
 export default function Batting({ route, navigation }: NativeStack.NativeStackScreenProps<RootStackParamList, 'Batting'>) {
   const [sound, setSound] = React.useState<Audio.Sound>();

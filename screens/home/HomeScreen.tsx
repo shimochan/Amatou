@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleSheet, Image, TouchableOpacity } from 'react-native';
-import { Text } from 'react-native';
+import { Text, ScrollView} from 'react-native';
 import { RootStackParamList, StressItem } from '../../types';
 import { ZStack, HStack, VStack, Spacer } from 'react-native-stacks';
 import DefaultStyle from '../../constants/DefaultStyles';
@@ -53,16 +53,17 @@ function HomeScreen({ navigation, route }: NativeStack.NativeStackScreenProps<Ro
 
 
   return (
-    <SafeAreaView style={DefaultStyle.safeAreaBackground}>
-      <VStack spacing={15} style={DefaultStyle.fullHeight}>
-        <Text style={DefaultStyle.title}>抱えているストレス</Text>
-        <Text style={DefaultStyle.title2}>{stressList.length}こ</Text>
+    <SafeAreaView style={{backgroundColor: "#fff", height: '100%'}}>
+      <ScrollView style={DefaultStyle.safeAreaBackground}>
+        <VStack spacing={15} style={DefaultStyle.fullHeight}>
+          <Text style={DefaultStyle.title}>抱えているストレス</Text>
+          <Text style={DefaultStyle.title2}>{stressList.length}こ</Text>
 
-        <Spacer />
+          <Spacer />
 
-        <Image source={getStoneImagePath(stressList.length)} style={DefaultStyle.homeImage} />
+          <Image source={getStoneImagePath(stressList.length)} style={DefaultStyle.homeImage} />
 
-        <Spacer />
+          <Spacer />
 
         <TouchableOpacity activeOpacity={0.5} onPress={() => navigation.push('StressSelect',{sound: sound!})} style={DefaultStyle.largeButton}>
           <ZStack style={DefaultStyle.fill}>
@@ -70,22 +71,23 @@ function HomeScreen({ navigation, route }: NativeStack.NativeStackScreenProps<Ro
           </ZStack>
         </TouchableOpacity>
 
-        <HStack>
-          <Spacer />
+          <HStack>
+            <Spacer />
 
           <TouchableOpacity activeOpacity={0.5} onPress={() => navigation.push('History',{sound: sound!})} style={[DefaultStyle.smallButton, { backgroundColor: '#9BCDA0' }]}>
             <Text>りれき</Text>
           </TouchableOpacity>
 
-          <Spacer />
+            <Spacer />
 
           <TouchableOpacity activeOpacity={0.5} onPress={() => navigation.push('AddStress',{sound: sound!})} style={[DefaultStyle.smallButton, { backgroundColor: '#C09BCD' }]}>
             <Text>ついか</Text>
           </TouchableOpacity>
 
-          <Spacer />
-        </HStack>
-      </VStack>
+            <Spacer />
+          </HStack>
+        </VStack>
+      </ScrollView>
     </SafeAreaView>
   );
 }

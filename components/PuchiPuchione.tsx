@@ -3,10 +3,19 @@ import React from 'react';
 import * as Haptics from 'expo-haptics';
 import * as NativeStack from '@react-navigation/native-stack';
 import { RootStackParamList, StressItem } from '../types';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Image } from 'react-native';
+import { Audio } from 'expo-av';
 
 export default function PuchiPuchione(key: number, tapAction: () => void, navigation: NativeStack.NativeStackNavigationProp<RootStackParamList, "PuchiPuchi", undefined>, stress: StressItem) {
+  const [sound, setSound] = useState<Audio.Sound>();
+  async function puchipuchiSound() {
+    const { sound } = await Audio.Sound.createAsync(require('../assets/Audio/Bubble_Wrap03-2.mp3')
+    );
+    setSound(sound);
+    await sound.playAsync();
+  }
+  
   const imagepuchipuchi2 = require("../assets/images/puchipuchitubushitaato.webp")
   const [imagepuchipuchi, setimagepuchipuchi] = useState(require("../assets/images/puchipuchitubusumae.webp"))
   const puchipuchiimage = () => {
@@ -14,6 +23,7 @@ export default function PuchiPuchione(key: number, tapAction: () => void, naviga
       Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success)
       setimagepuchipuchi(imagepuchipuchi2)
       tapAction();
+      puchipuchiSound();
     }
   }
 

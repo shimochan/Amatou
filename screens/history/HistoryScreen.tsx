@@ -4,14 +4,15 @@ import * as NativeStack from '@react-navigation/native-stack';
 import { RootStackParamList, StressItem } from '../../types';
 import StressItemView from '../../components/StressItem';
 import DefaultStyle from '../../constants/DefaultStyles';
-import { Spacer, VStack } from 'react-native-stacks';
+import { HStack, Spacer, VStack } from 'react-native-stacks';
 import { useRecoilValue } from 'recoil';
 import { finishedStressSelector } from '../../atoms/stressList';
+import CloseButton from '../../components/CloseButton';
 
 export default function StressHistory({ navigation ,route}: NativeStack.NativeStackScreenProps<RootStackParamList, 'History'>) {
   const stressList: StressItem[] = useRecoilValue(finishedStressSelector);
 
-  const listView = []
+  const listView = [];
 
   for (const stress of stressList) {
     listView.push(StressItemView(route.params.sound,stress, navigation));
@@ -23,6 +24,11 @@ export default function StressHistory({ navigation ,route}: NativeStack.NativeSt
         {listView}
         <Spacer />
       </ScrollView>
+      
+      <HStack style={DefaultStyle.footer}>
+        {CloseButton(navigation)}
+        <Spacer />
+      </HStack>
     </VStack>
   );
 }

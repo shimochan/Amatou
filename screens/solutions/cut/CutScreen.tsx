@@ -1,21 +1,15 @@
-import { StyleSheet } from 'react-native';
-import { View } from '../../../components/Themed';
+import { StyleSheet, TouchableOpacity } from 'react-native';
 import React, { useEffect } from 'react';
 import { Text, Image, Button } from 'react-native';
 import * as NativeStack from '@react-navigation/native-stack';
-import { ActionType, RootStackParamList } from '../../../types';
-import cutAction from '../../../hooks/actions/cutAction';
+import { RootStackParamList } from '../../../types';
 import DefaultStyle from '../../../constants/DefaultStyles';
 import { Spacer, VStack, HStack, ZStack } from 'react-native-stacks';
 import BackButton from '../../../components/BackButton';
+import cutAction from '../../../hooks/actions/cutAction';
 
 export default function CutAction({ route, navigation }: NativeStack.NativeStackScreenProps<RootStackParamList, 'CutAction'>) {
-
-  const onFinal = () => {
-    navigation.push('Result', { sound:route.params.sound!,stress: route.params.stress, type: ActionType.Cutting });
-  }
-
-  const { opacity, setFinalState, startListening } = cutAction(onFinal);
+  const { opacity, startFinalListening, startListening } = cutAction(navigation, route.params.stress);
 
   useEffect(() => {
     startListening();
@@ -34,9 +28,11 @@ export default function CutAction({ route, navigation }: NativeStack.NativeStack
 
       <Spacer />
 
-      <Button title='とどめをさす' onPress={() => {
-        setFinalState(true);
-      }} />
+      <TouchableOpacity style={DefaultStyle.largeButton} onPress={startFinalListening}>
+        <ZStack style={DefaultStyle.fill}>
+          <Text>とどめをさす</Text>
+        </ZStack>
+      </TouchableOpacity>
 
       <HStack style={DefaultStyle.footer}>
         {BackButton(navigation)}

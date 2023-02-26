@@ -10,7 +10,6 @@ import { Audio } from 'expo-av';
 export default function Batting({ route, navigation }: NativeStack.NativeStackScreenProps<RootStackParamList, 'Batting'>) {
   const [sound, setSound] = React.useState<Audio.Sound>();
   async function playSound() {
-    console.log('Loading Sound');
     const { sound } = await Audio.Sound.createAsync(require('../../../assets/Audio/ouenka.mp3')
     );
     setSound(sound);
@@ -19,7 +18,6 @@ export default function Batting({ route, navigation }: NativeStack.NativeStackSc
   React.useEffect(() => {
     return sound
       ? () => {
-        console.log('Unloading Sound');
         sound.unloadAsync();
       }
       : undefined;

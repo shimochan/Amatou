@@ -8,6 +8,7 @@ import Navigation from './navigation';
 import { RecoilRoot } from 'recoil';
 import { setCustomText } from 'react-native-global-props';
 import { TextProps } from 'react-native';
+import CustomNavigationBar from './components/CustomNavigationBar';
 
 export default function App() {
   const isLoadingComplete = useCachedResources();
@@ -28,7 +29,7 @@ export default function App() {
     return (
       <RecoilRoot>
         <SafeAreaProvider>
-          <Navigation colorScheme={colorScheme} />
+          <Navigation colorScheme={colorScheme}/>
           <StatusBar />
         </SafeAreaProvider>
       </RecoilRoot>

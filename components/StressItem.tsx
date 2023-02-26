@@ -7,9 +7,13 @@ import { Audio } from "expo-av";
 export default function StressItemView(sound:Audio.Sound, stress: StressItem, navigation: any) {
 
   return (
-    <TouchableOpacity activeOpacity={0.5} onPress={() => navigation.push("SolutionSelect", { sound: sound!,stress: stress })} key={stress.key}>
+    <TouchableOpacity activeOpacity={noAction ? 1.0 : 0.5} onPress={() => {
+      if (!noAction) {
+        navigation.push("SolutionSelect", { stress: stress })
+      }
+    }} key={stress.key}>
       <HStack style={styles.wrapper}>
-        <Text style={styles.title}>{stress.title}</Text>
+        <Text style={[styles.title, styles.headertext]} numberOfLines={1} ellipsizeMode="tail">{stress.title}</Text>
         <Spacer />
         <VStack spacing={5}>
           <Text style={[getIntensityStyle(stress.intensity)]}>{getIntensityLabel(stress.intensity)}</Text>
@@ -39,4 +43,7 @@ const styles = StyleSheet.create({
     fontSize: 14,
     color: "#777777",
   },
+  headertext: {
+    maxWidth: '60%'
+  }
 });

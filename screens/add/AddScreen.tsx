@@ -3,11 +3,12 @@ import React, { useState } from 'react';
 import { Image, Button, Text } from 'react-native';
 import * as NativeStack from '@react-navigation/native-stack';
 import { RootStackParamList, StressItem } from '../../types';
-import { ZStack, HStack, VStack } from 'react-native-stacks';
+import { ZStack, HStack, VStack, Spacer } from 'react-native-stacks';
 import DefaultStyle from '../../constants/DefaultStyles';
 import DateTimePickerModal from "react-native-modal-datetime-picker";
 import { stressListState } from '../../atoms/stressList';
 import { useRecoilState } from 'recoil';
+import CloseButton from '../../components/CloseButton';
 
 
 export default function AddStress({ navigation ,route }: NativeStack.NativeStackScreenProps<RootStackParamList, 'AddStress'>) {
@@ -17,6 +18,7 @@ export default function AddStress({ navigation ,route }: NativeStack.NativeStack
   const [isPressed_S, onPress_S] = useState(false);
   const [isPressed_M, onPress_M] = useState(true);
   const [isPressed_L, onPress_L] = useState(false);
+  const [selectedDate, selectDate] = useState(new Date());
 
   const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
   const showDatePicker = () => {
@@ -27,6 +29,7 @@ export default function AddStress({ navigation ,route }: NativeStack.NativeStack
   };
   const handleConfirm = (date: Date) => {
     console.warn("A date has been picked: ", date);
+    selectDate(date);
     hideDatePicker();
   };
 
@@ -48,12 +51,21 @@ export default function AddStress({ navigation ,route }: NativeStack.NativeStack
     onPress_L(true);
   }
 
+  const getIntensity = () => {
+    if (isPressed_S) {
+      return 0;
+    } else if (isPressed_M) {
+      return 1;
+    } else {
+      return 2;
+    }
+  }
+
   const addAndNavigate = () => {
     if (text == "") return;
     const stressCount = stressList.length;
-    const newStress: StressItem = { key: stressCount, title: text, intensity: 0, dueDate: new Date(), isDone: false };
+    const newStress: StressItem = { key: stressCount, title: text, intensity: getIntensity(), dueDate: selectedDate, isDone: false };
     setStressList([...stressList, newStress]);
-    console.log([...stressList, newStress]);
     navigation.pop();
     navigation.push('StressSelect',{sound: route.params.sound!});
   }
@@ -90,7 +102,7 @@ export default function AddStress({ navigation ,route }: NativeStack.NativeStack
       </HStack>
       <HStack spacing={0}>
         <Image source={require("../../assets/images/character_shimekiri.webp")} style={styles.character_shimekiri} />
-        <Button title="期限：＿曜日＿月＿日  ＿時＿分" onPress={showDatePicker} />
+        <Button title={selectedDate.toLocaleString()} onPress={showDatePicker} />
         <DateTimePickerModal
           isVisible={isDatePickerVisible}
           mode="datetime"
@@ -105,6 +117,12 @@ export default function AddStress({ navigation ,route }: NativeStack.NativeStack
         </ZStack>
       </TouchableOpacity>
 
+      <Spacer />
+
+      <HStack style={DefaultStyle.footer}>
+        {CloseButton(navigation)}
+        <Spacer />
+      </HStack>
 
     </VStack>
 

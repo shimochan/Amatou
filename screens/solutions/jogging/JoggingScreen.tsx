@@ -69,8 +69,8 @@ export default function Jogging({ route, navigation }: NativeStack.NativeStackSc
         setText("停止");
         break;
       case 3:
-        //結果画面ボタン押されたとき_
-        navigation.push('Result', { stress: route.params.stress, type: ActionType.Joggnig })
+        //結果画面ボタン押されたとき
+        navigation.replace('Result', { stress: route.params.stress, type: ActionType.Joggnig })
         break;
       // case 4:
       //   //制限時間が選択された状態でボタン押されたとき

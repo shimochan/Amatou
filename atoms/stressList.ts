@@ -5,25 +5,33 @@ export const stressListState = atom<StressItem[]>({
   key: "stressListState",
   default: [{
     key: 0,
-    title: "Test 1",
+    title: "ハッカソン アイデア出し",
     intensity: 0,
+    dueDate: new Date(),
+    isDone: true,
+  },
+  {
+    key: 1,
+    title: "ハッカソン 環境構築",
+    intensity: 1,
     dueDate: new Date(),
     isDone: false,
   },
   {
     key: 2,
-    title: "Test 2",
-    intensity: 1,
-    dueDate: new Date(),
-    isDone: true,
-  },
-  {
-    key: 3,
-    title: "Test 3",
+    title: "ハッカソン 開発",
     intensity: 2,
     dueDate: new Date(),
     isDone: false,
-  }],
+  },
+  // {
+  //   key: 3,
+  //   title: "ハッカソン 開発",
+  //   intensity: 2,
+  //   dueDate: new Date(),
+  //   isDone: false,
+  // }
+],
 });
 
 export const unDoneStressSelector = selector<StressItem[]>({

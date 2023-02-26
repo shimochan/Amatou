@@ -50,5 +50,5 @@ const styles = StyleSheet.create({
   footer: {
     padding: 40,
     marginBottom: 10,
-  }
+  },
 });

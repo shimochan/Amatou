@@ -1,26 +1,50 @@
 import { StyleSheet, TouchableOpacity } from 'react-native';
 import { View } from '../../../components/Themed';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Text } from 'react-native';
 import * as NativeStack from '@react-navigation/native-stack';
 import { ActionType, RootStackParamList } from '../../../types';
 import { VStack } from 'react-native-stacks';
 import { Pedometer } from 'expo-sensors';
+import RNPickerSelect from 'react-native-picker-select';
+import { numberLiteralTypeAnnotation } from '@babel/types';
 
 export default function Jogging({ route, navigation }: NativeStack.NativeStackScreenProps<RootStackParamList, 'Jogging'>) {
 
   let time: number = 20;
 
+  const list = [
+    { label: '5分', value: 5 },
+    { label: '10分', value: 10 },
+    { label: '15分', value: 15 },
+    { label: '20分', value: 20 },
+    { label: '25分', value: 25 },
+    { label: '30分', value: 30 },
+    { label: '35分', value: 35 },
+    { label: '40分', value: 40 },
+    { label: '45分', value: 45 },
+    { label: '50分', value: 50 },
+    { label: '55分', value: 55 },
+    { label: '60分', value: 60 },
+    { label: '65分', value: 65 },
+    { label: '70分', value: 70 },
+    { label: '75分', value: 75 },
+    { label: '80分', value: 80 },
+    { label: '85分', value: 85 },
+    { label: '90分', value: 90 }
+  ];
+
+  const [limit, setLimit] = useState();
+
   let end: Date;
   const [stepCount, setStepCount] = useState(0);
   const [pastCount, setPastCount] = useState(0);
 
-  const [count, setCount] = useState(time);
-  const [text, setText] = useState("開始");
-  const [mode, setMode] = useState(0);  //0:初期、1:動作中、2:停止中 3:終了後
+  const [count, setCount] = useState(0);
+  const [text, setText] = useState("走行時間を選択");
+  const [mode, setMode] = useState(4);  //0:初期、1:動作中、2:停止中 3:終了後
 
   const [start, setStart] = useState(new Date());
-
 
   const switchMode = () => {
     switch (mode) {
@@ -45,11 +69,32 @@ export default function Jogging({ route, navigation }: NativeStack.NativeStackSc
         setText("停止");
         break;
       case 3:
-        //結果画面ボタン押されたとき
+        //結果画面ボタン押されたとき_
         navigation.push('Result', { stress: route.params.stress, type: ActionType.Joggnig })
         break;
+      // case 4:
+      //   //制限時間が選択された状態でボタン押されたとき
+      //   setMode(0);
+      //   setStart(new Date());
+      //   setText("走行時間を選択してください");
+      //   break;
     }
   }
+
+  // useEffect(() => {
+  //   return () => {
+  //     if(limit==0||limit==undefined){
+  //       setMode(4);
+  //       setText("走行時間を選択してください");
+  //     }
+  //     else{
+  //       setMode(0);
+  //       console.log(limit);
+  //       setCount(limit);
+  //       setText("開始");
+  //     }
+  //   };
+  // }, [limit]);
 
   const getcount = async () => {
     const pastStepCountResult = await Pedometer.getStepCountAsync(start, end);
@@ -60,7 +105,7 @@ export default function Jogging({ route, navigation }: NativeStack.NativeStackSc
     setMode(0);
     setStepCount(0);
     setPastCount(0);
-    setCount(time);
+    // setCount(limit);
     setText("開始");
   }
 
@@ -87,9 +132,30 @@ export default function Jogging({ route, navigation }: NativeStack.NativeStackSc
     }
   }, 1 * 100);
 
+  const handleonchange = (value: number) => {
+    setCount(value != undefined ? value : 0);
+    if (value == null && limit == undefined) {
+      setMode(4);
+      setText("走行時間を選択");
+    }
+    else {
+      setMode(0);
+      setText("開始");
+    }
+  }
+
   return (
     <View style={styles.container}>
+
+
       <VStack spacing={10} style={styles.stack}>
+        <Text>
+          <RNPickerSelect
+            onValueChange={(value) => handleonchange(value)}
+            items={list}
+            style={pickerSelectStyles}
+          />
+        </Text>
         <Text style={styles.time}>{count}</Text>
         <Text style={styles.count}>{pastCount + stepCount}</Text>
         <TouchableOpacity activeOpacity={0.5} onPress={switchMode} style={styles.button}>
@@ -113,6 +179,11 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: 'bold',
   },
+  picker:{
+    padding: 10,
+    textAlignVertical: 'center',
+    borderWidth: 1,
+  },
   count: {
     width: '100%',
     textAlign: 'center',
@@ -135,14 +206,41 @@ const styles = StyleSheet.create({
     color: 'white',
   },
   button: {
+    height: 100,
     borderColor: 'black',
     borderWidth: 1,
-    paddingTop: 20,
     paddingRight: 40,
-    paddingBottom: 20,
     paddingLeft: 40,
+    textAlign: 'center'
   },
   text: {
-    fontSize: 30
+    lineHeight: 100,
+    fontSize: 30,
+    textAlign: 'center'
   }
+});
+const pickerSelectStyles = StyleSheet.create({
+  inputIOS: {
+    fontSize: 20,
+    paddingVertical: 12,
+    paddingHorizontal: 10,
+    borderWidth: 3,
+    borderColor: '#b2bec3',
+    borderRadius: 4,
+    color: 'black',
+    backgroundColor: '#dfe6e9',
+    textAlign: 'center',
+    paddingRight: 30, // to ensure the text is never behind the icon
+  },
+  inputAndroid: {
+    fontSize: 20,
+    paddingHorizontal: 10,
+    paddingVertical: 8,
+    borderWidth: 0.5,
+    borderColor: '#b2bec3',
+    backgroundColor: '#dfe6e9',
+    borderRadius: 8,
+    color: 'black',
+    paddingRight: 30, // to ensure the text is never behind the icon
+  },
 });

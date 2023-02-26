@@ -16,7 +16,7 @@ export default function StressSelect({ navigation ,route}: NativeStack.NativeSta
   const listView = [];
 
   for (const stress of stressList) {
-    listView.push(StressItemView(route.params.sound,stress, navigation)); 
+    listView.push(StressItemView(route.params.sound,stress, navigation));  
   }
 
   return (

@@ -18,7 +18,7 @@ export default function PuchiPuchi({ route, navigation }: RootStackScreenProps<'
   const onTap = (tapCount: number) => {
     settapCount(tapCount += 1);
     if (tapCount === 30) {
-      navigation.push("Result", { stress: route.params?.stress, type: ActionType.PuchiPuchi });
+      navigation.replace("Result", { stress: route.params?.stress, type: ActionType.PuchiPuchi });
     }
   }
 

@@ -46,7 +46,7 @@ export default function Jogging({ route, navigation }: NativeStack.NativeStackSc
         break;
       case 3:
         //結果画面ボタン押されたとき
-        navigation.push('Result', { stress: route.params.stress, type: ActionType.Joggnig })
+        navigation.replace('Result', { stress: route.params.stress, type: ActionType.Joggnig })
         break;
     }
   }

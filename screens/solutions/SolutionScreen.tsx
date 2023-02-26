@@ -6,16 +6,17 @@ import { VStack, HStack, Spacer } from 'react-native-stacks';
 import BackButton from '../../components/BackButton';
 import DefaultStyle from '../../constants/DefaultStyles';
 import { getIntensityStyle, getIntensityLabel } from '../../hooks/intensityConverter';
-import cutAction from '../../hooks/actions/cutAction';
+import { DeviceMotion } from 'expo-sensors';
 
 export default function SolutionSelect({ route, navigation }: RootStackScreenProps<'SolutionSelect'>) {
-  const { stopListening } = cutAction(() => { });
+
+  
 
   useEffect(() => {
-    stopListening();
+    DeviceMotion.removeAllListeners();
 
     const willFocusSubscription = navigation.addListener('focus', () => {
-      stopListening();
+      DeviceMotion.removeAllListeners();
     })
 
     return willFocusSubscription

@@ -3,10 +3,14 @@ import { StressItem } from "../types";
 import { Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { getIntensityStyle, getIntensityLabel } from '../hooks/intensityConverter';
 
-export default function StressItemView(stress: StressItem, navigation: any) {
+export default function StressItemView(stress: StressItem, navigation: any, noAction: boolean = false) {
 
   return (
-    <TouchableOpacity activeOpacity={0.5} onPress={() => navigation.push("SolutionSelect", { stress: stress })} key={stress.key}>
+    <TouchableOpacity activeOpacity={noAction ? 1.0 : 0.5} onPress={() => {
+      if (!noAction) {
+        navigation.push("SolutionSelect", { stress: stress })
+      }
+    }} key={stress.key}>
       <HStack style={styles.wrapper}>
         <Text style={[styles.title, styles.headertext]} numberOfLines={1} ellipsizeMode="tail">{stress.title}</Text>
         <Spacer />

@@ -11,7 +11,7 @@ const Resultcomponents = (stress: StressItem, type: ActionType, navigation: any)
   const setUrl = () => {
     switch (type) {
       case ActionType.Cutting: setimageurl(require('../assets/images/monster.webp')); break;
-      case ActionType.Batting: setimageurl(require('../assets/images/bg_baseball_ground.webp')); break;
+      case ActionType.Batting: setimageurl(require('../assets/images/baseballResult.png')); break;
       case ActionType.Joggnig: setimageurl(require('../assets/images/sport_jogging_woman.webp')); break;
       case ActionType.PuchiPuchi: setimageurl(require('../assets/images/bakuhatsu.webp')); break;
     }

@@ -13,7 +13,7 @@ import { unDoneStressSelector } from '../../atoms/stressList';
 export default function StressSelect({ navigation }: NativeStack.NativeStackScreenProps<RootStackParamList, 'StressSelect'>) {
   const stressList: StressItem[] = useRecoilValue(unDoneStressSelector);
 
-  const listView = []
+  const listView = [];
 
   for (const stress of stressList) {
     listView.push(StressItemView(stress, navigation));

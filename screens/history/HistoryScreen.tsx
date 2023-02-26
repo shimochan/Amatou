@@ -12,7 +12,7 @@ import CloseButton from '../../components/CloseButton';
 export default function StressHistory({ navigation }: NativeStack.NativeStackScreenProps<RootStackParamList, 'History'>) {
   const stressList: StressItem[] = useRecoilValue(finishedStressSelector);
 
-  const listView = []
+  const listView = [];
 
   for (const stress of stressList) {
     listView.push(StressItemView(stress, navigation, true));

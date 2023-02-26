@@ -34,13 +34,13 @@ export default function Jogging({ route, navigation }: NativeStack.NativeStackSc
     { label: '90分', value:90 }
   ];
   
-  const [limit, setLimit] = useState(0);
+  const [limit, setLimit] = useState(5);
 
   let end: Date;
   const [stepCount, setStepCount] = useState(0);
   const [pastCount, setPastCount] = useState(0);
 
-  const [count, setCount] = useState(time);
+  const [count, setCount] = useState(limit);
   const [text, setText] = useState("開始");
   const [mode, setMode] = useState(0);  //0:初期、1:動作中、2:停止中 3:終了後
 
@@ -69,7 +69,7 @@ export default function Jogging({ route, navigation }: NativeStack.NativeStackSc
         setText("停止");
         break;
       case 3:
-        //結果画面ボタン押されたとき
+        //結果画面ボタン押されたとき_
         navigation.push('Result', { stress: route.params.stress, type: ActionType.Joggnig })
         break;
     }
@@ -84,7 +84,7 @@ export default function Jogging({ route, navigation }: NativeStack.NativeStackSc
     setMode(0);
     setStepCount(0);
     setPastCount(0);
-    setCount(time);
+    setCount(limit);
     setText("開始");
   }
 
@@ -108,6 +108,7 @@ export default function Jogging({ route, navigation }: NativeStack.NativeStackSc
 
       end = new Date();
       getcount();
+      console.log(limit);
     }
   }, 1 * 100);
 
@@ -115,7 +116,7 @@ export default function Jogging({ route, navigation }: NativeStack.NativeStackSc
     <View style={styles.container}>
 
       <RNPickerSelect
-        onValueChange={(value) => setLimit(value.value)}
+        onValueChange={(value, index) => setLimit(value)}
         items = {list}
       />
 

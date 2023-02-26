@@ -35,7 +35,7 @@ const DefaultStyle = StyleSheet.create({
   largeButton: {
     height: 100,
     width: '50%',
-    borderRadius: 30,
+    borderRadius: 40,
     backgroundColor: "#C95858",
     textAlign: 'center',
     textAlignVertical: 'center',

@@ -62,8 +62,6 @@ const cutAction = (navigation: NativeStack.NativeStackNavigationProp<RootStackPa
   }
 
   const motionReset = (isFinal: boolean) => {
-    console.log(isFinal);
-
     xAccAvg = xAccSum / sumCount;
     yAccAvg = yAccSum / sumCount;
     zAccAvg = zAccSum / sumCount;
@@ -73,8 +71,6 @@ const cutAction = (navigation: NativeStack.NativeStackNavigationProp<RootStackPa
 
     // Right to Left || Left to Right
     if (xAccAvg < -4.0 || 4.0 < xAccAvg) {
-      console.log("CALLED 2");
-
       Haptics.notificationAsync(Haptics.NotificationFeedbackType.Error);
       isAnimationStarted = true;
       animation.start((_) => {
@@ -83,9 +79,7 @@ const cutAction = (navigation: NativeStack.NativeStackNavigationProp<RootStackPa
           duration: 200,
           useNativeDriver: true,
         }).start((_) => {
-          console.log("CALLED");
           if (isFinal) {
-            console.log("FINAL");
             navigation.replace('Result', { stress: stress, type: ActionType.Cutting });
             stopListening();
           }

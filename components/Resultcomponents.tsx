@@ -40,8 +40,6 @@ const Resultcomponents = (stress: StressItem, type: ActionType, navigation: any)
         return val;
       }
     })
-    
-    console.log(newStressList);
 
     setStressList(newStressList);
   }, []);

@@ -45,7 +45,6 @@ const battingAction = (pushToHomeRUn: () => void) => {
     alphaAvg = alphaSum / sumCount;
     betaAvg = betaSum / sumCount;
     gammaAvg = gammaSum / sumCount;
-    console.log(xAccAvg);
 
     // Right to Left || Left to Right
     if (xAccAvg < -4.0 || 4.0 < xAccAvg) {

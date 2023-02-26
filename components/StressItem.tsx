@@ -4,12 +4,12 @@ import { Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { getIntensityStyle, getIntensityLabel } from '../hooks/intensityConverter';
 import { Audio } from "expo-av";
 
-export default function StressItemView(sound:Audio.Sound, stress: StressItem, navigation: any) {
+export default function StressItemView(sound:Audio.Sound, stress: StressItem, navigation: any, noAction: boolean = false) {
 
   return (
     <TouchableOpacity activeOpacity={noAction ? 1.0 : 0.5} onPress={() => {
       if (!noAction) {
-        navigation.push("SolutionSelect", { stress: stress })
+        navigation.push("SolutionSelect", {sound:sound!, stress: stress })
       }
     }} key={stress.key}>
       <HStack style={styles.wrapper}>

@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleSheet, Image, TouchableOpacity } from 'react-native';
-import { Text } from 'react-native';
+import { Text, ScrollView} from 'react-native';
 import { RootStackParamList, StressItem } from '../../types';
 import { ZStack, HStack, VStack, Spacer } from 'react-native-stacks';
 import DefaultStyle from '../../constants/DefaultStyles';
@@ -29,7 +29,7 @@ const HomeScreen = ({ navigation }: NativeStack.NativeStackScreenProps<RootStack
   }
 
   return (
-    <SafeAreaView style={DefaultStyle.safeAreaBackground}>
+    <ScrollView style={DefaultStyle.safeAreaBackground}>
       <VStack spacing={15} style={DefaultStyle.fullHeight}>
         <Text style={DefaultStyle.title}>抱えているストレス</Text>
         <Text style={DefaultStyle.title2}>{stressList.length}こ</Text>
@@ -62,7 +62,7 @@ const HomeScreen = ({ navigation }: NativeStack.NativeStackScreenProps<RootStack
           <Spacer />
         </HStack>
       </VStack>
-    </SafeAreaView>
+    </ScrollView>
   );
 }
 

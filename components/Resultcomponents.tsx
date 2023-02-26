@@ -4,11 +4,12 @@ import { ActionType, StressItem } from "../types";
 import DefaultStyle from '../constants/DefaultStyles';
 import { useEffect } from 'react';
 import { useState } from 'react';
+import { Audio } from 'expo-av';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { stressListState } from '../atoms/stressList';
 import { useRecoilState } from 'recoil';
 
-const Resultcomponents = (stress: StressItem, type: ActionType, navigation: any) => {
+const Resultcomponents = (sound:Audio.Sound,stress: StressItem, type: ActionType, navigation: any) => {
   const [stressList, setStressList] = useRecoilState(stressListState);
   const initialimageUrl = require('../assets/images/monster.webp');
   const [imageurl, setimageurl] = useState(initialimageUrl);

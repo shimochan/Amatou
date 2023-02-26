@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { StyleSheet } from 'react-native';
 import { RootStackParamList } from '../../types';
 import * as NativeStack from '@react-navigation/native-stack';
@@ -6,9 +6,23 @@ import { View } from '../../components/Themed';
 import Resultcomponents from '../../components/Resultcomponents';
 
 const ResultScreen = ({ route, navigation }: NativeStack.NativeStackScreenProps<RootStackParamList, 'Result'>) => {
+  React.useEffect(() => {
+    return route.params.sound
+      ? () => {
+        route.params.sound.unloadAsync();
+      }
+      : undefined;
+  }, [route.params.sound]);
+
+  useEffect(() => {
+    if (route.params.sound != undefined) {
+      route.params.sound.unloadAsync();
+    }
+  }, [])
+
   return (
     <View>
-      {Resultcomponents(route.params?.stress, route.params?.type, navigation)}
+      {Resultcomponents(route.params.sound,route.params?.stress, route.params?.type, navigation)}
     </View>
   );
 }

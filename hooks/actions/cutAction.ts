@@ -5,8 +5,9 @@ import * as Haptics from 'expo-haptics';
 import { Animated } from "react-native";
 import { ActionType, RootStackParamList } from "../../types";
 import { StressItem } from "../../types";
+import { Audio } from "expo-av";
 
-const cutAction = (navigation: NativeStack.NativeStackNavigationProp<RootStackParamList, "CutAction", undefined>, stress: StressItem) => {
+const cutAction = (navigation: NativeStack.NativeStackNavigationProp<RootStackParamList, "CutAction", undefined>, sound:Audio.Sound, stress: StressItem) => {
   const [opacity, setOpacity] = useState(0);
   const opacityAnimation = useRef(new Animated.Value(0)).current;
   opacityAnimation.addListener((value) => { setOpacity(value.value); });
@@ -80,7 +81,7 @@ const cutAction = (navigation: NativeStack.NativeStackNavigationProp<RootStackPa
           useNativeDriver: true,
         }).start((_) => {
           if (isFinal) {
-            navigation.replace('Result', { stress: stress, type: ActionType.Cutting });
+            navigation.replace('Result', { sound:sound!,stress: stress, type: ActionType.Cutting });
             stopListening();
           }
           isAnimationStarted = false;

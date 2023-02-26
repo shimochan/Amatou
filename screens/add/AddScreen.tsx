@@ -11,7 +11,7 @@ import { useRecoilState } from 'recoil';
 import CloseButton from '../../components/CloseButton';
 
 
-export default function AddStress({ navigation }: NativeStack.NativeStackScreenProps<RootStackParamList, 'AddStress'>) {
+export default function AddStress({ navigation ,route }: NativeStack.NativeStackScreenProps<RootStackParamList, 'AddStress'>) {
   const [stressList, setStressList] = useRecoilState(stressListState);
 
   const [text, onChangeText] = useState("");
@@ -67,7 +67,7 @@ export default function AddStress({ navigation }: NativeStack.NativeStackScreenP
     const newStress: StressItem = { key: stressCount, title: text, intensity: getIntensity(), dueDate: selectedDate, isDone: false };
     setStressList([...stressList, newStress]);
     navigation.pop();
-    navigation.push('StressSelect');
+    navigation.push('StressSelect',{sound: route.params.sound!});
   }
 
   return (

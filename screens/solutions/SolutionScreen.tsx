@@ -35,7 +35,7 @@ export default function SolutionSelect({ route, navigation }: RootStackScreenPro
         </Text>
       </HStack>
 
-      <TouchableOpacity key={0} activeOpacity={0.5} onPress={() => navigation.push("CutAction", { stress: route.params?.stress })} style={styles.imageOuter}>
+      <TouchableOpacity key={0} activeOpacity={0.5} onPress={() => navigation.push("CutAction", { sound: route.params.sound,stress: route.params?.stress })} style={styles.imageOuter}>
         <HStack>
           <Spacer />
           <Text style={styles.text}>斬る</Text>
@@ -45,7 +45,7 @@ export default function SolutionSelect({ route, navigation }: RootStackScreenPro
         </HStack>
       </TouchableOpacity>
 
-      <TouchableOpacity key={1} activeOpacity={0.5} onPress={() => navigation.push("Jogging", { stress: route.params.stress })} style={styles.imageOuter}>
+      <TouchableOpacity key={1} activeOpacity={0.5} onPress={() => navigation.push("Jogging", { sound: route.params.sound,stress: route.params.stress })} style={styles.imageOuter}>
         <HStack>
           <Spacer />
           <Text style={styles.text}>走る</Text>
@@ -55,7 +55,7 @@ export default function SolutionSelect({ route, navigation }: RootStackScreenPro
         </HStack>
       </TouchableOpacity>
 
-      <TouchableOpacity key={2} activeOpacity={0.5} onPress={() => navigation.push("PuchiPuchi", { stress: route.params?.stress })} style={styles.imageOuter}>
+      <TouchableOpacity key={2} activeOpacity={0.5} onPress={() => navigation.push("PuchiPuchi", { sound: route.params.sound,stress: route.params?.stress })} style={styles.imageOuter}>
         <HStack>
           <Spacer />
           <Text style={styles.text}>潰す</Text>
@@ -65,7 +65,7 @@ export default function SolutionSelect({ route, navigation }: RootStackScreenPro
         </HStack>
       </TouchableOpacity>
 
-      <TouchableOpacity key={3} activeOpacity={0.5} onPress={() => navigation.push("Batting", { stress: route.params.stress })} style={styles.imageOuter}>
+      <TouchableOpacity key={3} activeOpacity={0.5} onPress={() => navigation.push("Batting", { sound: route.params.sound,stress: route.params.stress })} style={styles.imageOuter}>
         <HStack>
           <Spacer />
           <Text style={styles.text}>打つ</Text>

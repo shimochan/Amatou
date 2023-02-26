@@ -6,7 +6,6 @@ import { RootStackParamList } from '../../../types';
 import { useEffect } from 'react';
 import { Image } from 'react-native';
 import { Audio } from 'expo-av';
-import battingAction from '../../../hooks/actions/battingAction';
 
 export default function Batting({ route, navigation }: NativeStack.NativeStackScreenProps<RootStackParamList, 'Batting'>) {
   const [sound, setSound] = React.useState<Audio.Sound>();
@@ -25,7 +24,11 @@ export default function Batting({ route, navigation }: NativeStack.NativeStackSc
   }, [sound]);
 
   useEffect(() => {
-    playSound();
+    if (route.params.sound != undefined) {
+      route.params.sound.unloadAsync();
+      playSound();
+    }
+    
   }, [])
 
 

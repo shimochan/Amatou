@@ -12,7 +12,7 @@ export default function StressItemView(stress: StressItem, navigation: any, noAc
       }
     }} key={stress.key}>
       <HStack style={styles.wrapper}>
-        <Text style={styles.title}>{stress.title}</Text>
+        <Text style={[styles.title, styles.headertext]} numberOfLines={1} ellipsizeMode="tail">{stress.title}</Text>
         <Spacer />
         <VStack spacing={5}>
           <Text style={[getIntensityStyle(stress.intensity)]}>{getIntensityLabel(stress.intensity)}</Text>
@@ -42,4 +42,7 @@ const styles = StyleSheet.create({
     fontSize: 14,
     color: "#777777",
   },
+  headertext: {
+    maxWidth: '60%'
+  }
 });

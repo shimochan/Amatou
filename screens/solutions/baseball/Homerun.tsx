@@ -9,7 +9,6 @@ import { Audio } from 'expo-av';
 export default function Homerun({ route, navigation }: NativeStack.NativeStackScreenProps<RootStackParamList, 'Homerun'>) {
   const [sound, setSound] = React.useState<Audio.Sound>();
   async function playSound() {
-    console.log('Loading Sound');
     const { sound } = await Audio.Sound.createAsync(require('../../../assets/Audio/金属バットと歓声.mp3')
     );
     setSound(sound);
@@ -18,7 +17,6 @@ export default function Homerun({ route, navigation }: NativeStack.NativeStackSc
   React.useEffect(() => {
     return sound
       ? () => {
-        console.log('Unloading Sound');
         sound.unloadAsync();
       }
       : undefined;

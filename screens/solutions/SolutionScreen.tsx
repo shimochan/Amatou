@@ -27,7 +27,7 @@ export default function SolutionSelect({ route, navigation }: RootStackScreenPro
 
       <HStack spacing={15} style={styles.header}>
         <Spacer />
-        <Text style={DefaultStyle.title}>{route.params?.stress.title}</Text>
+        <Text style={[DefaultStyle.title, styles.headertext]} numberOfLines={1} ellipsizeMode="tail">{route.params?.stress.title}</Text>
         <Spacer />
         <Text style={[getIntensityStyle(route.params?.stress.intensity)]}>{getIntensityLabel(route.params?.stress.intensity)}</Text>
         <Text style={styles.dueDate}>
@@ -93,6 +93,7 @@ const styles = StyleSheet.create({
   },
   header: {
     paddingVertical: 20,
+
   },
   separator: {
     marginVertical: 30,
@@ -103,7 +104,7 @@ const styles = StyleSheet.create({
     width: '90%',
     height: 100,
     borderRadius: 20,
-    backgroundColor: "lightblue",
+    backgroundColor: "#4AE2EF",
     margin: 10,
   },
   imagesize: {
@@ -124,4 +125,7 @@ const styles = StyleSheet.create({
     fontSize: 14,
     color: "#777777",
   },
+  headertext: {
+    maxWidth: '50%'
+  }
 });

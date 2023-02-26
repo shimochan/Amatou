@@ -66,7 +66,6 @@ export default function AddStress({ navigation }: NativeStack.NativeStackScreenP
     const stressCount = stressList.length;
     const newStress: StressItem = { key: stressCount, title: text, intensity: getIntensity(), dueDate: selectedDate, isDone: false };
     setStressList([...stressList, newStress]);
-    console.log([...stressList, newStress]);
     navigation.pop();
     navigation.push('StressSelect');
   }

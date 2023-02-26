@@ -1,10 +1,10 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet, TouchableOpacity } from 'react-native';
 import React, { useEffect } from 'react';
 import { Text, Image, Button } from 'react-native';
 import * as NativeStack from '@react-navigation/native-stack';
 import { RootStackParamList } from '../../../types';
 import DefaultStyle from '../../../constants/DefaultStyles';
-import { Spacer, VStack, HStack } from 'react-native-stacks';
+import { Spacer, VStack, HStack, ZStack } from 'react-native-stacks';
 import BackButton from '../../../components/BackButton';
 import cutAction from '../../../hooks/actions/cutAction';
 
@@ -28,7 +28,11 @@ export default function CutAction({ route, navigation }: NativeStack.NativeStack
 
       <Spacer />
 
-      <Button title='とどめをさす' onPress={startFinalListening} />
+      <TouchableOpacity style={DefaultStyle.largeButton} onPress={startFinalListening}>
+        <ZStack style={DefaultStyle.fill}>
+          <Text>とどめをさす</Text>
+        </ZStack>
+      </TouchableOpacity>
 
       <HStack style={DefaultStyle.footer}>
         {BackButton(navigation)}

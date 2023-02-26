@@ -40,23 +40,16 @@ const Resultcomponents = (stress: StressItem, type: ActionType, navigation: any)
         return val;
       }
     })
-    
-    console.log(newStressList);
 
     setStressList(newStressList);
   }, []);
 
   return (
-    <SafeAreaView style={{backgroundColor: "#fff"}}>
-      <TouchableOpacity activeOpacity={0.5} onPress={() => {
-        stress.isDone = true;
-        navigation.popToTop();
-      }}>
+    <SafeAreaView>
+      <TouchableOpacity activeOpacity={0.5} onPress={() => navigation.push("Home", { stress: stress })}>
         <VStack style={DefaultStyle.fullHeight} spacing={5}>
-          <Text style={styles.title}>{stress.title}</Text>
-          <Text style={styles.solve}>
-            解消
-          </Text>
+          <Text style={[styles.title, styles.headertext]} numberOfLines={1} ellipsizeMode="tail">{stress.title}</Text>
+          <Text style={styles.solve}>解消</Text>
           <Image source={imageurl} style={styles.imagestyle}></Image>
           <Text style={styles.title}> よくできました！</Text>
         </VStack>
@@ -80,6 +73,9 @@ const styles = StyleSheet.create({
     resizeMode: 'contain',
     width: '90%',
     flex: 1
+  },
+  headertext: {
+    maxWidth: '90%'
   }
 });
 

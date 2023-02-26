@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleSheet, Image, TouchableOpacity } from 'react-native';
-import { Text } from 'react-native';
+import { Text, ScrollView} from 'react-native';
 import { RootStackParamList, StressItem } from '../../types';
 import { ZStack, HStack, VStack, Spacer } from 'react-native-stacks';
 import DefaultStyle from '../../constants/DefaultStyles';
@@ -29,39 +29,41 @@ const HomeScreen = ({ navigation }: NativeStack.NativeStackScreenProps<RootStack
   }
 
   return (
-    <SafeAreaView style={DefaultStyle.safeAreaBackground}>
-      <VStack spacing={15} style={DefaultStyle.fullHeight}>
-        <Text style={DefaultStyle.title}>抱えているストレス</Text>
-        <Text style={DefaultStyle.title2}>{stressList.length}こ</Text>
+    <SafeAreaView style={{backgroundColor: "#fff", height: '100%'}}>
+      <ScrollView style={DefaultStyle.safeAreaBackground}>
+        <VStack spacing={15} style={DefaultStyle.fullHeight}>
+          <Text style={DefaultStyle.title}>抱えているストレス</Text>
+          <Text style={DefaultStyle.title2}>{stressList.length}こ</Text>
 
-        <Spacer />
-
-        <Image source={getStoneImagePath(stressList.length)} style={DefaultStyle.homeImage} />
-
-        <Spacer />
-
-        <TouchableOpacity activeOpacity={0.5} onPress={() => navigation.push('StressSelect')} style={DefaultStyle.largeButton}>
-          <ZStack style={DefaultStyle.fill}>
-            <Text style={[DefaultStyle.title2, { color: "#fff" }]}>ストレス一覧</Text>
-          </ZStack>
-        </TouchableOpacity>
-
-        <HStack>
           <Spacer />
 
-          <TouchableOpacity activeOpacity={0.5} onPress={() => navigation.push('History')} style={[DefaultStyle.smallButton, { backgroundColor: '#9BCDA0' }]}>
-            <Text>りれき</Text>
+          <Image source={getStoneImagePath(stressList.length)} style={DefaultStyle.homeImage} />
+
+          <Spacer />
+
+          <TouchableOpacity activeOpacity={0.5} onPress={() => navigation.push('StressSelect')} style={DefaultStyle.largeButton}>
+            <ZStack style={DefaultStyle.fill}>
+              <Text style={[DefaultStyle.title2, { color: "#fff" }]}>ストレス一覧</Text>
+            </ZStack>
           </TouchableOpacity>
 
-          <Spacer />
+          <HStack>
+            <Spacer />
 
-          <TouchableOpacity activeOpacity={0.5} onPress={() => navigation.push('AddStress')} style={[DefaultStyle.smallButton, { backgroundColor: '#C09BCD' }]}>
-            <Text>ついか</Text>
-          </TouchableOpacity>
+            <TouchableOpacity activeOpacity={0.5} onPress={() => navigation.push('History')} style={[DefaultStyle.smallButton, { backgroundColor: '#9BCDA0' }]}>
+              <Text>りれき</Text>
+            </TouchableOpacity>
 
-          <Spacer />
-        </HStack>
-      </VStack>
+            <Spacer />
+
+            <TouchableOpacity activeOpacity={0.5} onPress={() => navigation.push('AddStress')} style={[DefaultStyle.smallButton, { backgroundColor: '#C09BCD' }]}>
+              <Text>ついか</Text>
+            </TouchableOpacity>
+
+            <Spacer />
+          </HStack>
+        </VStack>
+      </ScrollView>
     </SafeAreaView>
   );
 }

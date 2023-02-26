@@ -34,7 +34,7 @@ export type RootStackParamList = {
   WriteStress:{sound: Audio.Sound };
   StressSelect: {sound: Audio.Sound  };
   Home: {sound: Audio.Sound };
-  Result: {sound: Audio.Sound, stress: StressItem, type: ActionType };
+  Result: {sound: Audio.Sound | undefined, stress: StressItem, type: ActionType };
 };
 
 export type RootStackScreenProps<Screen extends keyof RootStackParamList> = NativeStackScreenProps<

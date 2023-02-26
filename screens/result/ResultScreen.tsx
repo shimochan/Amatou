@@ -9,7 +9,9 @@ const ResultScreen = ({ route, navigation }: NativeStack.NativeStackScreenProps<
   React.useEffect(() => {
     return route.params.sound
       ? () => {
-        route.params.sound.unloadAsync();
+        if (route.params.sound != null) {
+          route.params.sound.unloadAsync();
+        }
       }
       : undefined;
   }, [route.params.sound]);
@@ -22,7 +24,7 @@ const ResultScreen = ({ route, navigation }: NativeStack.NativeStackScreenProps<
 
   return (
     <View>
-      {Resultcomponents(route.params.sound,route.params?.stress, route.params?.type, navigation)}
+      {Resultcomponents(route.params?.stress, route.params?.type, navigation)}
     </View>
   );
 }

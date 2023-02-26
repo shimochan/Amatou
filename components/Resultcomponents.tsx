@@ -29,7 +29,7 @@ const Resultcomponents = (stress: StressItem, type: ActionType, navigation: any)
           解消
         </Text>
         <Image source={imageurl} style={styles.imagestyle}></Image>
-        <Text style={styles.title}>{stress.title} をやっつけた！</Text>
+        <Text style={styles.title}> よくできました！</Text>
       </VStack>
     </TouchableOpacity>
   );

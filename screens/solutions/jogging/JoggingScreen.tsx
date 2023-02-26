@@ -14,6 +14,7 @@ export default function Jogging({ route, navigation }: NativeStack.NativeStackSc
   let time: number = 20;
 
   const list = [
+    { label: '10秒', value: 10 },
     { label: '5分', value: 5 },
     { label: '10分', value: 10 },
     { label: '15分', value: 15 },
@@ -34,7 +35,7 @@ export default function Jogging({ route, navigation }: NativeStack.NativeStackSc
     { label: '90分', value: 90 }
   ];
 
-  const [limit, setLimit] = useState();
+  const [limit, setLimit] = useState<number>();
 
   let end: Date;
   const [stepCount, setStepCount] = useState(0);
@@ -51,6 +52,7 @@ export default function Jogging({ route, navigation }: NativeStack.NativeStackSc
       case 0:
         //スタートボタン押されたとき
         setMode(1);
+        setLimit(count);
         setStart(new Date());
         setText("停止");
         break;
@@ -80,6 +82,19 @@ export default function Jogging({ route, navigation }: NativeStack.NativeStackSc
       //   break;
     }
   }
+
+  // const Pickertab = () => {
+  //   // if(limit==undefined){
+  //     return (
+  //       <RNPickerSelect
+  //       onValueChange={(value) => handleonchange(value)}
+  //       items={list}
+  //       style={pickerSelectStyles}
+  //       />
+  //     );
+  //   // };
+
+  // }
 
   // useEffect(() => {
   //   return () => {
@@ -143,7 +158,16 @@ export default function Jogging({ route, navigation }: NativeStack.NativeStackSc
       setText("開始");
     }
   }
+  const judge=()=>{
+    if(limit!=undefined){
+      return true
+    }
+    else{
+      return false
+    }
+  }
 
+  
   return (
     <View style={styles.container}>
 
@@ -154,16 +178,18 @@ export default function Jogging({ route, navigation }: NativeStack.NativeStackSc
             onValueChange={(value) => handleonchange(value)}
             items={list}
             style={pickerSelectStyles}
+            disabled={judge()}
           />
+          {/* <Pickertab></Pickertab> */}
         </Text>
         <Text style={styles.time}>{count}</Text>
         <Text style={styles.count}>{pastCount + stepCount}</Text>
         <TouchableOpacity activeOpacity={0.5} onPress={switchMode} style={styles.button}>
           <Text style={styles.text}>{text}</Text>
         </TouchableOpacity>
-        <TouchableOpacity activeOpacity={0.5} onPress={reset}>
+        {/* <TouchableOpacity activeOpacity={0.5} onPress={reset}>
           <Text>reset</Text>
-        </TouchableOpacity>
+        </TouchableOpacity> */}
       </VStack>
     </View>
   );

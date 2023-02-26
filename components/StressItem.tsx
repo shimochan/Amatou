@@ -2,11 +2,12 @@ import { HStack, Spacer, VStack } from "react-native-stacks";
 import { StressItem } from "../types";
 import { Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { getIntensityStyle, getIntensityLabel } from '../hooks/intensityConverter';
+import { Audio } from "expo-av";
 
-export default function StressItemView(stress: StressItem, navigation: any) {
+export default function StressItemView(sound:Audio.Sound, stress: StressItem, navigation: any) {
 
   return (
-    <TouchableOpacity activeOpacity={0.5} onPress={() => navigation.push("SolutionSelect", { stress: stress })} key={stress.key}>
+    <TouchableOpacity activeOpacity={0.5} onPress={() => navigation.push("SolutionSelect", { sound: sound!,stress: stress })} key={stress.key}>
       <HStack style={styles.wrapper}>
         <Text style={styles.title}>{stress.title}</Text>
         <Spacer />

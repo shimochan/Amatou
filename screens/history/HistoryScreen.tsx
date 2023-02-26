@@ -8,13 +8,13 @@ import { Spacer, VStack } from 'react-native-stacks';
 import { useRecoilValue } from 'recoil';
 import { finishedStressSelector } from '../../atoms/stressList';
 
-export default function StressHistory({ navigation }: NativeStack.NativeStackScreenProps<RootStackParamList, 'History'>) {
+export default function StressHistory({ navigation ,route}: NativeStack.NativeStackScreenProps<RootStackParamList, 'History'>) {
   const stressList: StressItem[] = useRecoilValue(finishedStressSelector);
 
   const listView = []
 
   for (const stress of stressList) {
-    listView.push(StressItemView(stress, navigation));
+    listView.push(StressItemView(route.params.sound,stress, navigation));
   }
 
   return (

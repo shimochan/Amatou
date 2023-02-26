@@ -4,8 +4,9 @@ import { ActionType, StressItem } from "../types";
 import DefaultStyle from '../constants/DefaultStyles';
 import { useEffect } from 'react';
 import { useState } from 'react';
+import { Audio } from 'expo-av';
 
-const Resultcomponents = (stress: StressItem, type: ActionType, navigation: any) => {
+const Resultcomponents = (sound:Audio.Sound,stress: StressItem, type: ActionType, navigation: any) => {
   const initialimageUrl = require('../assets/images/monster.webp');
   const [imageurl, setimageurl] = useState(initialimageUrl)
   const setUrl = () => {
@@ -22,7 +23,7 @@ const Resultcomponents = (stress: StressItem, type: ActionType, navigation: any)
   }, []);
 
   return (
-    <TouchableOpacity activeOpacity={0.5} onPress={() => navigation.push("Home", { stress: stress })}>
+    <TouchableOpacity activeOpacity={0.5} onPress={() => navigation.push("Home", { sound:sound!,stress: stress })}>
       <VStack style={DefaultStyle.fullHeight} spacing={5}>
         <Text style={styles.title}>{stress.title}</Text>
         <Text style={styles.solve}>

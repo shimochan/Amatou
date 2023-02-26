@@ -10,13 +10,13 @@ import BackButton from '../../components/BackButton';
 import { useRecoilValue } from 'recoil';
 import { unDoneStressSelector } from '../../atoms/stressList';
 
-export default function StressSelect({ navigation }: NativeStack.NativeStackScreenProps<RootStackParamList, 'StressSelect'>) {
+export default function StressSelect({ navigation ,route}: NativeStack.NativeStackScreenProps<RootStackParamList, 'StressSelect'>) {
   const stressList: StressItem[] = useRecoilValue(unDoneStressSelector);
 
   const listView = []
 
   for (const stress of stressList) {
-    listView.push(StressItemView(stress, navigation));
+    listView.push(StressItemView(route.params.sound,stress, navigation));
   }
 
   return (
@@ -28,7 +28,7 @@ export default function StressSelect({ navigation }: NativeStack.NativeStackScre
       <HStack style={DefaultStyle.footer}>
         {BackButton(navigation)}
         <Spacer />
-        <TouchableOpacity activeOpacity={0.5} style={styles.addButton} onPress={() => navigation.push('AddStress')}>
+        <TouchableOpacity activeOpacity={0.5} style={styles.addButton} onPress={() => navigation.push('AddStress',{sound: route.params.sound!})}>
           <ZStack style={DefaultStyle.fill}>
             <Text>ストレスを追加</Text>
           </ZStack>

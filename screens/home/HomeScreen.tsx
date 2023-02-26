@@ -8,9 +8,11 @@ import * as NativeStack from '@react-navigation/native-stack';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useRecoilValue } from 'recoil';
 import { unDoneStressSelector } from '../../atoms/stressList';
+import { Audio } from 'expo-av';
+import { useEffect } from 'react';
 
 
-const HomeScreen = ({ navigation }: NativeStack.NativeStackScreenProps<RootStackParamList, 'Home'>) => {
+function HomeScreen({ navigation, route }: NativeStack.NativeStackScreenProps<RootStackParamList, 'Home'>): JSX.Element {
   const stressList: StressItem[] = useRecoilValue(unDoneStressSelector);
 
   const getStoneImagePath = (count: number) => {
@@ -26,7 +28,29 @@ const HomeScreen = ({ navigation }: NativeStack.NativeStackScreenProps<RootStack
       case 7: return require(basePath + "07.webp");
       default: return require(basePath + "many.webp");
     }
+  };
+  //music
+  const [sound, setSound] = React.useState<Audio.Sound>();
+  async function playSound() {
+    console.log('Loading Sound');
+    const { sound } = await Audio.Sound.createAsync(require('../../assets/Audio/orokanarumono.mp3')
+    );
+    setSound(sound);
+    await sound.playAsync();
   }
+  React.useEffect(() => {
+    return sound
+      ? () => {
+        console.log('Unloading Sound');
+        sound.unloadAsync();
+      }
+      : undefined;
+  }, [sound]);
+
+  useEffect(() => {
+    playSound();
+  }, []);
+
 
   return (
     <SafeAreaView style={DefaultStyle.safeAreaBackground}>
@@ -40,7 +64,7 @@ const HomeScreen = ({ navigation }: NativeStack.NativeStackScreenProps<RootStack
 
         <Spacer />
 
-        <TouchableOpacity activeOpacity={0.5} onPress={() => navigation.push('StressSelect')} style={DefaultStyle.largeButton}>
+        <TouchableOpacity activeOpacity={0.5} onPress={() => navigation.push('StressSelect',{sound: sound!})} style={DefaultStyle.largeButton}>
           <ZStack style={DefaultStyle.fill}>
             <Text style={[DefaultStyle.title2, { color: "#fff" }]}>ストレス一覧</Text>
           </ZStack>
@@ -49,13 +73,13 @@ const HomeScreen = ({ navigation }: NativeStack.NativeStackScreenProps<RootStack
         <HStack>
           <Spacer />
 
-          <TouchableOpacity activeOpacity={0.5} onPress={() => navigation.push('History')} style={[DefaultStyle.smallButton, { backgroundColor: '#9BCDA0' }]}>
+          <TouchableOpacity activeOpacity={0.5} onPress={() => navigation.push('History',{sound: sound!})} style={[DefaultStyle.smallButton, { backgroundColor: '#9BCDA0' }]}>
             <Text>りれき</Text>
           </TouchableOpacity>
 
           <Spacer />
 
-          <TouchableOpacity activeOpacity={0.5} onPress={() => navigation.push('AddStress')} style={[DefaultStyle.smallButton, { backgroundColor: '#C09BCD' }]}>
+          <TouchableOpacity activeOpacity={0.5} onPress={() => navigation.push('AddStress',{sound: sound!})} style={[DefaultStyle.smallButton, { backgroundColor: '#C09BCD' }]}>
             <Text>ついか</Text>
           </TouchableOpacity>
 

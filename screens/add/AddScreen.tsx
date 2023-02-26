@@ -10,7 +10,7 @@ import { stressListState } from '../../atoms/stressList';
 import { useRecoilState } from 'recoil';
 
 
-export default function AddStress({ navigation }: NativeStack.NativeStackScreenProps<RootStackParamList, 'AddStress'>) {
+export default function AddStress({ navigation ,route }: NativeStack.NativeStackScreenProps<RootStackParamList, 'AddStress'>) {
   const [stressList, setStressList] = useRecoilState(stressListState);
 
   const [text, onChangeText] = useState("");
@@ -55,7 +55,7 @@ export default function AddStress({ navigation }: NativeStack.NativeStackScreenP
     setStressList([...stressList, newStress]);
     console.log([...stressList, newStress]);
     navigation.pop();
-    navigation.push('StressSelect');
+    navigation.push('StressSelect',{sound: route.params.sound!});
   }
 
   return (

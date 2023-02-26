@@ -12,7 +12,7 @@ import BackButton from '../../../components/BackButton';
 export default function CutAction({ route, navigation }: NativeStack.NativeStackScreenProps<RootStackParamList, 'CutAction'>) {
 
   const onFinal = () => {
-    navigation.push('Result', { stress: route.params.stress, type: ActionType.Cutting });
+    navigation.push('Result', { sound:route.params.sound!,stress: route.params.stress, type: ActionType.Cutting });
   }
 
   const { opacity, setFinalState, startListening } = cutAction(onFinal);

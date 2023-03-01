@@ -6,8 +6,10 @@ import { VStack } from 'react-native-stacks';
 import { useRecoilState } from 'recoil';
 import { stressListState } from '../../atoms/stressList';
 import DefaultStyle from '../../constants/DefaultStyles';
+import { battingSoundState } from '../../atoms/battingSoundState';
 
 const ResultScreen = ({ route, navigation }: NativeStack.NativeStackScreenProps<RootStackParamList, 'Result'>) => {
+  const [battingSound, setBattingSound] = useRecoilState(battingSoundState);
   const [stressList, setStressList] = useRecoilState(stressListState);
   const initialimageUrl = require('../../assets/images/monster.webp');
   const [imageurl, setimageurl] = useState(initialimageUrl);
@@ -22,8 +24,8 @@ const ResultScreen = ({ route, navigation }: NativeStack.NativeStackScreenProps<
   }
 
   useEffect(() => {
-    if (route.params.sound != undefined) {
-      route.params.sound.unloadAsync();
+    if (battingSound != undefined) {
+      battingSound.unloadAsync();
     }
     setUrl();
 

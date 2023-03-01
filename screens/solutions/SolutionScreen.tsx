@@ -8,12 +8,37 @@ import DefaultStyle from '../../constants/DefaultStyles';
 import { getIntensityStyle, getIntensityLabel } from '../../hooks/intensityConverter';
 import { DeviceMotion } from 'expo-sensors';
 import { useFocusEffect } from '@react-navigation/native';
+import { useRecoilState } from 'recoil';
+import { battingSoundState } from '../../atoms/battingSoundState';
+import { globalSoundState } from '../../atoms/globalSoundState';
+import { Audio } from 'expo-av';
 
 export default function SolutionSelect({ route, navigation }: RootStackScreenProps<'SolutionSelect'>) {
+  const [globalSound, setGlobalSound] = useRecoilState(globalSoundState);
+  const [battingSound, setBattingSound] = useRecoilState(battingSoundState);
+
+  async function setAudio() {
+    const sound = new Audio.Sound();
+    await sound.loadAsync(require('../../assets/Audio/orokanarumono.mp3'));
+    await sound.setIsLoopingAsync(true);
+    setGlobalSound(sound);
+  }
 
   useFocusEffect(() => {
+    if (battingSound != undefined) {
+      battingSound.unloadAsync();
+    }
+    if (globalSound == undefined) {
+      setAudio();
+    }
     DeviceMotion.removeAllListeners();
   });
+
+  useEffect(() => {
+    if (globalSound != undefined) {
+      globalSound.playAsync();
+    }
+  }, [globalSound]);
 
   return (
     <VStack style={DefaultStyle.fullHeight}>

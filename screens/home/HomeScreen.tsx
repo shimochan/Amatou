@@ -10,12 +10,12 @@ import { useRecoilState, useRecoilValue } from 'recoil';
 import { unDoneStressSelector } from '../../atoms/stressList';
 import { Audio } from 'expo-av';
 import { useEffect } from 'react';
-import { soundState } from '../../atoms/soundState';
+import { globalSoundState } from '../../atoms/globalSoundState';
 
 
 function HomeScreen({ navigation, route }: NativeStack.NativeStackScreenProps<RootStackParamList, 'Home'>): JSX.Element {
   const stressList: StressItem[] = useRecoilValue(unDoneStressSelector);
-  const [globalSound, setGlobalSound] = useRecoilState(soundState);
+  const [globalSound, setGlobalSound] = useRecoilState(globalSoundState);
 
   const getStoneImagePath = (count: number) => {
     const basePath = "../../assets/images/home_stones/";

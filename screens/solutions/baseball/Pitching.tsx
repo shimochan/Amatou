@@ -8,7 +8,7 @@ import battingAction from '../../../hooks/actions/battingAction';
 
 export default function Pitching({ route, navigation }: NativeStack.NativeStackScreenProps<RootStackParamList, 'Pitching'>) {
   const pushToHomeRun = () => {
-    navigation.replace('Homerun', { sound: route.params.sound, stress: route.params.stress })
+    navigation.replace('Homerun', { stress: route.params.stress });
   }
 
   const { startListening } = battingAction(pushToHomeRun);

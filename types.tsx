@@ -22,15 +22,15 @@ export type RootStackParamList = {
   Gyro: undefined;
   AddStress: undefined;
   Batting: { stress: StressItem };
-  Pitching: { sound: Audio.Sound | undefined, stress: StressItem };
-  Homerun: { sound: Audio.Sound | undefined, stress: StressItem };
+  Pitching: { stress: StressItem };
+  Homerun: { stress: StressItem };
   CutAction: { stress: StressItem };
   History: undefined;
   Jogging: { stress: StressItem };
   SolutionSelect: { stress: StressItem };
   StressSelect: undefined;
   Home: undefined;
-  Result: { sound?: Audio.Sound | undefined, stress: StressItem, type: ActionType };
+  Result: { stress: StressItem, type: ActionType };
 };
 
 export type RootStackScreenProps<Screen extends keyof RootStackParamList> = NativeStackScreenProps<

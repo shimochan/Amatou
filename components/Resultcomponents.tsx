@@ -9,11 +9,11 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { stressListState } from '../atoms/stressList';
 import { useRecoilState } from 'recoil';
 
-const Resultcomponents = (sound:Audio.Sound,stress: StressItem, type: ActionType, navigation: any) => {
+const Resultcomponents = (stress: StressItem, type: ActionType, navigation: any) => {
   const [stressList, setStressList] = useRecoilState(stressListState);
   const initialimageUrl = require('../assets/images/monster.webp');
   const [imageurl, setimageurl] = useState(initialimageUrl);
-  
+
   const setUrl = () => {
     switch (type) {
       case ActionType.Cutting: setimageurl(require('../assets/images/monster.webp')); break;
@@ -35,7 +35,7 @@ const Resultcomponents = (sound:Audio.Sound,stress: StressItem, type: ActionType
     }
 
     const newStressList = stressList.map((val) => {
-      if (val.key === newStress.key){
+      if (val.key === newStress.key) {
         return newStress;
       } else {
         return val;
@@ -47,7 +47,7 @@ const Resultcomponents = (sound:Audio.Sound,stress: StressItem, type: ActionType
 
   return (
     <SafeAreaView>
-      <TouchableOpacity activeOpacity={0.5} onPress={() => navigation.push("Home", { stress: stress })}>
+      <TouchableOpacity activeOpacity={0.5} onPress={() => navigation.popToTop()}>
         <VStack style={DefaultStyle.fullHeight} spacing={5}>
           <Text style={[styles.title, styles.headertext]} numberOfLines={1} ellipsizeMode="tail">{stress.title}</Text>
           <Text style={styles.solve}>解消</Text>

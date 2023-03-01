@@ -10,7 +10,7 @@ import { Audio } from 'expo-av';
 
 declare global {
   namespace ReactNavigation {
-    interface RootParamList extends RootStackParamList {}
+    interface RootParamList extends RootStackParamList { }
   }
 }
 
@@ -18,23 +18,19 @@ export type RootStackParamList = {
   Root: NavigatorScreenParams<RootTabParamList> | undefined;
   Modal: undefined;
   NotFound: undefined;
-  PuchiPuchi: { sound: Audio.Sound |undefined ,stress: StressItem };
+  PuchiPuchi: { stress: StressItem };
   Gyro: undefined;
-  AddStress: {sound: Audio.Sound };
-  Batting: { sound: Audio.Sound |undefined ,stress: StressItem };
-  Pitching: {sound: Audio.Sound | undefined,  stress: StressItem};
-  Homerun: {sound: Audio.Sound | undefined, stress: StressItem};
-  CutAction: {sound: Audio.Sound|undefined, stress: StressItem };
-  FinallyAddStress: {sound: Audio.Sound };
-  History: {sound: Audio.Sound };
-  Jogging: { sound: Audio.Sound |undefined ,stress: StressItem };
-  SelectDeadline: {sound: Audio.Sound };
-  SelectSize: {sound: Audio.Sound };
-  SolutionSelect: { sound: Audio.Sound | undefined, stress: StressItem };
-  WriteStress:{sound: Audio.Sound };
-  StressSelect: {sound: Audio.Sound  };
-  Home: {sound: Audio.Sound };
-  Result: {sound: Audio.Sound, stress: StressItem, type: ActionType };
+  AddStress: undefined;
+  Batting: { stress: StressItem };
+  Pitching: { sound: Audio.Sound | undefined, stress: StressItem };
+  Homerun: { sound: Audio.Sound | undefined, stress: StressItem };
+  CutAction: { stress: StressItem };
+  History: undefined;
+  Jogging: { stress: StressItem };
+  SolutionSelect: { stress: StressItem };
+  StressSelect: undefined;
+  Home: undefined;
+  Result: { sound?: Audio.Sound | undefined, stress: StressItem, type: ActionType };
 };
 
 export type RootStackScreenProps<Screen extends keyof RootStackParamList> = NativeStackScreenProps<

@@ -1,6 +1,6 @@
 import { StyleSheet } from 'react-native';
 import { View } from '../../../components/Themed';
-import React from 'react';
+import { useEffect, useState } from 'react';
 import * as NativeStack from '@react-navigation/native-stack';
 import { RootStackParamList } from '../../../types';
 import { Image } from 'react-native';
@@ -8,10 +8,12 @@ import battingAction from '../../../hooks/actions/battingAction';
 
 export default function Pitching({ route, navigation }: NativeStack.NativeStackScreenProps<RootStackParamList, 'Pitching'>) {
   const pushToHomeRun = () => {
-    navigation.push('Homerun', { sound: route.params.sound, stress: route.params.stress})
+    navigation.replace('Homerun', { sound: route.params.sound, stress: route.params.stress })
   }
+
   const { startListening } = battingAction(pushToHomeRun);
   startListening();
+
   return (
     <View style={styles.container}>
       <Image source={require("../../../assets/images/Pitching.png")} style={styles.image} />

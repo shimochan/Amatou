@@ -67,7 +67,7 @@ export default function AddStress({ navigation ,route }: NativeStack.NativeStack
     const newStress: StressItem = { key: stressCount, title: text, intensity: getIntensity(), dueDate: selectedDate, isDone: false };
     setStressList([...stressList, newStress]);
     navigation.pop();
-    navigation.push('StressSelect',{sound: route.params.sound!});
+    navigation.push('StressSelect');
   }
 
   return (

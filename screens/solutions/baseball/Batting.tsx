@@ -1,49 +1,51 @@
 import { StyleSheet, TouchableOpacity } from 'react-native';
 import { View } from '../../../components/Themed';
-import React from 'react';
+import { useState } from 'react';
 import * as NativeStack from '@react-navigation/native-stack';
 import { RootStackParamList } from '../../../types';
 import { useEffect } from 'react';
 import { Image } from 'react-native';
 import { Audio } from 'expo-av';
+import { useRecoilState } from 'recoil';
+import { soundState } from '../../../atoms/soundState';
 
 export default function Batting({ route, navigation }: NativeStack.NativeStackScreenProps<RootStackParamList, 'Batting'>) {
-  const [sound, setSound] = React.useState<Audio.Sound>();
+  const [sound, setSound] = useState<Audio.Sound>();
+  const [globalSound, setGlobalSound] = useRecoilState(soundState);
+
   async function playSound() {
-    const { sound } = await Audio.Sound.createAsync(require('../../../assets/Audio/ouenka.mp3')
-    );
+    const { sound } = await Audio.Sound.createAsync(require('../../../assets/Audio/ouenka.mp3'));
     setSound(sound);
     await sound.playAsync();
   }
-  React.useEffect(() => {
-    return sound
-      ? () => {
-        sound.unloadAsync();
-      }
-      : undefined;
-  }, [sound]);
+
+  useEffect(() =>
+      navigation.addListener('beforeRemove', (e) => {
+        sound?.unloadAsync();
+        e.preventDefault();
+      }),
+    [navigation]
+  );
 
   useEffect(() => {
-    if (route.params.sound != undefined) {
-      route.params.sound.unloadAsync();
+    if (globalSound != undefined) {
+      globalSound.unloadAsync();
       playSound();
     }
-    
-  }, [])
+  }, []);
 
-
+  useEffect(() =>
+    navigation.addListener('beforeRemove', () => {
+      sound?.unloadAsync();
+    }),
+    [navigation]
+  );
 
   return (
-    <TouchableOpacity activeOpacity={0.5} onPress={() => navigation.push('Pitching', { sound: sound, stress: route.params.stress })} style={styles.container}>
+    <TouchableOpacity activeOpacity={0.5} onPress={() => navigation.replace('Pitching', { sound: sound, stress: route.params.stress })} style={styles.container}>
       <Image source={require("../../../assets/images/batting.png")} style={styles.image} />
     </TouchableOpacity>
   );
-
-
-
-
-
-
 }
 
 const styles = StyleSheet.create({

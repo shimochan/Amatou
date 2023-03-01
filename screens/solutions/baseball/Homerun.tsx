@@ -7,30 +7,25 @@ import { Image } from 'react-native';
 import { Audio } from 'expo-av';
 
 export default function Homerun({ route, navigation }: NativeStack.NativeStackScreenProps<RootStackParamList, 'Homerun'>) {
+
+  // Background Music
   const [sound, setSound] = React.useState<Audio.Sound>();
+
   async function playSound() {
-    const { sound } = await Audio.Sound.createAsync(require('../../../assets/Audio/金属バットと歓声.mp3')
-    );
+    const { sound } = await Audio.Sound.createAsync(require('../../../assets/Audio/金属バットと歓声.mp3'));
     setSound(sound);
     await sound.playAsync();
   }
-  React.useEffect(() => {
-    return sound
-      ? () => {
-        sound.unloadAsync();
-      }
-      : undefined;
-  }, [sound]);
 
   useEffect(() => {
     if (route.params.sound != undefined) {
       route.params.sound.unloadAsync();
-      playSound();
     }
-  }, [])
+    playSound();
+  }, []);
 
   return (
-    <TouchableOpacity activeOpacity={0.5} onPress={() => navigation.push('Result', {sound:sound!, stress: route.params.stress, type: ActionType.Batting })} style={styles.container}>
+    <TouchableOpacity activeOpacity={0.5} onPress={() => navigation.replace('Result', { sound: sound!, stress: route.params.stress, type: ActionType.Batting })} style={styles.container}>
 
       <Image source={require("../../../assets/images/homerun.png")} style={styles.image} />
 

@@ -9,13 +9,13 @@ import { useRecoilValue } from 'recoil';
 import { finishedStressSelector } from '../../atoms/stressList';
 import CloseButton from '../../components/CloseButton';
 
-export default function StressHistory({ navigation ,route}: NativeStack.NativeStackScreenProps<RootStackParamList, 'History'>) {
+export default function StressHistory({ navigation }: NativeStack.NativeStackScreenProps<RootStackParamList, 'History'>) {
   const stressList: StressItem[] = useRecoilValue(finishedStressSelector);
 
   const listView = [];
 
   for (const stress of stressList) {
-    listView.push(StressItemView(route.params.sound,stress, navigation));
+    listView.push(StressItemView(stress, navigation, true));
   }
 
   return (

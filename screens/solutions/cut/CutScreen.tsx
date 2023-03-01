@@ -9,7 +9,7 @@ import BackButton from '../../../components/BackButton';
 import cutAction from '../../../hooks/actions/cutAction';
 
 export default function CutAction({ route, navigation }: NativeStack.NativeStackScreenProps<RootStackParamList, 'CutAction'>) {
-  const { opacity, startFinalListening, startListening } = cutAction(navigation, route.params.sound!,route.params.stress);
+  const { opacity, startFinalListening, startListening } = cutAction(navigation, route.params.stress);
 
   useEffect(() => {
     startListening();

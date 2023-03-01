@@ -1,19 +1,21 @@
 import React from 'react';
 import { StyleSheet, Image, TouchableOpacity } from 'react-native';
-import { Text, ScrollView} from 'react-native';
+import { Text, ScrollView } from 'react-native';
 import { RootStackParamList, StressItem } from '../../types';
 import { ZStack, HStack, VStack, Spacer } from 'react-native-stacks';
 import DefaultStyle from '../../constants/DefaultStyles';
 import * as NativeStack from '@react-navigation/native-stack';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { useRecoilValue } from 'recoil';
+import { useRecoilState, useRecoilValue } from 'recoil';
 import { unDoneStressSelector } from '../../atoms/stressList';
 import { Audio } from 'expo-av';
 import { useEffect } from 'react';
+import { globalSoundState } from '../../atoms/globalSoundState';
 
 
 function HomeScreen({ navigation, route }: NativeStack.NativeStackScreenProps<RootStackParamList, 'Home'>): JSX.Element {
   const stressList: StressItem[] = useRecoilValue(unDoneStressSelector);
+  const [globalSound, setGlobalSound] = useRecoilState(globalSoundState);
 
   const getStoneImagePath = (count: number) => {
     const basePath = "../../assets/images/home_stones/";
@@ -29,31 +31,28 @@ function HomeScreen({ navigation, route }: NativeStack.NativeStackScreenProps<Ro
       default: return require(basePath + "many.webp");
     }
   };
-  //music
-  const [sound, setSound] = React.useState<Audio.Sound>();
-  async function playSound() {
-    console.log('Loading Sound');
-    const { sound } = await Audio.Sound.createAsync(require('../../assets/Audio/orokanarumono.mp3')
-    );
-    setSound(sound);
-    await sound.playAsync();
+
+  // Background Music
+  async function setAudio() {
+    const sound = new Audio.Sound();
+    await sound.loadAsync(require('../../assets/Audio/orokanarumono.mp3'));
+    await sound.setIsLoopingAsync(true);
+    setGlobalSound(sound);
   }
-  React.useEffect(() => {
-    return sound
-      ? () => {
-        console.log('Unloading Sound');
-        sound.unloadAsync();
-      }
-      : undefined;
-  }, [sound]);
 
   useEffect(() => {
-    playSound();
+    setAudio();
   }, []);
+
+  useEffect(() => {
+    if (globalSound != undefined) {
+      globalSound.playAsync();
+    }
+  }, [globalSound]);
 
 
   return (
-    <SafeAreaView style={{backgroundColor: "#fff", height: '100%'}}>
+    <SafeAreaView style={{ backgroundColor: "#fff", height: '100%' }}>
       <ScrollView style={DefaultStyle.safeAreaBackground}>
         <VStack spacing={15} style={DefaultStyle.fullHeight}>
           <Text style={DefaultStyle.title}>抱えているストレス</Text>
@@ -65,24 +64,24 @@ function HomeScreen({ navigation, route }: NativeStack.NativeStackScreenProps<Ro
 
           <Spacer />
 
-        <TouchableOpacity activeOpacity={0.5} onPress={() => navigation.push('StressSelect',{sound: sound!})} style={DefaultStyle.largeButton}>
-          <ZStack style={DefaultStyle.fill}>
-            <Text style={[DefaultStyle.title2, { color: "#fff" }]}>ストレス一覧</Text>
-          </ZStack>
-        </TouchableOpacity>
+          <TouchableOpacity activeOpacity={0.5} onPress={() => navigation.push('StressSelect')} style={DefaultStyle.largeButton}>
+            <ZStack style={DefaultStyle.fill}>
+              <Text style={[DefaultStyle.title2, { color: "#fff" }]}>ストレス一覧</Text>
+            </ZStack>
+          </TouchableOpacity>
 
           <HStack>
             <Spacer />
 
-          <TouchableOpacity activeOpacity={0.5} onPress={() => navigation.push('History',{sound: sound!})} style={[DefaultStyle.smallButton, { backgroundColor: '#9BCDA0' }]}>
-            <Text>りれき</Text>
-          </TouchableOpacity>
+            <TouchableOpacity activeOpacity={0.5} onPress={() => navigation.push('History')} style={[DefaultStyle.smallButton, { backgroundColor: '#9BCDA0' }]}>
+              <Text>りれき</Text>
+            </TouchableOpacity>
 
             <Spacer />
 
-          <TouchableOpacity activeOpacity={0.5} onPress={() => navigation.push('AddStress',{sound: sound!})} style={[DefaultStyle.smallButton, { backgroundColor: '#C09BCD' }]}>
-            <Text>ついか</Text>
-          </TouchableOpacity>
+            <TouchableOpacity activeOpacity={0.5} onPress={() => navigation.push('AddStress')} style={[DefaultStyle.smallButton, { backgroundColor: '#C09BCD' }]}>
+              <Text>ついか</Text>
+            </TouchableOpacity>
 
             <Spacer />
           </HStack>

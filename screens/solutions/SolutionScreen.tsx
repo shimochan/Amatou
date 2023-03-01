@@ -7,20 +7,38 @@ import BackButton from '../../components/BackButton';
 import DefaultStyle from '../../constants/DefaultStyles';
 import { getIntensityStyle, getIntensityLabel } from '../../hooks/intensityConverter';
 import { DeviceMotion } from 'expo-sensors';
+import { useFocusEffect } from '@react-navigation/native';
+import { useRecoilState } from 'recoil';
+import { battingSoundState } from '../../atoms/battingSoundState';
+import { globalSoundState } from '../../atoms/globalSoundState';
+import { Audio } from 'expo-av';
 
 export default function SolutionSelect({ route, navigation }: RootStackScreenProps<'SolutionSelect'>) {
+  const [globalSound, setGlobalSound] = useRecoilState(globalSoundState);
+  const [battingSound, setBattingSound] = useRecoilState(battingSoundState);
 
-  
+  async function setAudio() {
+    const sound = new Audio.Sound();
+    await sound.loadAsync(require('../../assets/Audio/orokanarumono.mp3'));
+    await sound.setIsLoopingAsync(true);
+    setGlobalSound(sound);
+  }
+
+  useFocusEffect(() => {
+    if (battingSound != undefined) {
+      battingSound.unloadAsync();
+    }
+    if (globalSound == undefined) {
+      setAudio();
+    }
+    DeviceMotion.removeAllListeners();
+  });
 
   useEffect(() => {
-    DeviceMotion.removeAllListeners();
-
-    const willFocusSubscription = navigation.addListener('focus', () => {
-      DeviceMotion.removeAllListeners();
-    })
-
-    return willFocusSubscription
-  }, []);
+    if (globalSound != undefined) {
+      globalSound.playAsync();
+    }
+  }, [globalSound]);
 
   return (
     <VStack style={DefaultStyle.fullHeight}>
@@ -35,7 +53,7 @@ export default function SolutionSelect({ route, navigation }: RootStackScreenPro
         </Text>
       </HStack>
 
-      <TouchableOpacity key={0} activeOpacity={0.5} onPress={() => navigation.push("CutAction", { sound: route.params.sound,stress: route.params?.stress })} style={styles.imageOuter}>
+      <TouchableOpacity key={1} activeOpacity={0.5} onPress={() => navigation.push("CutAction", { stress: route.params?.stress })} style={styles.imageOuter}>
         <HStack>
           <Spacer />
           <Text style={styles.text}>斬る</Text>
@@ -45,7 +63,7 @@ export default function SolutionSelect({ route, navigation }: RootStackScreenPro
         </HStack>
       </TouchableOpacity>
 
-      <TouchableOpacity key={1} activeOpacity={0.5} onPress={() => navigation.push("Jogging", { sound: route.params.sound,stress: route.params.stress })} style={styles.imageOuter}>
+      <TouchableOpacity key={2} activeOpacity={0.5} onPress={() => navigation.push("Jogging", { stress: route.params.stress })} style={styles.imageOuter}>
         <HStack>
           <Spacer />
           <Text style={styles.text}>走る</Text>
@@ -55,7 +73,7 @@ export default function SolutionSelect({ route, navigation }: RootStackScreenPro
         </HStack>
       </TouchableOpacity>
 
-      <TouchableOpacity key={2} activeOpacity={0.5} onPress={() => navigation.push("PuchiPuchi", { sound: route.params.sound,stress: route.params?.stress })} style={styles.imageOuter}>
+      <TouchableOpacity key={3} activeOpacity={0.5} onPress={() => navigation.push("PuchiPuchi", { stress: route.params?.stress })} style={styles.imageOuter}>
         <HStack>
           <Spacer />
           <Text style={styles.text}>潰す</Text>
@@ -65,7 +83,7 @@ export default function SolutionSelect({ route, navigation }: RootStackScreenPro
         </HStack>
       </TouchableOpacity>
 
-      <TouchableOpacity key={3} activeOpacity={0.5} onPress={() => navigation.push("Batting", { sound: route.params.sound,stress: route.params.stress })} style={styles.imageOuter}>
+      <TouchableOpacity key={4} activeOpacity={0.5} onPress={() => navigation.push("Batting", { stress: route.params.stress })} style={styles.imageOuter}>
         <HStack>
           <Spacer />
           <Text style={styles.text}>打つ</Text>

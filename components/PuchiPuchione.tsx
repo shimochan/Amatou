@@ -16,10 +16,10 @@ export default function PuchiPuchione(key: number, tapAction: () => void, naviga
     await sound.playAsync();
   }
   
-  const imagepuchipuchi2 = require("../assets/images/puchipuchitubushitaato.webp")
-  const [imagepuchipuchi, setimagepuchipuchi] = useState(require("../assets/images/puchipuchitubusumae.webp"))
+  const imagepuchipuchi2 = require("../assets/images/puchipuchi/puchi_after.webp")
+  const [imagepuchipuchi, setimagepuchipuchi] = useState(require("../assets/images/puchipuchi/puchi_before.webp"))
   const puchipuchiimage = () => {
-    if (imagepuchipuchi === require("../assets/images/puchipuchitubusumae.webp")) {
+    if (imagepuchipuchi === require("../assets/images/puchipuchi/puchi_before.webp")) {
       Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success)
       setimagepuchipuchi(imagepuchipuchi2)
       tapAction();

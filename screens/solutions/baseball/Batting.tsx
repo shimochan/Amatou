@@ -44,7 +44,7 @@ export default function Batting({ route, navigation }: NativeStack.NativeStackSc
 
   return (
     <TouchableOpacity activeOpacity={0.5} onPress={() => navigation.replace('Pitching', { stress: route.params.stress })} style={styles.container}>
-      <Image source={require("../../../assets/images/batting.png")} style={styles.image} />
+      <Image source={require("../../../assets/images/batting/batting.png")} style={styles.image} />
     </TouchableOpacity>
   );
 }

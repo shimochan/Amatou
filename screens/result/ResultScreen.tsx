@@ -11,7 +11,7 @@ import { battingSoundState } from '../../atoms/battingSoundState';
 const ResultScreen = ({ route, navigation }: NativeStack.NativeStackScreenProps<RootStackParamList, 'Result'>) => {
   const [battingSound, setBattingSound] = useRecoilState(battingSoundState);
   const [stressList, setStressList] = useRecoilState(stressListState);
-  const initialimageUrl = require('../../assets/images/monster.webp');
+  const initialimageUrl = require('../../assets/images/cut/monster.webp');
   const [imageurl, setimageurl] = useState(initialimageUrl);
 
   const setUrl = () => {

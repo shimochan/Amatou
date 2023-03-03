@@ -58,7 +58,7 @@ export default function SolutionSelect({ route, navigation }: RootStackScreenPro
           <Spacer />
           <Text style={styles.text}>斬る</Text>
           <Spacer />
-          <Image source={require("../../assets/images/kiruyatu.webp")} style={styles.imagesize} />
+          <Image source={require("../../assets/images/cut/kiruyatu.webp")} style={styles.imagesize} />
           <Spacer />
         </HStack>
       </TouchableOpacity>
@@ -68,7 +68,7 @@ export default function SolutionSelect({ route, navigation }: RootStackScreenPro
           <Spacer />
           <Text style={styles.text}>走る</Text>
           <Spacer />
-          <Image source={require("../../assets/images/sport_jogging_woman.webp")} style={styles.imagesize} />
+          <Image source={require("../../assets/images/jogging/sport_jogging_woman.webp")} style={styles.imagesize} />
           <Spacer />
         </HStack>
       </TouchableOpacity>
@@ -78,7 +78,7 @@ export default function SolutionSelect({ route, navigation }: RootStackScreenPro
           <Spacer />
           <Text style={styles.text}>潰す</Text>
           <Spacer />
-          <Image source={require("../../assets/images/bakuhatsu.webp")} style={styles.imagesize} />
+          <Image source={require("../../assets/images/puchipuchi/bakuhatsu.webp")} style={styles.imagesize} />
           <Spacer />
         </HStack>
       </TouchableOpacity>
@@ -88,7 +88,7 @@ export default function SolutionSelect({ route, navigation }: RootStackScreenPro
           <Spacer />
           <Text style={styles.text}>打つ</Text>
           <Spacer />
-          <Image source={require("../../assets/images/baseball.png")} style={styles.imagesize} />
+          <Image source={require("../../assets/images/batting/baseball.png")} style={styles.imagesize} />
           <Spacer />
         </HStack>
       </TouchableOpacity>

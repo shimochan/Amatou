@@ -17,6 +17,18 @@ export default function useCachedResources() {
           ...FontAwesome.font,
           'space-mono': require('../assets/fonts/SpaceMono-Regular.ttf'),
         });
+
+        // Load fonts
+        await Font.loadAsync({
+          ...FontAwesome.font,
+          'Yomogi': require('../assets/fonts/Yomogi-Regular.ttf'),
+        });
+
+        // Load fonts
+        await Font.loadAsync({
+          ...FontAwesome.font,
+          'PottaOne': require('../assets/fonts/PottaOne-Regular.ttf'),
+        });
       } catch (e) {
         // We might want to provide this error information to an error reporting service
         console.warn(e);

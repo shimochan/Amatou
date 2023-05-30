@@ -1,5 +1,5 @@
 import { StyleSheet, TouchableOpacity } from 'react-native';
-import React from 'react';
+import React, { useState } from 'react';
 import * as NativeStack from '@react-navigation/native-stack';
 import { ActionType, RootStackParamList } from '../../../types';
 import { useEffect } from 'react';
@@ -10,32 +10,35 @@ import { battingSoundState } from '../../../atoms/battingSoundState';
 
 export default function Homerun({ route, navigation }: NativeStack.NativeStackScreenProps<RootStackParamList, 'Homerun'>) {
   const [battingSound, setBattingSound] = useRecoilState(battingSoundState);
+  const [homerunSound, setHomerunSound] = useState<Audio.Sound | undefined>(undefined);
 
   // Background Music
   async function setAudio() {
-    // if (battingSound != undefined) {
-    //   await battingSound.unloadAsync();
-    // }
     const sound = new Audio.Sound();
     await sound.loadAsync(require('../../../assets/Audio/金属バットと歓声.mp3'));
-    setBattingSound(sound);
+    setHomerunSound(sound);
   }
 
   useEffect(() => {
-    if (battingSound != undefined) {
-      battingSound.unloadAsync();
-    }
     setAudio();
   }, []);
 
   useEffect(() => {
-    if (battingSound != undefined) {
-      battingSound.playAsync();
+    if (homerunSound != undefined) {
+      homerunSound.playAsync();
     }
-  }, [battingSound]);
+  }, [homerunSound]);
 
   return (
-    <TouchableOpacity activeOpacity={0.5} onPress={() => navigation.replace('Result', { stress: route.params.stress, type: ActionType.Batting })} style={styles.container}>
+    <TouchableOpacity activeOpacity={0.5} onPress={() => {
+        if (battingSound != undefined) {
+          battingSound.unloadAsync();
+        }
+        if (homerunSound != undefined) {
+          homerunSound.unloadAsync();
+        }
+        navigation.replace('Result', { stress: route.params.stress, type: ActionType.Batting })
+      }} style={styles.container}>
 
       <Image source={require("../../../assets/images/batting/homerun.png")} style={styles.image} />
 

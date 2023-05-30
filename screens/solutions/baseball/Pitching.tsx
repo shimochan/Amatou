@@ -16,7 +16,7 @@ export default function Pitching({ route, navigation }: NativeStack.NativeStackS
 
   return (
     <View style={styles.container}>
-      <Image source={require("../../../assets/images/Pitching.png")} style={styles.image} />
+      <Image source={require("../../../assets/images/batting/Pitching.png")} style={styles.image} />
     </View>
   );
 }

@@ -23,8 +23,8 @@ export default function CutAction({ route, navigation }: NativeStack.NativeStack
 
       <Spacer />
 
-      <Image style={styles.monster} source={require('../../../assets/images/monster.webp')} />
-      <Image style={[styles.effect, { opacity: opacity }]} source={require('../../../assets/images/cut-effect.webp')} />
+      <Image style={styles.monster} source={require('../../../assets/images/cut/monster.webp')} />
+      <Image style={[styles.effect, { opacity: opacity }]} source={require('../../../assets/images/cut/cut-effect.webp')} />
 
       <Spacer />
 

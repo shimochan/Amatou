@@ -37,7 +37,7 @@ export default function Homerun({ route, navigation }: NativeStack.NativeStackSc
   return (
     <TouchableOpacity activeOpacity={0.5} onPress={() => navigation.replace('Result', { stress: route.params.stress, type: ActionType.Batting })} style={styles.container}>
 
-      <Image source={require("../../../assets/images/homerun.png")} style={styles.image} />
+      <Image source={require("../../../assets/images/batting/homerun.png")} style={styles.image} />
 
     </TouchableOpacity>
   );

@@ -73,7 +73,7 @@ export default function AddStress({ navigation ,route }: NativeStack.NativeStack
   return (
     <VStack spacing={2} style={DefaultStyle.fullHeight}>
       <ZStack>
-        <Image source={require("../../assets/images/worry.webp")} style={styles.inputbutton} />
+        <Image source={require("../../assets/images/add/worry.webp")} style={styles.inputbutton} />
         <TextInput
           style={styles.addtext}
           onChangeText={onChangeText}
@@ -101,7 +101,7 @@ export default function AddStress({ navigation ,route }: NativeStack.NativeStack
         </TouchableOpacity>
       </HStack>
       <HStack spacing={0}>
-        <Image source={require("../../assets/images/character_shimekiri.webp")} style={styles.character_shimekiri} />
+        <Image source={require("../../assets/images/add/character_shimekiri.webp")} style={styles.character_shimekiri} />
         <Button title={selectedDate.toLocaleString()} onPress={showDatePicker} />
         <DateTimePickerModal
           isVisible={isDatePickerVisible}
